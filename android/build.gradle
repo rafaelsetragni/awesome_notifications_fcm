@@ -1,5 +1,5 @@
 group 'me.carda.awesome_notifications_fcm'
-version '0.7.0-alpha.5'
+version '0.7.0-alpha.1'
 
 buildscript {
     ext.kotlin_version = "1.5.1"
