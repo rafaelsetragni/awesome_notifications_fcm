@@ -1,8 +1,4 @@
 # awesome_notifications_fcm
- Awesome Notifications adapter to enable firebase push notifications.
+Awesome Notifications add-on plugin to enable push notifications through Firebase Cloud Messaging with all awesome notifications features.
 
-BGTaskSchedulerPermittedIdentifiers on info.plist
-https://stackoverflow.com/questions/57927881/how-to-fix-app-store-connect-operation-error-itms-90771
-
-Always Embed Swift Standard
-https://developer.apple.com/forums/thread/17732
+(Documentation is under construction. To learn more about this, visit our Discord Community at https://discord.gg/MP3sEXPTnx)
