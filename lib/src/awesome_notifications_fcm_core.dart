@@ -18,7 +18,6 @@ class AwesomeNotificationsFcm {
 
   PushTokenHandler? _tokenFcmHandler;
   PushTokenHandler? _tokenNativeHandler;
-  FcmSilentDataHandler? _silentDataHandler;
 
   /// SINGLETON METHODS *********************************************
 
@@ -48,7 +47,6 @@ class AwesomeNotificationsFcm {
 
     _tokenFcmHandler = onFcmTokenHandle;
     _tokenNativeHandler = onNativeTokenHandle;
-    _silentDataHandler = onFcmSilentDataHandle;
 
     final dartCallbackReference =
         PluginUtilities.getCallbackHandle(dartBackgroundMain);

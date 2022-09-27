@@ -1,5 +1,6 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
+// ignore: implementation_imports
 import 'package:awesome_notifications/src/models/model.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 import '../fcm_definitions.dart';
 
