@@ -16,9 +16,7 @@ open class DartAwesomeServiceExtension: AwesomeServiceExtension {
         _ request: UNNotificationRequest,
         withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
     ){
-        DartAwesomeNotificationsExtension.setRegistrar()
-        DartAwesomeNotificationsExtension.initialize()
-        
+        SwiftAwesomeNotificationsFcmPlugin.loadClassReferences()
         super.didReceive(request, withContentHandler: contentHandler)
     }
 }

@@ -94,6 +94,7 @@ class NotificationController with ChangeNotifier {
   ///  *********************************************
 
   /// Use this method to detect when a new notification or a schedule is created
+  @pragma("vm:entry-point")
   static Future<void> myNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
     Fluttertoast.showToast(
@@ -103,6 +104,7 @@ class NotificationController with ChangeNotifier {
   }
 
   /// Use this method to detect every time that a new notification is displayed
+  @pragma("vm:entry-point")
   static Future<void> myNotificationDisplayedMethod(
       ReceivedNotification receivedNotification) async {
     Fluttertoast.showToast(
@@ -112,15 +114,17 @@ class NotificationController with ChangeNotifier {
   }
 
   /// Use this method to detect if the user dismissed a notification
+  @pragma("vm:entry-point")
   static Future<void> myDismissActionReceivedMethod(
       ReceivedAction receivedAction) async {
     Fluttertoast.showToast(
         msg: 'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedAction.createdSource)} dismissed',
-        backgroundColor: Colors.yellow
+        backgroundColor: Colors.orange
     );
   }
 
   /// Use this method to detect when the user taps on a notification or action button
+  @pragma("vm:entry-point")
   static Future<void> myActionReceivedMethod(
       ReceivedAction receivedAction) async {
     String? actionSourceText =
@@ -141,6 +145,7 @@ class NotificationController with ChangeNotifier {
   ///  *********************************************
 
   /// Use this method to detect when a silent data arrives (even while terminated)
+  @pragma("vm:entry-point")
   static Future<void> mySilentDataHandle(FcmSilentData silentData) async {
     Fluttertoast.showToast(
         msg: 'Silent data received',
@@ -158,6 +163,7 @@ class NotificationController with ChangeNotifier {
   }
 
   /// Use this method to detect when a new fcm token is received
+  @pragma("vm:entry-point")
   static Future<void> myFcmTokenHandle(String token) async {
     Fluttertoast.showToast(
         msg: 'Fcm token received',
@@ -171,6 +177,7 @@ class NotificationController with ChangeNotifier {
   }
 
   /// Use this method to detect when a new fcm token is received
+  @pragma("vm:entry-point")
   static Future<void> myNativeTokenHandle(String token) async {
     Fluttertoast.showToast(
         msg: 'Native token received',

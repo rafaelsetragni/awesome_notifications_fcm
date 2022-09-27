@@ -1,3 +1,5 @@
 
 example/ios/Runner/GoogleService-Info.plist
 example/android/app/google-services.json
+example/android/awn_fcm_core
+example/android/awn_core

@@ -4,7 +4,6 @@ import 'package:awesome_notifications/src/models/model.dart';
 import '../fcm_definitions.dart';
 
 class FcmSilentData extends Model {
-
   int? _id;
   Map<String, String?>? _data;
   DateTime? _createdDate;
@@ -13,23 +12,21 @@ class FcmSilentData extends Model {
 
   int? get id => _id;
   Map<String, String?>? get data => _data;
-  DateTime? get createdDate  =>  _createdDate;
+  DateTime? get createdDate => _createdDate;
   NotificationSource? get createdSource => _createdSource;
-  NotificationLifeCycle? get createdLifeCycle  => createdLifeCycle;
+  NotificationLifeCycle? get createdLifeCycle => createdLifeCycle;
 
   @override
   FcmSilentData? fromMap(Map<String, dynamic> dataMap) {
-
     _id = dataMap[NOTIFICATION_ID];
 
-    if(data != null)
+    if (data != null)
       _data?.clear();
     else
       _data = {};
 
-    for(String key in dataMap.keys){
-      switch(key){
-
+    for (String key in dataMap.keys) {
+      switch (key) {
         case NOTIFICATION_CREATED_DATE:
           _createdDate = AwesomeAssertUtils.extractValue(
               NOTIFICATION_CREATED_DATE, dataMap, DateTime);
@@ -42,7 +39,9 @@ class FcmSilentData extends Model {
 
         case NOTIFICATION_CREATED_LIFECYCLE:
           _createdLifeCycle = AwesomeAssertUtils.extractEnum(
-              NOTIFICATION_CREATED_LIFECYCLE, dataMap, NotificationLifeCycle.values);
+              NOTIFICATION_CREATED_LIFECYCLE,
+              dataMap,
+              NotificationLifeCycle.values);
           continue;
 
         case SILENT_HANDLE:
@@ -64,15 +63,14 @@ class FcmSilentData extends Model {
       NOTIFICATION_ID: _id?.toString(),
       NOTIFICATION_CREATED_DATE: _createdDate.toString(),
       NOTIFICATION_CREATED_SOURCE:
-      AwesomeAssertUtils.toSimpleEnumString(_createdSource),
+          AwesomeAssertUtils.toSimpleEnumString(_createdSource),
       NOTIFICATION_CREATED_LIFECYCLE:
-      AwesomeAssertUtils.toSimpleEnumString(_createdLifeCycle),
+          AwesomeAssertUtils.toSimpleEnumString(_createdLifeCycle),
     });
 
     return _data!;
   }
 
   @override
-  void validate() {
-  }
+  void validate() {}
 }

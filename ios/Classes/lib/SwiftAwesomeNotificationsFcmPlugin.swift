@@ -40,7 +40,7 @@ public class SwiftAwesomeNotificationsFcmPlugin:
         self.registrar = registrar
         self.flutterChannel = channel
         
-        AwesomeNotificationsFcm.backgroundFcmClassType = DartFcmBackgroundExecutor.self
+        SwiftAwesomeNotificationsFcmPlugin.loadClassReferences()
         
         self.awesomeNotificationsFcm = AwesomeNotificationsFcm()
         
@@ -56,6 +56,11 @@ public class SwiftAwesomeNotificationsFcmPlugin:
         FlutterAudioUtils.extendCapabilities(usingFlutterRegistrar: registrar)
         FlutterBitmapUtils.extendCapabilities(usingFlutterRegistrar: registrar)
         DartBackgroundExecutor.extendCapabilities(usingFlutterRegistrar: registrar)
+    }
+    
+    public static func loadClassReferences(){
+        if FcmBackgroundService.backgroundFcmClassType != nil { return }
+        FcmBackgroundService.backgroundFcmClassType = DartFcmBackgroundExecutor.self
     }
     
     @objc
@@ -84,11 +89,15 @@ public class SwiftAwesomeNotificationsFcmPlugin:
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) -> Bool {
+        SwiftAwesomeNotificationsFcmPlugin.loadClassReferences()
         return awesomeNotificationsFcm?
             .application(
                 application,
                 didReceiveRemoteNotification: userInfo,
-                fetchCompletionHandler: completionHandler) ?? false
+                fetchCompletionHandler: { backgroundFetchResult in
+                    Logger.d(SwiftAwesomeNotificationsFcmPlugin.TAG, "didReceiveRemoteNotification completed with \(backgroundFetchResult)")
+                    completionHandler(backgroundFetchResult)
+                }) ?? false
     }
     
     public func onNewNativeToken(token: String?) {

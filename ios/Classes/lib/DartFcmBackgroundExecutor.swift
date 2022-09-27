@@ -56,7 +56,6 @@ public class DartFcmBackgroundExecutor: FcmBackgroundExecutor {
         silentCallbackHandle:Int64,
         dartCallbackHandle:Int64
     ){
-        AwesomeNotificationsFcm.backgroundFcmClassType = DartFcmBackgroundExecutor.self
         addSilentDataRequest(silentDataRequest)
        
         if(!self._isRunning){

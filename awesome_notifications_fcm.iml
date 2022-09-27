@@ -290,6 +290,9 @@
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/awesome_notifications/example/macos/Flutter/ephemeral/.symlinks/plugins/path_provider_macos/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/awesome_notifications/example/macos/Flutter/ephemeral/.symlinks/plugins/path_provider_macos/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/awesome_notifications/example/macos/Flutter/ephemeral/.symlinks/plugins/path_provider_macos/build" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/awesome_notifications_fcm/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/awesome_notifications_fcm/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/awesome_notifications_fcm/example/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

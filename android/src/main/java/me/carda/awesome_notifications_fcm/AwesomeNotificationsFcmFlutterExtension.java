@@ -2,6 +2,7 @@ package me.carda.awesome_notifications_fcm;
 
 import android.content.Context;
 
+import me.carda.awesome_notifications.DartBackgroundExecutor;
 import me.carda.awesome_notifications.core.AwesomeNotifications;
 import me.carda.awesome_notifications.core.AwesomeNotificationsExtension;
 import me.carda.awesome_notifications.core.logs.Logger;
@@ -23,6 +24,7 @@ public class AwesomeNotificationsFcmFlutterExtension extends AwesomeNotification
     @Override
     public void loadExternalExtensions(Context context) {
         AwesomeNotificationsFcm.awesomeFcmServiceClass = DartFcmService.class;
+        AwesomeNotificationsFcm.awesomeFcmBackgroundExecutorClass = FcmBackgroundExecutor.class;
         FcmBackgroundExecutor.setBackgroundExecutorClass(FcmDartBackgroundExecutor.class);
     }
 }

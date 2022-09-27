@@ -20,8 +20,6 @@ public class AwesomeNotificationsFcm:
 {
     let TAG = "AwesomeNotificationsFcm"
 
-    public static var backgroundFcmClassType:FcmBackgroundExecutor.Type?
-
     static var _debug:Bool? = nil
     static var debug:Bool {
         get {
@@ -176,7 +174,7 @@ public class AwesomeNotificationsFcm:
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) -> Bool {
-        AwesomeFcmService()
+        return AwesomeFcmService()
             .didReceiveRemoteNotification(
                 userInfo: userInfo,
                 fetchCompletionHandler: completionHandler)
