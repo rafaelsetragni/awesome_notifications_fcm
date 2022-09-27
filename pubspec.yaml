@@ -11,16 +11,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+  awesome_notifications: ^0.7.0-beta.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   firebase_core: ^1.14.0
-  awesome_notifications:
-    path: ../awesome_notifications
-    #git:
-    #  url: https://github.com/rafaelsetragni/awesome_notifications.git
-    #  ref: fbee982
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
