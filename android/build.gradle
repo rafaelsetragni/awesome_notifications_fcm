@@ -1,8 +1,8 @@
 group 'me.carda.awesome_notifications_fcm'
-version '0.7.0-alpha.1'
+version '0.7.0-alpha.2'
 
 buildscript {
-    ext.kotlin_version = "1.5.1"
+    ext.kotlin_version = '1.6.1'
     repositories {
         google()
         mavenCentral()
@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:7.1.2'
     }
 }
 
@@ -57,8 +57,8 @@ def getRootProjectExtOrCoreProperty(name, firebaseCoreProject) {
 dependencies {
 //    implementation project(':awn_core')
 //    implementation project(':awn_fcm_core')
-    implementation "me.carda:androidcore:0.7.0-alpha.6"
-    implementation 'me.carda:fcmandroidcore:0.7.0-alpha.6'
+    implementation 'me.carda:androidcore:0.7.0'
+    implementation 'me.carda:fcmandroidcore:0.7.0-alpha.7'
     compileOnly project(':awesome_notifications')
 
     implementation 'com.google.android.gms:play-services-base:18.1.0'

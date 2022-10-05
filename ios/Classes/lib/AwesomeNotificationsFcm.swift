@@ -79,9 +79,9 @@ public class AwesomeNotificationsFcm:
 
         if try !LicenseManager.shared.isLicenseKeyValid() {
             Logger.i(TAG,
-                 "You need to insert a valid license key to use Awesome Notification's companion " +
+                 "You need to insert a valid license key to use Awesome Notification's add-on " +
                  "plugin in release mode without watermarks for Bundle ID \"\(Bundle.main.bundleIdentifier ?? "")\". " +
-                 "To know more about it, please visit www.carda.me/awesome-notifications#prices")
+                 "To know more about it, please visit www.awesome-notifications.carda.me#prices")
         }
         else {
             Logger.d(TAG,"Awesome Notification's license key validated")

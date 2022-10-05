@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   firebase_core: ^1.21.1
-  awesome_notifications: ^0.7.0-beta.7
+  awesome_notifications: ^0.7.0
   awesome_notifications_fcm:
     path: ../
 

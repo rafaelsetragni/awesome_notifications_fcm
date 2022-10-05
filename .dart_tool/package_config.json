@@ -9,7 +9,7 @@
     },
     {
       "name": "awesome_notifications",
-      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.0-beta.7+5",
+      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -45,19 +45,19 @@
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.14.1",
+      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_core_platform_interface",
-      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.2.5",
+      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_core_web",
-      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.2",
+      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.7.3",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -176,7 +176,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-09-27T21:14:33.837593Z",
+  "generated": "2022-10-05T02:26:10.167777Z",
   "generator": "pub",
-  "generatorVersion": "2.18.1"
+  "generatorVersion": "2.18.2"
 }
