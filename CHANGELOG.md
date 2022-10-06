@@ -1,3 +1,6 @@
+## [0.7.1]
+* Fixed get createdLifeCycle property from silentDataModel
+* Fixed awesome-notifications url in console documentation
 ## [0.7.0+1]
 * Fixed discord invite link
 ## [0.7.0]

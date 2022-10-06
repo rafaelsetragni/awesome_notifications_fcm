@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -154,6 +155,13 @@ class NotificationController with ChangeNotifier {
         fontSize: 16);
 
     print('"SilentData": ${silentData.toString()}');
+
+    if (silentData.createdLifeCycle != NotificationLifeCycle.Foreground) {
+      print("bg");
+    } else {
+      print("FOREGROUND");
+    }
+
     print("starting long task");
     await Future.delayed(Duration(seconds: 4));
     final url = Uri.parse("http://google.com");
