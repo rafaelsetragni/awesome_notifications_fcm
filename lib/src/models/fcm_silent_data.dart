@@ -15,7 +15,7 @@ class FcmSilentData extends Model {
   Map<String, String?>? get data => _data;
   DateTime? get createdDate => _createdDate;
   NotificationSource? get createdSource => _createdSource;
-  NotificationLifeCycle? get createdLifeCycle => createdLifeCycle;
+  NotificationLifeCycle? get createdLifeCycle => _createdLifeCycle;
 
   @override
   FcmSilentData? fromMap(Map<String, dynamic> dataMap) {
