@@ -4,6 +4,8 @@ Awesome Notifications add-on to send push notifications through Firebase Cloud M
 
 <br>
 
+![image](https://user-images.githubusercontent.com/40064496/194728018-8ab6821c-d59d-4b1f-972c-57464c9b9aec.png)
+
 <div>
 
 [![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)](#)
