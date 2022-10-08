@@ -1,6 +1,6 @@
 # Awesome Notifications FCM<br>(Firebase Cloud Message)
 
-Awesome Notifications add-on to send push notifications through Firebase Cloud Messaging, using all awesome notifications features.
+Awesome Notifications add-on to send push notifications using Firebase Cloud Messaging, with all awesome notifications features.
 
 <br>
 
