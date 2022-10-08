@@ -66,15 +66,15 @@ class NotificationController with ChangeNotifier {
         onFcmTokenHandle: NotificationController.myFcmTokenHandle,
         onNativeTokenHandle: NotificationController.myNativeTokenHandle,
         licenseKey:
-          // On this example app, the app ID / Bundle Id are different
-          // for each platform
-          Platform.isIOS
-            ? 'B3J3yxQbzzyz0KmkQR6rDlWB5N68sTWTEMV7k9HcPBroUh4RZ/Og2Fv6Wc/lE'
-              '2YaKuVY4FUERlDaSN4WJ0lMiiVoYIRtrwJBX6/fpPCbGNkSGuhrx0Rekk'
-              '+yUTQU3C3WCVf2D534rNF3OnYKUjshNgQN8do0KAihTK7n83eUD60='
-            : 'UzRlt+SJ7XyVgmD1WV+7dDMaRitmKCKOivKaVsNkfAQfQfechRveuKblFnCp4'
-              'zifTPgRUGdFmJDiw1R/rfEtTIlZCBgK3Wa8MzUV4dypZZc5wQIIVsiqi0Zhaq'
-              'YtTevjLl3/wKvK8fWaEmUxdOJfFihY8FnlrSA48FW94XWIcFY=',
+            // On this example app, the app ID / Bundle Id are different
+            // for each platform
+            Platform.isIOS
+                ? 'B3J3yxQbzzyz0KmkQR6rDlWB5N68sTWTEMV7k9HcPBroUh4RZ/Og2Fv6Wc/lE'
+                    '2YaKuVY4FUERlDaSN4WJ0lMiiVoYIRtrwJBX6/fpPCbGNkSGuhrx0Rekk'
+                    '+yUTQU3C3WCVf2D534rNF3OnYKUjshNgQN8do0KAihTK7n83eUD60='
+                : 'UzRlt+SJ7XyVgmD1WV+7dDMaRitmKCKOivKaVsNkfAQfQfechRveuKblFnCp4'
+                    'zifTPgRUGdFmJDiw1R/rfEtTIlZCBgK3Wa8MzUV4dypZZc5wQIIVsiqi0Zhaq'
+                    'YtTevjLl3/wKvK8fWaEmUxdOJfFihY8FnlrSA48FW94XWIcFY=',
         debug: debug);
   }
 
@@ -99,9 +99,9 @@ class NotificationController with ChangeNotifier {
   static Future<void> myNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
     Fluttertoast.showToast(
-        msg: 'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedNotification.createdSource)} created',
-        backgroundColor: Colors.green
-    );
+        msg:
+            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedNotification.createdSource)} created',
+        backgroundColor: Colors.green);
   }
 
   /// Use this method to detect every time that a new notification is displayed
@@ -109,9 +109,9 @@ class NotificationController with ChangeNotifier {
   static Future<void> myNotificationDisplayedMethod(
       ReceivedNotification receivedNotification) async {
     Fluttertoast.showToast(
-        msg: 'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedNotification.createdSource)} displayed',
-        backgroundColor: Colors.blue
-    );
+        msg:
+            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedNotification.createdSource)} displayed',
+        backgroundColor: Colors.blue);
   }
 
   /// Use this method to detect if the user dismissed a notification
@@ -119,9 +119,9 @@ class NotificationController with ChangeNotifier {
   static Future<void> myDismissActionReceivedMethod(
       ReceivedAction receivedAction) async {
     Fluttertoast.showToast(
-        msg: 'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedAction.createdSource)} dismissed',
-        backgroundColor: Colors.orange
-    );
+        msg:
+            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedAction.createdSource)} dismissed',
+        backgroundColor: Colors.orange);
   }
 
   /// Use this method to detect when the user taps on a notification or action button
@@ -145,7 +145,8 @@ class NotificationController with ChangeNotifier {
   ///     REMOTE NOTIFICATION METHODS
   ///  *********************************************
 
-  /// Use this method to detect when a silent data arrives (even while terminated)
+  /// Use this method to execute on background when a silent data arrives
+  /// (even while terminated)
   @pragma("vm:entry-point")
   static Future<void> mySilentDataHandle(FcmSilentData silentData) async {
     Fluttertoast.showToast(
@@ -184,7 +185,7 @@ class NotificationController with ChangeNotifier {
     _instance.notifyListeners();
   }
 
-  /// Use this method to detect when a new fcm token is received
+  /// Use this method to detect when a new native token is received
   @pragma("vm:entry-point")
   static Future<void> myNativeTokenHandle(String token) async {
     Fluttertoast.showToast(
