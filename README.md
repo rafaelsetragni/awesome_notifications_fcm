@@ -33,13 +33,13 @@ Awesome Notifications add-on to send push notifications using Firebase Cloud Mes
 <br>
 <br>
 
-# ⚠️ ATTENTION - `FIREBASE_MESSAGING` PLUGIN
+# ⚠️ ATTENTION - `FIREBASE_MESSAGING` PLUGIN ⚠️ 
 
 
 This plugin provides all features available in `firebase_messaging` plugin + all Awesome Notification features. Because of this, `awesome_notifications_fcm` plugin is incompatible with `firebase_messaging`, as both plugins will compete each other to accquire global notification resources. So, you **MUST not use** `firebase_messaging` with `awesome_notifications_fcm`. All other Firebase plugins are compatible with awesome notification plugins.
     
-To migrate `firebase_messaging` to `awesome_notifications_fcm`, please take a look at:  
-[How to Migrate firebase_messaging plugin]().
+To migrate **firebase_messaging** to **awesome_notifications_fcm**, please take a look at:  
+[How to migrate firebase_messaging plugin]().
 
 
 <br>
@@ -81,11 +81,11 @@ To stay tuned with new updates and get our community support, please subscribe i
 
 # Getting Started
 
-In this section, you going to configue your Android and iOS project to use all features available in `awesome_notifications_fcm`:
+In this section, you going to configue your Android and iOS project to use all features available in **awesome_notifications_fcm**:
 
 <br>
 
-## Plugin Dependencies
+## *Plugin Dependencies*
 
 Add the plugins bellow as a dependency in your `pubspec.yaml` file:
 ```yaml
@@ -98,7 +98,7 @@ OBS: Always certificate to use the last versions of all these plugins.
 <br>
 <br>
 
-## Android Configuration
+## *Android Configuration*
 
 1 - You MUST apply Google Play Services in your project to use FCM services. To do that, first you need to import `com.google.gms:google-services` package into your Android project, adding the line bellow in your `build.gralde` file, located at "android" folder. (Certifies to use the latest version)
 ```Gradle
@@ -122,7 +122,7 @@ Now, your Android project is configured to use `awesome_notifications_fcm`. *Awe
 <br>
 <br>
 
-## * iOS Configuration
+## *iOS Configuration*
 
 1 - First, ensure to have the last XCode version available instaled with at least Swift 5.5.7 (XCode version 14.A400).
 
