@@ -126,6 +126,8 @@ Now, your Android project is configured to use `awesome_notifications_fcm`. *Awe
 
 1 - First, ensure to have the last XCode version available instaled with at least Swift 5.5.7 (XCode version 14.A400).
 
+![image](https://user-images.githubusercontent.com/40064496/194728638-9cada1b9-4f2d-4a30-9fb3-3bb448f36017.png)
+
 <br>
 
 2 - Then, run the command `pod install` inside your iOS project folder.
