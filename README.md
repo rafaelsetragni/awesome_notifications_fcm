@@ -130,9 +130,11 @@ Now, your Android project is configured to use `awesome_notifications_fcm`. *Awe
 
 <br>
 
-2 - Then, run the command `pod install` inside your iOS project folder.
+2 - Run the command `pod install` inside your iOS project folder.
 
 OBS: In case it returns some version conflict, run `pod repo update` to update your local repository and then rename/erase the file "Podfile.lock" inside your iOS folder. For last, try to execute the command `pod install` once again.
+
+![image](https://user-images.githubusercontent.com/40064496/194728843-5a5fd0a1-8540-4186-95e5-441fe5ebfd2f.png)
 
 <br>
 
@@ -143,46 +145,69 @@ Go to your iOS project folder and open the file *Runner.xcfworkspace*.
 
 
 
-With your project opened, go to File -> New -> Target 
+With your project opened, go to "*File -> New -> Target*"
 
+![image](https://user-images.githubusercontent.com/40064496/194728921-ae8c464c-a53b-4d93-a71a-ea417fc620ce.png)
 
-Add a name to your target extension, ending with "ServiceExtension".
+... and chose "Notification Service Extension"
 
+![image](https://user-images.githubusercontent.com/40064496/194729005-3f645f12-f782-43fc-b686-6bad5a2f65e5.png)
 
-4 - Now, you need to include `Flutter` and `Awesome Notifications FCM` libraries to your Notification Service Extension. To do that you need to modify your "PodFile", adding the lines bellow at the end of the file, replacing the 2 mentions of `AwesomeServiceExtension` by your service extension name:
+... and add a name to your target extension, ending with "ServiceExtension".
+
+![image](https://user-images.githubusercontent.com/40064496/194729045-7956c95f-26ec-4f4a-9649-5f1bb0fbc575.png)
+
+<br>
+
+4 - Now, you need to include `Flutter` and `Awesome Notifications FCM` libraries to your *Notification Service Extension*. To do that you need to modify your "PodFile", adding the lines bellow at the end of the file, replacing the 2 mentions of `MyAppServiceExtension` by your service extension name:
 
 ```Ruby
 ################  Awesome Notifications FCM pod mod  ###################
 awesome_fcm_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications_fcm', 'ios', 'Scripts', 'AwesomeFcmPodFile'), '.symlinks')
 require awesome_fcm_pod_file
-target 'AwesomeServiceExtension' do
+target 'MyAppServiceExtension' do
   use_frameworks!
   use_modular_headers!
   
   install_awesome_fcm_ios_pod_target File.dirname(File.realpath(__FILE__))
 end
-update_awesome_fcm_service_target('AwesomeServiceExtension', File.dirname(File.realpath(__FILE__)), flutter_root)
+update_awesome_fcm_service_target('MyAppServiceExtension', File.dirname(File.realpath(__FILE__)), flutter_root)
 ################  Awesome Notifications FCM pod mod  ###################
 ```
 Them execute the command `pod install` to update your target extension. 
 
 <br>
 
-5 - At this point, your target extension is able to use awesome notifications library. Inside your Target extension folder, edit the file `NotificationService.swift`, replacing the class `UNNotificationServiceExtension` by `DartAwesomeServiceExtension` and erasing all Notification Service content.
+5 - At this point, your target extension is able to use awesome notifications library. Inside your Target extension folder, edit the file `NotificationService.swift`, replacing the class `UNNotificationServiceExtension` by `DartAwesomeServiceExtension` and erasing all Notification Service content. The final file should look like this:
+
+```Swift
+import UserNotifications
+import awesome_notifications_fcm
+
+@available(iOS 10.0, *)
+class NotificationService: DartAwesomeServiceExtension {
+
+}
+```
+
+<br>
 
 
+6 - Also to build the app correctly, you need to ensure to set some `build settings` options for each of your app targets. In your project view, click on *Runner -> Target Runner -> Build settings*...  
 
-6 - Also to build the app correctly, you need to ensure to set some `build settings` options for each of your app targets. In your project view, click on Runner -> Build settings and set the following options:  
+![image](https://user-images.githubusercontent.com/40064496/194729267-6fbfc78c-8cba-422b-8af7-d7099f359adb.png)
+
+... and set the following options:
 
 In *Runner* Target:
 * Build libraries for distribution => NO
 * Only safe API extensions => NO
-* Deployment target => 11 or greater
+* iOS Deployment Target => 11 or greater
 
-In *NotificationServiceExtension* Target:
+In your *NotificationServiceExtension* Target:
 * Build libraries for distribution => NO
 * Only safe API extensions => YES
-* Deployment target => 11 or greater
+* iOS Deployment Target => 11 or greater
 
 <br>
 
