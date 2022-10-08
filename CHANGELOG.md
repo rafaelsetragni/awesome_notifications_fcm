@@ -1,3 +1,5 @@
+## [0.7.2+1]
+* Added README documentation (Work in Progress)
 ## [0.7.2]
 * Media Style dependencies upgraded
 ## [0.7.1]
