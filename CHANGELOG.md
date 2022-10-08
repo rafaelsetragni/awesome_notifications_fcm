@@ -1,3 +1,5 @@
+## [0.7.2]
+* Media Style dependencies upgraded
 ## [0.7.1]
 * Fixed get createdLifeCycle property from silentDataModel
 * Fixed awesome-notifications url in console documentation
