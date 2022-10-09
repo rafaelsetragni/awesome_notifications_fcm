@@ -1,3 +1,6 @@
+## [0.7.2+2]
+* README documentation improved (Work in Progress)
+* Android dependencies updated
 ## [0.7.2+1]
 * Added README documentation (Work in Progress)
 ## [0.7.2]
