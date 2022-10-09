@@ -64,7 +64,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-base:18.1.0'
 
     implementation 'com.google.code.gson:gson:2.8.9'
-    implementation ('com.google.guava:guava:30.1-android') { setForce(true) }
+    implementation 'com.google.guava:guava:31.1-android'
 
     api firebaseCoreProject
     implementation platform("com.google.firebase:firebase-bom:${getRootProjectExtOrCoreProperty("FirebaseSDKVersion", firebaseCoreProject)}")

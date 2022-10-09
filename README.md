@@ -31,7 +31,7 @@ Awesome Notifications add-on to send push notifications using FCM (Firebase Clou
 <br>
 <br>
 
-# ⚠️ ATTENTION ⚠️ <br> Users from `firebase_messaging` PLUGIN
+# ⚠️ ATTENTION ⚠️ <br> Users from `firebase_messaging` plugin
 
 This plugin contains all features available in `firebase_messaging` plugin + all Awesome Notification features. Because of this, `awesome_notifications_fcm` plugin is incompatible with `firebase_messaging`, as both plugins will compete each other to accquire global notification resources.
 
@@ -383,3 +383,30 @@ Send this token to your backend server and this way you got the "device address"
 ## Using your backend server
 (work in progress)
 
+<br>
+<br>
+
+# How to migrate `firebase_messaging` plugin.
+
+To migrate from `firebase_messaging` you just need to replace firebase methods by its equivalents on Awesome Notifications and Awesome Notifications FCM:
+
+* FirebaseMessaging.onMessageOpenedApp `->` AwesomeNotifications.getInitialNotificationAction()
+
+* FirebaseMessaging.onMessage `->` static Future <void> onActionReceivedMethod(ReceivedAction receivedAction)
+
+* FirebaseMessaging.onBackgroundMessage `->` static Future<void> mySilentDataHandle(FcmSilentData silentData)
+
+* FirebaseMessaging.requestPermission `->` AwesomeNotifications().requestPermissionToSendNotifications()
+
+
+To access non-static resources inside the static methods, you can use some design patterns:
+
+* Singleton classes
+* Static Flutter Navigator Key defined in MaterialApp widget
+
+
+To switch the execution from background isolate to the main isolate of your application, where you have a valid context to redirect the users, use `ReceivePort` and `SendPort` classes.
+
+```Dart
+
+```
