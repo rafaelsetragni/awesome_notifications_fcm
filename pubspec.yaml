@@ -11,7 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  awesome_notifications: ^0.7.1
+  awesome_notifications: #^0.7.1
+    path: ../awesome_notifications
 
 dev_dependencies:
   flutter_test:

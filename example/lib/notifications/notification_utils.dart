@@ -27,7 +27,14 @@ class NotificationUtils {
                 (dateTime == null
                     ? ''
                     : (' to be displayed at ' +
-                        AwesomeDateUtils.parseDateToString(dateTime)!))),
+                        AwesomeDateUtils.parseDateToString(dateTime)!)),
+            payload: {
+              "topic": "test",
+              "articleId": "1234567890",
+              "publisherId": "",
+              "quizId": ""
+            }
+        ),
         actionButtons: [
           NotificationActionButton(key: 'ACCEPT', label: 'Accept'),
           NotificationActionButton(key: 'DENY', label: 'Deny')
