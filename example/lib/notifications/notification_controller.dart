@@ -90,6 +90,17 @@ class NotificationController with ChangeNotifier {
             NotificationController.myDismissActionReceivedMethod);
   }
 
+  static Future<void> getInitialNotificationAction() async {
+    ReceivedAction? receivedAction = await AwesomeNotifications()
+        .getInitialNotificationAction(removeFromActionEvents: true);
+    if (receivedAction == null) return;
+    // Fluttertoast.showToast(
+    //     msg: 'Notification action launched app: $receivedAction',
+    //   backgroundColor: Colors.deepPurple
+    // );
+    print('Notification action launched app: $receivedAction');
+  }
+
   ///  *********************************************
   ///    LOCAL NOTIFICATION METHODS
   ///  *********************************************

@@ -3,9 +3,9 @@ async
 file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/
 file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/lib/
 awesome_notifications
-2.12
-file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.1/
-file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.1/lib/
+2.14
+file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.3/
+file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.3/lib/
 boolean_selector
 2.12
 file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/
@@ -111,7 +111,7 @@ flutter_web_plugins
 file:///Users/rafaelsetragni/Development/flutter/packages/flutter_web_plugins/
 file:///Users/rafaelsetragni/Development/flutter/packages/flutter_web_plugins/lib/
 awesome_notifications_fcm
-2.12
+2.14
 file:///Users/rafaelsetragni/Documents/GitHub/plugins/awesome_notifications_fcm/
 file:///Users/rafaelsetragni/Documents/GitHub/plugins/awesome_notifications_fcm/lib/
 2

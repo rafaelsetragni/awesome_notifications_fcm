@@ -11,10 +11,10 @@ packages:
   awesome_notifications:
     dependency: "direct main"
     description:
-      path: "../awesome_notifications"
-      relative: true
-    source: path
-    version: "0.7.2"
+      name: awesome_notifications
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.3"
   boolean_selector:
     dependency: transitive
     description:

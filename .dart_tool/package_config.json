@@ -9,9 +9,9 @@
     },
     {
       "name": "awesome_notifications",
-      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.1",
+      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.3",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     },
     {
       "name": "boolean_selector",
@@ -173,10 +173,10 @@
       "name": "awesome_notifications_fcm",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     }
   ],
-  "generated": "2022-10-06T03:08:50.610846Z",
+  "generated": "2022-10-16T00:45:59.426696Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }

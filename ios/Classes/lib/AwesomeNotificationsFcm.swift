@@ -62,7 +62,9 @@ public class AwesomeNotificationsFcm:
         if isInitialized {
             return true
         }
-
+        
+        UIApplication.shared.registerForRemoteNotifications()
+        
         AwesomeNotificationsFcm.debug = debug
 
         FcmDefaultsManager.shared.debug = debug

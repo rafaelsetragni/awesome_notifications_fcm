@@ -12,12 +12,22 @@ end
 
 def update_awesome_fcm_service_target(target_name, xcodeproj_path, flutter_root)
      project = Xcodeproj::Project.open(File.join(xcodeproj_path, 'Runner.xcodeproj'))
+     
+     project.targets.each do |target|
+         target.build_configurations.each do |config|
+             config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'NO'
+         end
+     end
+     
      target = project.targets.select { |t| t.name == target_name }.first
      if target.nil? || project.targets.count == 1
-         raise "You need to create a notification service extension to properly use awesome_notifications_fcm\n"
+         raise "You need to create a Notification Service Extension to properly use awesome_notifications_fcm\n"
      end
      target.build_configurations.each do |config|
          config.build_settings['ENABLE_BITCODE'] = 'NO'
+         config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'YES'
+         config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'NO'
      end
+     
      project.save
 end

@@ -2,6 +2,8 @@ package me.carda.awesome_notifications_fcm;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -46,11 +48,15 @@ public class AwesomeNotificationsFcmPlugin
     public static boolean isInitialized = false;
     private WeakReference<Context> wContext;
 
+    private final Handler uiThreadHandler = new Handler(Looper.getMainLooper());
+
     private final AwesomeFcmTokenListener fcmTokenListener = new AwesomeFcmTokenListener() {
         @Override
         public void onNewFcmTokenReceived(@NonNull String token) {
             if(pluginChannel != null)
-                pluginChannel.invokeMethod(FcmDefinitions.CHANNEL_METHOD_NEW_FCM_TOKEN, token);
+                uiThreadHandler.post(
+                        () -> pluginChannel.invokeMethod(
+                                FcmDefinitions.CHANNEL_METHOD_NEW_FCM_TOKEN, token));
             else
                 ExceptionFactory
                         .getInstance()
@@ -64,7 +70,9 @@ public class AwesomeNotificationsFcmPlugin
         @Override
         public void onNewNativeTokenReceived(@NonNull String token) {
             if(pluginChannel != null)
-                pluginChannel.invokeMethod(FcmDefinitions.CHANNEL_METHOD_NEW_NATIVE_TOKEN, token);
+                uiThreadHandler.post(
+                        () -> pluginChannel.invokeMethod(
+                                FcmDefinitions.CHANNEL_METHOD_NEW_NATIVE_TOKEN, token));
             else
                 ExceptionFactory
                         .getInstance()
@@ -259,11 +267,10 @@ public class AwesomeNotificationsFcmPlugin
         Object debugObject = arguments.get(FcmDefinitions.DEBUG_MODE);
 
         boolean debug = debugObject != null && (boolean) debugObject;
-        long silentCallback = callbackSilentObj == null ? 0L : (Long) callbackSilentObj;
-        long dartCallback = callbackDartObj == null ? 0L :(Long) callbackDartObj;
+        long silentCallback = callbackSilentObj == null ? 0L : ((Number) callbackSilentObj).longValue();
+        long dartCallback = callbackDartObj == null ? 0L : ((Number) callbackDartObj).longValue();
         String licenseKey = licenseKeyObject != null ? (String) licenseKeyObject : null;
 
-        //-6288304895990788096
         if(FlutterCallbackInformation.lookupCallbackInformation(silentCallback) == null){
             throw ExceptionFactory
                     .getInstance()

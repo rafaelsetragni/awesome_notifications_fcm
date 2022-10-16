@@ -33,12 +33,12 @@ Awesome Notifications add-on to send push notifications using FCM (Firebase Clou
 
 # ⚠️ ATTENTION ⚠️ <br> Users from `firebase_messaging` plugin
 
-This plugin contains all features available in `firebase_messaging` plugin + all Awesome Notification features. Because of this, `awesome_notifications_fcm` plugin is incompatible with `firebase_messaging`, as both plugins will compete each other to accquire global notification resources.
+This plugin contains all features available in `firebase_messaging` plugin + all Awesome Notification features. Because of this, `awesome_notifications_fcm` plugin is incompatible with `firebase_messaging`, as both plugins will compete each other to acquire global notification resources.
 
 So, you **MUST not use** `firebase_messaging` with `awesome_notifications_fcm`. All other Firebase plugins are compatible with awesome notification plugins.
     
 To migrate **firebase_messaging** to **awesome_notifications_fcm**, please take a look at:  
-[How to migrate firebase_messaging plugin]().
+[How to migrate firebase_messaging plugin](#how-to-migrate-firebase_messaging-plugin).
 
 
 <br>
@@ -77,6 +77,17 @@ To stay tuned with new updates and get our community support, please subscribe i
 
 
 
+# 📝 Important initial notes
+
+1. This plugin is an add-on of [Awesome Notifications](https://pub.dev/packages/awesome_notification) plugin and, because of it, depends on it.
+2. Push notifications, like local notifications, are not 100% reliable. That means your notification may be delayed or denied due to battery saving modes, background processing blocking, internet connection failures, etc. Keep this in mind when designing your business logic.
+3. On iOS, push notifications are only delivered to real devices, but all other features can be tested using simulators.
+4. To check what is happening with your notification while the app is terminated, you need to read all logs from the device. To do this on Android, use LogCat from Android Studio. On iOS, use the "Console.app" program available on MacOS.
+5. If your app was forced to stop on any platform, all notifications will no longer be delivered until your app is reopened.
+
+<br>
+<br>
+
 
 # 🛠 Getting Started
 
@@ -89,8 +100,8 @@ In this section, you going to configue your Android and iOS project to use all f
 Add the plugins bellow as a dependency in your `pubspec.yaml` file:
 ```yaml
   firebase_core: ^1.24.1
-  awesome_notifications: ^0.7.2
-  awesome_notifications_fcm: ^0.7.2
+  awesome_notifications: ^0.7.X
+  awesome_notifications_fcm: ^0.7.X
 ```
 OBS: Always certificate to use the last versions of all these plugins.
 
@@ -238,11 +249,12 @@ Now, your iOS project is configured to use `awesome_notifications_fcm`. *Awesome
 
 1. Push notifications on iOS DO NOT support IDs/Identifiers.
 2. Push notifications are only delivered to real devices, all other features can be tested using simulators.
-3. Push notifications are always delivered, even in a catastrophic error in your configuration, json package or notification service extension. In these cases, your notification is displayed as simply as possible. To allow you to avoid such situation, awesome sets these notifications with category `"INVALID"`, and you can filter this category editing your info.plist, but you need to ask Apple for permission to do it. Other solution is to send your push notificaiton setting the `apns-push-type` header field to alert. To know more about it, please check [com.apple.developer.usernotifications.filtering](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_usernotifications_filtering).
-3. If you do not set "mutable_content" to true, your notification will not be delivered to NSE (Notification Service Extension) and modified to have awesome customizations. Instead, it will be delivered only with title and body content.
-4. If you do not use "content_available", your silent push notification will not be delivered.
-5. You must not use silent push notifications to often, otherwise Apple will starts to block your device to run on background. You can use "Console.app" on MacOS to get the device's logs and check if your app is getting blocked.
-6. Your push notifications can be denied on iOS if your users don't open your app for a long time. This limitation is canceled as soon your user opens your application manually.
+3. Push notifications are always delivered, even in a catastrophic error in your configuration, json package or notification service extension. In these cases, your notification is displayed as simply as possible. To allow you to avoid such situation, awesome sets these notifications with category `"INVALID"`, and you can filter this category editing your info.plist, but you need to ask Apple for permission to do it. To know more about, please check [com.apple.developer.usernotifications.filtering](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_usernotifications_filtering).
+3. If you do not set `"mutable_content"` to true, your notification will not be delivered to NSE (Notification Service Extension) and modified to have awesome notification customizations. Instead, it will be delivered only with originals title and body content.
+4. If you do not set `"content_available"` to true, your silent push notification will not be delivered.
+5. Is recommended to set the badge value in the notification section at same time as in data, because in NSE failures, iOS will reade the badge value present in notification section. Meantime, Android FCM library does not delivery badge value inside notification section, so you need to set it inside data section.
+6. You must not use silent push notifications to often, otherwise Apple will starts to block your device to run on background. You can use "Console.app" on MacOS to get the device's logs and check if your app is getting blocked.
+7. Your push notifications can be denied on iOS if your users don't open your app for a long time. This limitation is canceled as soon as your user reopen your application manually.
 
 <br>
 <br>
@@ -250,7 +262,7 @@ Now, your iOS project is configured to use `awesome_notifications_fcm`. *Awesome
 
 # 📋 Creating a Firebase Project to send Push Notifications
 
-To send push notifications using FCM (Firebase Cloud Message) you need to have an Firebase account with `Cloud Messaging` enable and copy the google-services.info (iOS) and google-services.json (Android) files to the correct Android and iOS folders. Also, you need to send to Firebase the APN certificates to enable the comunication between Firebase and Apple servers. In this section we going to explain to you how to do all of that.
+To send push notifications using FCM (Firebase Cloud Message) you need to have an Firebase account with `Cloud Messaging` enable and copy the google-services.info (iOS) and google-services.json (Android) files at correct places. Also, you need to send to Firebase the APNs certificates to enable the comunication between Firebase and Apple servers. In this section we going to explain to you how to do all of that.
 
 First, you need to create an Firebase account and activate the Firebase service called `Cloud Messaging`:
 
@@ -389,9 +401,17 @@ Send this token to your backend server and this way you got the "device address"
 # 📣 Sending Push Notifications
 
 ## Using Firebase portal
-(work in progress)
+
+<br>
+
+To send notifications using Firebase console, you can check this excelent tutorial about how to send push notifications on Firebase Console:
+[Complete guide on sending Push using Firebase Cloud Messaging Console](https://enappd.com/blog/sending-push-using-firebase-console/35/)
+
+<br>
 
 ## Using your backend server / Postman
+
+<br>
 
 To send push notifications in awesome notifications with all features available, you must use the standard below (Android and iOS sections are optional):
 
@@ -401,13 +421,14 @@ To send push notifications in awesome notifications with all features available,
     "priority": "high",
     "mutable_content": true,
     "notification": {
+        "badge": 42,
         "title": "Huston! The eagle has landed!",
         "body": "A small step for a man, but a giant leap to Flutter's community!"
     },
     "data" : {
         "content": {
             "id": 1,
-            "badge": 0,
+            "badge": 42,
             "channelKey": "alerts",
             "displayOnForeground": true,
             "notificationLayout": "BigPicture",
@@ -468,10 +489,33 @@ To send push notifications in awesome notifications with all features available,
 }
 ```
 
+To send silent push notifications, you must not use "notification" section and you need to use "content_available" instead of "mutable_content":
+
+```Json
+{
+    "to" : "{{fcm_token_ios}}",
+    "content_available": true,
+    "priority": "high",
+    "data" : {
+        "data1": "fb787aa2-6387-4f65-a5a2-125f96ab4c14",
+        "data2": "call_voice",
+        "data3": "3c3079b7-ab5e-48a5-8c61-b64ebb4910a9",
+        "data4": "5469846578",
+    }
+}
+```
+
+It's not required to have a real server to send push notifications. You can use REST programs to emulate your backend sending push notifications, like [Postman](https://www.postman.com).
+
+Below is a Postman project/collection containing all avaliable Awesome Notifications FCM features to be changed and tested at your will:  
+[Firebase FMC Example.postman_collection.json](https://github.com/rafaelsetragni/awesome_notifications_fcm/blob/9b4aefdd4f55156db768f8dfc35263c03c869c41/example/assets/readme/Firebase%20FMC%20Example.postman_collection.json)
+
+To use it, download the json file and import it as collection into your Postman, remembering to replace the variables according to your Firebase project keys and your devices' tokens.
+
 <br>
 <br>
 
-# How to migrate `firebase_messaging` plugin.
+# 🚚 How to migrate `firebase_messaging` plugin.
 
 To migrate from `firebase_messaging` you just need to replace firebase methods by its equivalents on Awesome Notifications and Awesome Notifications FCM:
 
@@ -496,3 +540,30 @@ To switch the execution from background isolate to the main isolate of your appl
 
 ```
 (work in progress)
+<br>
+<br>
+
+
+# 🔑 License key.
+
+Local notifications using [Awesome Notifications]() are always 100% free to use. And you can also test all push notifications features on [Awesome Notifications FCM]() for free, Forever.
+
+But to use Awesome Notifications FCM on release mode without the watermark [DEMO], you need to purchase a license key. This license key is a RSA digital signature, validated with private and public keys in conjunction with plugin versionings and your App ID / Bundle ID. Because of it, once the license key is generated for your app, its forever. It will never expires and do not require internet connection to be validated.
+
+<br>
+
+The price of a license key is **$ 9.99 / App**, and it contains:
+
+* Push Notifications without watermark
+* 1 license Key, expandable to 4 id variations
+* Perpetual Licenses
+* 2 Dedicated Support Meetings
+* 1 Year exclusive support on Discord
+* 1 Year of Free Updates
+
+<br>
+
+That way, you only pay a small contribution and help keep the plugin evolving and supporting it, as well as purchasing new devices to test, hiring new developers, etc.
+
+The Awesome Notification's portal to purchasing and managing your license keys is now in the final stages of development. So for now, to purchase the license key, get in contact with us on our Discord community at https://discord.awesome-notifications.carda.me .
+

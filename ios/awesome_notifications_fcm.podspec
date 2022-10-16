@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'awesome_notifications_fcm'
-  s.version          = '0.7.0'
+  s.version          = '0.7.2'
   s.summary          = 'Complement of Awesome Notifications to allow firebase with all awesome resources in Flutter.'
   s.description      = <<-DESC
 Complement of Awesome Notifications to allow firebase with all awesome resources in Flutter.
@@ -16,8 +16,9 @@ Complement of Awesome Notifications to allow firebase with all awesome resources
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'awesome_notifications'
-  s.dependency 'IosAwnCore', '0.7.1'
-  s.dependency 'IosAwnFcmDist', '0.7.0-alpha.2'
+  s.dependency 'IosAwnCore', '0.7.3'
+  #s.dependency 'IosAwnFcmCore'#
+  s.dependency 'IosAwnFcmDist', '0.7.3'
   s.dependency 'Firebase'
   s.dependency 'Firebase/Messaging'
   
@@ -27,11 +28,12 @@ Complement of Awesome Notifications to allow firebase with all awesome resources
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = {
-    'DEFINES_MODULE' => 'YES',
-    'ONLY_ACTIVE_ARCH' => 'YES',
-    'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64',
+    'DEFINES_MODULE' => 'NO',
     'ENABLE_BITCODE' => 'NO',
-    'APPLICATION_EXTENSION_API_ONLY' => 'NO'
+    'ONLY_ACTIVE_ARCH' => 'YES',
+    'APPLICATION_EXTENSION_API_ONLY' => 'NO',
+    'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'NO',
+    'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64',
   }
   
   s.script_phase = {

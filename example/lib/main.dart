@@ -6,8 +6,10 @@ import 'package:awesome_notifications_fcm_example/routes.dart';
 import 'notifications/notification_controller.dart';
 
 main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await NotificationController.initializeLocalNotifications(debug: true);
   await NotificationController.initializeRemoteNotifications(debug: true);
+  await NotificationController.getInitialNotificationAction();
   runApp(MyApp());
 }
 
