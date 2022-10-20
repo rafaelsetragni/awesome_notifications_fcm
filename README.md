@@ -546,6 +546,8 @@ To switch the execution from background isolate to the main isolate of your appl
 
 # 🔑 License key.
 
+![image](https://user-images.githubusercontent.com/40064496/196968996-c5b5a11c-db47-4450-b698-a28984fb8e2b.png)
+
 Local notifications using [Awesome Notifications]() are always 100% free to use. And you can also test all push notifications features on [Awesome Notifications FCM]() for free, Forever.
 
 But to use Awesome Notifications FCM on release mode without the watermark [DEMO], you need to purchase a license key. This license key is a RSA digital signature, validated with private and public keys in conjunction with plugin versionings and your App ID / Bundle ID. Because of it, once the license key is generated for your app, its forever. It will never expires and do not require internet connection to be validated.
