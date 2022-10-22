@@ -141,6 +141,13 @@ class NotificationController with ChangeNotifier {
       ReceivedAction receivedAction) async {
     String? actionSourceText =
         AwesomeAssertUtils.toSimpleEnumString(receivedAction.actionLifeCycle);
+
+    if(receivedAction.actionType == ActionType.SilentBackgroundAction){
+      print('myActionReceivedMethod received a SilentBackgroundAction execution');
+      await executeLongTaskTest();
+      return;
+    }
+
     Fluttertoast.showToast(
         msg: 'Notification action captured on $actionSourceText');
 
@@ -173,6 +180,12 @@ class NotificationController with ChangeNotifier {
     } else {
       print("FOREGROUND");
     }
+
+    print('mySilentDataHandle received a FcmSilentData execution');
+    await executeLongTaskTest();
+  }
+
+  static Future<void> executeLongTaskTest() async {
 
     print("starting long task");
     await Future.delayed(Duration(seconds: 4));

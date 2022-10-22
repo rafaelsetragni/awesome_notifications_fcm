@@ -566,4 +566,3 @@ The price of a license key is **$ 9.99 / App**, and it contains:
 That way, you only pay a small contribution and help keep the plugin evolving and supporting it, as well as purchasing new devices to test, hiring new developers, etc.
 
 The Awesome Notification's portal to purchasing and managing your license keys is now in the final stages of development. So for now, to purchase the license key, get in contact with us on our Discord community at https://discord.awesome-notifications.carda.me .
-

@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications_fcm/src/fcm_definitions.dart';
-import 'package:awesome_notifications_fcm/src/isolates/background_main.dart';
+import 'package:awesome_notifications_fcm/src/isolates/silent_push_isolate_main.dart';
 
 import 'exceptions/exceptions.dart';
 
@@ -49,7 +49,7 @@ class AwesomeNotificationsFcm {
     _tokenNativeHandler = onNativeTokenHandle;
 
     final dartCallbackReference =
-        PluginUtilities.getCallbackHandle(dartBackgroundMain);
+        PluginUtilities.getCallbackHandle(silentPushBackgroundMain);
     final tokenCallbackReference =
         PluginUtilities.getCallbackHandle(onFcmTokenHandle);
     final silentCallbackReference =

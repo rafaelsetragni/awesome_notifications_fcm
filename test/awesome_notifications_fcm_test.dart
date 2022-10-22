@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('awesome_notifications_fcm');

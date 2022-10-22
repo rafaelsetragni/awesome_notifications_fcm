@@ -8,7 +8,7 @@ PODS:
     - Firebase/Messaging
     - Flutter
     - IosAwnCore (= 0.7.3)
-    - IosAwnFcmDist (= 0.7.3)
+    - IosAwnFcmDist (= 0.7.4)
   - Firebase (9.6.0):
     - Firebase/Core (= 9.6.0)
   - Firebase/Core (9.6.0):
@@ -114,7 +114,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.8.0):
     - GoogleUtilities/Logger
   - IosAwnCore (0.7.3)
-  - IosAwnFcmDist (0.7.3):
+  - IosAwnFcmDist (0.7.4):
     - IosAwnCore (= 0.7.3)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
@@ -173,7 +173,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   awesome_notifications: d63d9a25f126860f9a600850d99772237895b3ba
-  awesome_notifications_fcm: 546a26438fd70439c3590ce69f5cdf223bb3d246
+  awesome_notifications_fcm: 961d851b77a2a7f0147dc68df3e25d3837356d11
   Firebase: 5ae8b7cf8efce559a653aef0ad95bab3f427c351
   firebase_core: 7c28ecc1e5dd74e03829ac3e9ff5ba3314e737a9
   FirebaseAnalytics: 89ad762c6c3852a685794174757e2c60a36b6a82
@@ -188,7 +188,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
   IosAwnCore: 6494e0e174d49f04f513e8a002187be226889a37
-  IosAwnFcmDist: cabbf6925974cebf0e08d90df5ac60b17a941cbf
+  IosAwnFcmDist: 4c14490ae1ecab99e2f94af9130c0a26d0b34ffa
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb

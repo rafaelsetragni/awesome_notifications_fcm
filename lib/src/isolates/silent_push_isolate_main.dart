@@ -7,7 +7,7 @@ import 'package:awesome_notifications_fcm/src/exceptions/exceptions.dart';
 import 'package:awesome_notifications_fcm/src/fcm_definitions.dart';
 
 @pragma("vm:entry-point")
-Future<void> dartBackgroundMain() async {
+Future<void> silentPushBackgroundMain() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   const MethodChannel _channel = MethodChannel(DART_FCM_REVERSE_CHANNEL);

@@ -36,8 +36,20 @@ class NotificationUtils {
             }
         ),
         actionButtons: [
-          NotificationActionButton(key: 'ACCEPT', label: 'Accept'),
-          NotificationActionButton(key: 'DENY', label: 'Deny')
+          NotificationActionButton(
+              key: 'ACCEPT',
+              label: 'Accept'
+          ),
+          NotificationActionButton(
+              key: 'BACKGROUND',
+              label: 'Background',
+              actionType: ActionType.SilentBackgroundAction
+          ),
+          NotificationActionButton(
+              key: 'DENY',
+              label: 'Deny',
+              isDangerousOption: true
+          )
         ],
         schedule: dateTime == null
             ? null
