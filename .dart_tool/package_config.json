@@ -9,7 +9,7 @@
     },
     {
       "name": "awesome_notifications",
-      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_notifications-0.7.3",
+      "rootUri": "file:///Users/rafaelsetragni/Development/flutter/.pub-cache/git/awesome_notifications-77b7a0e1b305e845662a1ef6c9b4573385e06127/",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -176,7 +176,7 @@
       "languageVersion": "2.14"
     }
   ],
-  "generated": "2022-10-16T00:45:59.426696Z",
+  "generated": "2022-10-22T20:45:46.956576Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }

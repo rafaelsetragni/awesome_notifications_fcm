@@ -6,7 +6,7 @@ description: Demonstrates how to use the awesome_notifications_fcm plugin.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -16,7 +16,7 @@ dependencies:
   awesome_notifications: #^0.7.4
     #path: ../../awesome_notifications
     git:
-      ref: "75df468"
+      ref: "b861f36"
       url: https://github.com/rafaelsetragni/awesome_notifications
   awesome_notifications_fcm:
     path: ../

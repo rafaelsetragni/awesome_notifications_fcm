@@ -34,13 +34,15 @@ class AwesomeNotificationsFcm {
 
   /// INITIALIZING METHODS *********************************************
 
-  /// Initializes the plugin, creating a default icon and the initial channels. Only needs
-  /// to be called at main.dart once.
+  /// Initializes the plugin, setting the [onFcmTokenHandle] and [onFcmSilentDataHandle]
+  /// listeners to capture Firebase Messaging events and the [licenseKeys] necessary
+  /// to validate the release use of this plugin.
+  /// You should call this method only once at main_complete.dart.
   /// [debug]: enables the console log prints
   Future<bool> initialize(
       {required PushTokenHandler onFcmTokenHandle,
       required FcmSilentDataHandler onFcmSilentDataHandle,
-      required String? licenseKey,
+      List<String>? licenseKeys,
       PushTokenHandler? onNativeTokenHandle,
       bool debug = false}) async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +61,7 @@ class AwesomeNotificationsFcm {
     _isInitialized =
         await _channel.invokeMethod(CHANNEL_METHOD_FCM_INITIALIZE, {
       DEBUG_MODE: debug,
-      LICENSE_KEY: licenseKey,
+      LICENSE_KEYS: licenseKeys,
       DART_BG_HANDLE: dartCallbackReference!.toRawHandle(),
       TOKEN_HANDLE: tokenCallbackReference?.toRawHandle(),
       SILENT_HANDLE: silentCallbackReference?.toRawHandle()
