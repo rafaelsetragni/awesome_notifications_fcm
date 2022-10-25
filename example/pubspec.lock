@@ -25,11 +25,9 @@ packages:
   awesome_notifications:
     dependency: "direct main"
     description:
-      path: "."
-      ref: b861f36
-      resolved-ref: b861f3666643125c9df8b54ec671a67b7d177353
-      url: "https://github.com/rafaelsetragni/awesome_notifications"
-    source: git
+      name: awesome_notifications
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.7.4"
   awesome_notifications_fcm:
     dependency: "direct main"

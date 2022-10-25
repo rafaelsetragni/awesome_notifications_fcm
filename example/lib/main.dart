@@ -12,6 +12,9 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+
+
+
 ///  *********************************************
 ///     NOTIFICATION CONTROLLER
 ///  *********************************************
@@ -315,6 +318,9 @@ class NotificationController extends ChangeNotifier {
   }
 }
 
+
+
+
 ///  *********************************************
 ///     MAIN WIDGET
 ///  *********************************************
@@ -386,6 +392,10 @@ class _AppState extends State<MyApp> {
     );
   }
 }
+
+
+
+
 
 ///  *********************************************
 ///     HOME PAGE
@@ -471,6 +481,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
+
 
 ///  *********************************************
 ///     NOTIFICATION PAGE
