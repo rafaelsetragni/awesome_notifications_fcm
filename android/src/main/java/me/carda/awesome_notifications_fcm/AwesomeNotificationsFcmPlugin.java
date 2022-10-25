@@ -7,6 +7,7 @@ import android.os.Looper;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
@@ -245,7 +246,7 @@ public class AwesomeNotificationsFcmPlugin
         }
     }
 
-    private void channelMethodInitialize(@NonNull MethodCall call, @NonNull final Result result) throws AwesomeNotificationsException, AwesomeNotificationsException {
+    private void channelMethodInitialize(@NonNull MethodCall call, @NonNull final Result result) throws AwesomeNotificationsException {
         if(isInitialized) {
             result.success(true);
             return;
@@ -263,13 +264,13 @@ public class AwesomeNotificationsFcmPlugin
 
         Object callbackSilentObj = arguments.get(FcmDefinitions.SILENT_HANDLE);
         Object callbackDartObj = arguments.get(FcmDefinitions.DART_BG_HANDLE);
-        Object licenseKeyObject = arguments.get(FcmDefinitions.LICENSE_KEY);
+        Object licenseKeysObject = arguments.get(FcmDefinitions.LICENSE_KEYS);
         Object debugObject = arguments.get(FcmDefinitions.DEBUG_MODE);
 
         boolean debug = debugObject != null && (boolean) debugObject;
         long silentCallback = callbackSilentObj == null ? 0L : ((Number) callbackSilentObj).longValue();
         long dartCallback = callbackDartObj == null ? 0L : ((Number) callbackDartObj).longValue();
-        String licenseKey = licenseKeyObject != null ? (String) licenseKeyObject : null;
+        List<String> licenseKeys = licenseKeysObject != null ? (List<String>) licenseKeysObject : null;
 
         if(FlutterCallbackInformation.lookupCallbackInformation(silentCallback) == null){
             throw ExceptionFactory
@@ -293,7 +294,7 @@ public class AwesomeNotificationsFcmPlugin
 
         boolean success =
             awesomeNotificationsFcm.initialize(
-                    licenseKey,
+                    licenseKeys,
                     dartCallback,
                     silentCallback,
                     debug

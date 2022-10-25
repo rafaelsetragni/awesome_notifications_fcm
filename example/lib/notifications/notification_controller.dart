@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:ui';
-
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -65,16 +62,20 @@ class NotificationController with ChangeNotifier {
         onFcmSilentDataHandle: NotificationController.mySilentDataHandle,
         onFcmTokenHandle: NotificationController.myFcmTokenHandle,
         onNativeTokenHandle: NotificationController.myNativeTokenHandle,
-        licenseKey:
-            // On this example app, the app ID / Bundle Id are different
-            // for each platform
-            Platform.isIOS
-                ? 'B3J3yxQbzzyz0KmkQR6rDlWB5N68sTWTEMV7k9HcPBroUh4RZ/Og2Fv6Wc/lE'
-                    '2YaKuVY4FUERlDaSN4WJ0lMiiVoYIRtrwJBX6/fpPCbGNkSGuhrx0Rekk'
-                    '+yUTQU3C3WCVf2D534rNF3OnYKUjshNgQN8do0KAihTK7n83eUD60='
-                : 'UzRlt+SJ7XyVgmD1WV+7dDMaRitmKCKOivKaVsNkfAQfQfechRveuKblFnCp4'
-                    'zifTPgRUGdFmJDiw1R/rfEtTIlZCBgK3Wa8MzUV4dypZZc5wQIIVsiqi0Zhaq'
-                    'YtTevjLl3/wKvK8fWaEmUxdOJfFihY8FnlrSA48FW94XWIcFY=',
+        licenseKeys:
+        // On this example app, the app ID / Bundle Id are different
+        // for each platform, so was used the main Bundle ID + 1 variation
+        [
+            // me.carda.awesome-notifications-fcm.example
+            'B3J3yxQbzzyz0KmkQR6rDlWB5N68sTWTEMV7k9HcPBroUh4RZ/Og2Fv6Wc/lE'
+            '2YaKuVY4FUERlDaSN4WJ0lMiiVoYIRtrwJBX6/fpPCbGNkSGuhrx0Rekk'
+            '+yUTQU3C3WCVf2D534rNF3OnYKUjshNgQN8do0KAihTK7n83eUD60=',
+
+            // me.carda.awesome_notifications_fcm.example
+            'UzRlt+SJ7XyVgmD1WV+7dDMaRitmKCKOivKaVsNkfAQfQfechRveuKblFnCp4'
+            'zifTPgRUGdFmJDiw1R/rfEtTIlZCBgK3Wa8MzUV4dypZZc5wQIIVsiqi0Zhaq'
+            'YtTevjLl3/wKvK8fWaEmUxdOJfFihY8FnlrSA48FW94XWIcFY=',
+        ],
         debug: debug);
   }
 
@@ -141,6 +142,13 @@ class NotificationController with ChangeNotifier {
       ReceivedAction receivedAction) async {
     String? actionSourceText =
         AwesomeAssertUtils.toSimpleEnumString(receivedAction.actionLifeCycle);
+
+    if(receivedAction.actionType == ActionType.SilentBackgroundAction){
+      print('myActionReceivedMethod received a SilentBackgroundAction execution');
+      await executeLongTaskTest();
+      return;
+    }
+
     Fluttertoast.showToast(
         msg: 'Notification action captured on $actionSourceText');
 
@@ -173,6 +181,12 @@ class NotificationController with ChangeNotifier {
     } else {
       print("FOREGROUND");
     }
+
+    print('mySilentDataHandle received a FcmSilentData execution');
+    await executeLongTaskTest();
+  }
+
+  static Future<void> executeLongTaskTest() async {
 
     print("starting long task");
     await Future.delayed(Duration(seconds: 4));

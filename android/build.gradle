@@ -57,8 +57,8 @@ def getRootProjectExtOrCoreProperty(name, firebaseCoreProject) {
 dependencies {
 //    implementation project(':awn_core')
 //    implementation project(':awn_fcm_core')
-    implementation 'me.carda:androidcore:0.7.2'
-    implementation 'me.carda:fcmandroidcore:0.7.1'
+    implementation 'me.carda:androidcore:0.7.7'
+    implementation 'me.carda:fcmandroidcore:0.7.6'
 
     compileOnly project(':awesome_notifications')
 

@@ -1,3 +1,6 @@
+## [0.7.4]
+* Fixed labels for silent handle and action handle
+* Added option to send multiple license keys, dismissing the necessity to switch it to each bundle ID
 ## [0.7.3]
 * Added switchable push notifications
 * Added remote badge updates via push notifications

@@ -56,7 +56,7 @@ public class AwesomeNotificationsFcm:
     public func initialize(
         silentHandle:Int64,
         dartBgHandle:Int64,
-        licenseKey:String,
+        licenseKeys:[String],
         debug:Bool
     ) throws -> Bool {
         if isInitialized {
@@ -70,7 +70,7 @@ public class AwesomeNotificationsFcm:
         FcmDefaultsManager.shared.debug = debug
         FcmDefaultsManager.shared.silentCallback = silentHandle
         FcmDefaultsManager.shared.backgroundCallback = dartBgHandle
-        FcmDefaultsManager.shared.licenseKey = licenseKey
+        FcmDefaultsManager.shared.licenseKeys = licenseKeys
 
         if AwesomeNotificationsFcm.debug {
             Logger.d(TAG,
