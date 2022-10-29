@@ -12,9 +12,9 @@ const String PAGE_FIREBASE_TEST = '/firebase-test-page';
 Map<String, WidgetBuilder> materialRoutes = {
   PAGE_HOME: (context) => HomePage(),
   PAGE_NOTIFICATION_DETAILS: (context) => NotificationDetailsPage(
-    ModalRoute.of(context)!.settings.arguments as ReceivedNotification,
-  ),
+        ModalRoute.of(context)!.settings.arguments as ReceivedNotification,
+      ),
   PAGE_FIREBASE_TEST: (context) => FirebaseBackendPage(
-    ModalRoute.of(context)!.settings.arguments as String,
-  ),
+        ModalRoute.of(context)!.settings.arguments as String,
+      ),
 };

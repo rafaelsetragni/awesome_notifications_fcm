@@ -35,7 +35,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.7.4"
+    version: "0.7.4+1"
   boolean_selector:
     dependency: transitive
     description:
@@ -105,21 +105,21 @@ packages:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.24.0"
+    version: "2.1.1"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.5.1"
+    version: "4.5.2"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.3"
+    version: "2.0.1"
   flare_dart:
     dependency: transitive
     description:

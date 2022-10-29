@@ -1,3 +1,5 @@
+## [0.7.4+1]
+* Firebase core upgraded to version 2.1.1
 ## [0.7.4]
 * Fixed labels for silent handle and action handle
 * Added option to send multiple license keys, dismissing the necessity to switch it to each bundle ID

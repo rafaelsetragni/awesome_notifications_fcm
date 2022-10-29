@@ -69,7 +69,7 @@ Your donation will be mainly used to purchase new devices and equipments, which 
 
 To stay tuned with new updates and get our community support, please subscribe into our Discord Chat Server:
 
-[![Discord](https://img.shields.io/discord/888523488376279050.svg?style=for-the-badge&colorA=7289da&label=Chat%20on%20Discord)](https://discord.awesome-notifications.carda.me)<br>https://discord.awesome-notifications.carda.me
+[![Discord Banner 3](https://discordapp.com/api/guilds/888523488376279050/widget.png?style=banner3)](https://discord.awesome-notifications.carda.me)
 
 <br>
 <br>
