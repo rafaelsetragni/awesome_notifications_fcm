@@ -283,7 +283,7 @@ To allow Firebase send push notifications to iOS devices, its necessary to do an
 
 <br>
 
-1 - Go to https://developer.apple.com, sing into an Apple Account and go to "Certificates" and click on "+" button.  
+1 - Go to https://developer.apple.com, sign into an Apple Account and go to "Certificates" and click on "+" button.  
 2 - Go to Services section and check **Apple Push Notification service SSL** and click on "Continue"  
 3 - Insert the same iOS App ID configured in your Firebase Cloud Messaging.   
 4 - In your MacOS machine, Launch Keychain Access app, located in /Applications/Utilities.   
