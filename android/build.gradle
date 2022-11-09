@@ -57,8 +57,8 @@ def getRootProjectExtOrCoreProperty(name, firebaseCoreProject) {
 dependencies {
 //    implementation project(':awn_core')
 //    implementation project(':awn_fcm_core')
-    implementation 'me.carda:androidcore:0.7.7'
-    implementation 'me.carda:fcmandroidcore:0.7.6'
+    implementation 'me.carda:androidcore:0.7.9'
+    implementation 'me.carda:fcmandroidcore:0.7.8'
 
     compileOnly project(':awesome_notifications')
 
@@ -71,6 +71,7 @@ dependencies {
     implementation platform("com.google.firebase:firebase-bom:${getRootProjectExtOrCoreProperty("FirebaseSDKVersion", firebaseCoreProject)}")
     implementation 'com.google.firebase:firebase-messaging'//:23.0.1
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
 
     // Required for instrumented tests
     testImplementation 'junit:junit:4.13.2'

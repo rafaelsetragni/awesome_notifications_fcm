@@ -1,3 +1,6 @@
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 Future<void> main() async {
   await NotificationController.initializeLocalNotifications(debug: true);
   await NotificationController.initializeRemoteNotifications(debug: true);
+  await NotificationController.initializeIsolateReceivePort();
   await NotificationController.getInitialNotificationAction();
   runApp(const MyApp());
 }
@@ -75,9 +79,9 @@ class NotificationController extends ChangeNotifier {
       {required bool debug}) async {
     await Firebase.initializeApp();
     await AwesomeNotificationsFcm().initialize(
-        onFcmSilentDataHandle: NotificationController.mySilentDataHandle,
         onFcmTokenHandle: NotificationController.myFcmTokenHandle,
         onNativeTokenHandle: NotificationController.myNativeTokenHandle,
+        onFcmSilentDataHandle: NotificationController.mySilentDataHandle,
         licenseKeys:
         // On this example app, the app ID / Bundle Id are different
         // for each platform, so i used the main Bundle ID + 1 variation
@@ -88,7 +92,7 @@ class NotificationController extends ChangeNotifier {
             '+yUTQU3C3WCVf2D534rNF3OnYKUjshNgQN8do0KAihTK7n83eUD60=',
 
             // me.carda.awesome_notifications_fcm_example
-            'UzRlt+SJ7XyVgmD1WV+7dDMaRitmKCKOivKaVsNkfAQfQfechRveuKblFnCp4'
+            'azRlt+SJ7XyVgmD1WV+7dDMaRitmKCKOivKaVsNkfAQfQfechRveuKblFnCp4'
             'zifTPgRUGdFmJDiw1R/rfEtTIlZCBgK3Wa8MzUV4dypZZc5wQIIVsiqi0Zhaq'
             'YtTevjLl3/wKvK8fWaEmUxdOJfFihY8FnlrSA48FW94XWIcFY=',
         ],
@@ -98,6 +102,19 @@ class NotificationController extends ChangeNotifier {
   static Future<void> startListeningNotificationEvents() async {
     AwesomeNotifications()
         .setListeners(onActionReceivedMethod: onActionReceivedMethod);
+  }
+
+  static ReceivePort? receivePort;
+  static Future<void> initializeIsolateReceivePort() async {
+    receivePort = ReceivePort('Notification action port in main isolate')
+      ..listen(
+        (silentData) => onActionReceivedImplementationMethod(silentData)
+      );
+
+    IsolateNameServer.registerPortWithName(
+        receivePort!.sendPort,
+        'notification_action_port'
+    );
   }
 
   ///  *********************************************
@@ -113,16 +130,49 @@ class NotificationController extends ChangeNotifier {
     //     msg: 'Notification action launched app: $receivedAction',
     //   backgroundColor: Colors.deepPurple
     // );
-    print('Notification action launched app: $receivedAction');
+    print('App launched by a notification action: $receivedAction');
   }
 
   @pragma('vm:entry-point')
   static Future<void> onActionReceivedMethod(
       ReceivedAction receivedAction) async {
+
+    if(
+        receivedAction.actionType == ActionType.SilentAction ||
+        receivedAction.actionType == ActionType.SilentBackgroundAction
+    ){
+      // For background actions, you must hold the execution until the end
+      print('Message sent via notification input: "${receivedAction.buttonKeyInput}"');
+      await executeLongTaskInBackground();
+      return;
+    }
+    else {
+      if (receivePort == null){
+        // onActionReceivedMethod was called inside a parallel dart isolate.
+        SendPort? sendPort = IsolateNameServer.lookupPortByName(
+            'notification_action_port'
+        );
+
+        if (sendPort != null){
+          // Redirecting the execution to main isolate process (this process is
+          // only necessary when you need to redirect the user to a new page or
+          // use a valid context)
+          sendPort.send(receivedAction);
+          return;
+        }
+      }
+    }
+
+    return onActionReceivedImplementationMethod(receivedAction);
+  }
+
+  static Future<void> onActionReceivedImplementationMethod(
+      ReceivedAction receivedAction
+  ) async {
     MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(
         '/notification-page',
-        (route) =>
-            (route.settings.name != '/notification-page') || route.isFirst,
+            (route) =>
+        (route.settings.name != '/notification-page') || route.isFirst,
         arguments: receivedAction);
   }
 

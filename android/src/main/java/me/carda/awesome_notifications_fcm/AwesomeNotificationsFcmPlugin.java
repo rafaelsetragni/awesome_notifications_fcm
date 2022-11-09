@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import io.flutter.Log;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 
@@ -21,9 +24,11 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 import io.flutter.view.FlutterCallbackInformation;
 import me.carda.awesome_notifications.core.AwesomeNotificationsExtension;
+import me.carda.awesome_notifications.core.broadcasters.receivers.AwesomeExceptionReceiver;
 import me.carda.awesome_notifications.core.exceptions.AwesomeNotificationsException;
 import me.carda.awesome_notifications.core.exceptions.ExceptionCode;
 import me.carda.awesome_notifications.core.exceptions.ExceptionFactory;
+import me.carda.awesome_notifications.core.listeners.AwesomeExceptionListener;
 import me.carda.awesome_notifications.core.utils.MapUtils;
 
 import me.carda.awesome_notifications_fcm.core.AwesomeNotificationsFcm;
@@ -50,6 +55,15 @@ public class AwesomeNotificationsFcmPlugin
     private WeakReference<Context> wContext;
 
     private final Handler uiThreadHandler = new Handler(Looper.getMainLooper());
+
+    private final AwesomeExceptionListener exceptionListener = new AwesomeExceptionListener() {
+        @Override
+        public void onNewAwesomeException(Exception exception) {
+            FirebaseCrashlytics
+                    .getInstance()
+                    .recordException(exception);
+        }
+    };
 
     private final AwesomeFcmTokenListener fcmTokenListener = new AwesomeFcmTokenListener() {
         @Override
@@ -143,6 +157,10 @@ public class AwesomeNotificationsFcmPlugin
                     .subscribeOnAwesomeFcmTokenEvents(fcmTokenListener)
                     .subscribeOnAwesomeSilentEvents(awesomeFcmSilentListener);
 
+            AwesomeExceptionReceiver
+                    .getInstance()
+                    .subscribeOnNotificationEvents(exceptionListener);
+
             wContext = new WeakReference<>(context);
 
             if (AwesomeNotificationsFcm.debug)
@@ -168,6 +186,10 @@ public class AwesomeNotificationsFcmPlugin
             awesomeNotificationsFcm
                     .unsubscribeOnAwesomeFcmTokenEvents(fcmTokenListener)
                     .unsubscribeOnAwesomeSilentEvents(awesomeFcmSilentListener);
+
+            AwesomeExceptionReceiver
+                    .getInstance()
+                    .unsubscribeOnNotificationEvents(exceptionListener);
 
             awesomeNotificationsFcm.dispose();
             awesomeNotificationsFcm = null;
@@ -303,6 +325,8 @@ public class AwesomeNotificationsFcmPlugin
 
         isInitialized = success;
         result.success(success);
+
+        awesomeNotificationsFcm.printValidationTest();
     }
 
     private void channelMethodSubscribeToTopic(
