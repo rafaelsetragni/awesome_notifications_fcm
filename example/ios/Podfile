@@ -32,7 +32,7 @@ target 'Runner' do
   use_modular_headers!
 
   #pod 'IosAwnCore', :path => '../../../IosAwnCore/'
-  #pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
+  pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
   #pod 'IosAwnFcmDist', :path => '../../../IosAwnFcmDist/'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
@@ -51,7 +51,7 @@ target 'AwesomeServiceExtension' do
   use_modular_headers!
   
   #pod 'IosAwnCore', :path => '../../../IosAwnCore/'
-  #pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
+  pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
   #pod 'IosAwnFcmDist', :path => '../../../IosAwnFcmDist/'
   install_awesome_fcm_ios_pod_target File.dirname(File.realpath(__FILE__))
 end

@@ -1,6 +1,13 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
-    <CLASSES />
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_core-2.1.1" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.0.4" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/cloud_firestore_web-3.0.4" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_core_web-2.0.1" />
+      <root url="file://$USER_HOME$/.pub-cache/git/awesome_notifications-d01d03170cfad48360dd4c7f62b4052a002a45b0" />
+    </CLASSES>
     <JAVADOC />
     <SOURCES />
   </library>

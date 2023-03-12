@@ -26,6 +26,7 @@ import io.flutter.embedding.engine.dart.DartExecutor.DartCallback;
 
 import me.carda.awesome_notifications.AwesomeNotificationsFlutterExtension;
 import me.carda.awesome_notifications.core.enumerators.NotificationSource;
+import me.carda.awesome_notifications.core.utils.StringUtils;
 import me.carda.awesome_notifications_fcm.core.FcmDefinitions;
 import me.carda.awesome_notifications_fcm.core.background.FcmBackgroundExecutor;
 import me.carda.awesome_notifications_fcm.core.models.SilentDataModel;
@@ -222,17 +223,23 @@ public class FcmDartBackgroundExecutor extends FcmBackgroundExecutor implements 
 
     public void dischargeNextSilentExecution(){
         if (!silentDataQueue.isEmpty()) {
+            String intentContent = "";
             try {
                 Intent intent = silentDataQueue.take();
+                intentContent = intent.getStringExtra(FcmDefinitions.NOTIFICATION_SILENT_DATA);
                 executeDartCallbackInBackgroundIsolate(intent);
             } catch (AwesomeNotificationsException ignore) {
                 closeBackgroundIsolate();
             } catch (Exception e) {
+                if (StringUtils.getInstance().isNullOrEmpty(intentContent)) {
+                    intentContent = "(empty)";
+                }
                 ExceptionFactory
                         .getInstance()
                         .registerNewAwesomeException(
                                 TAG,
                                 ExceptionCode.CODE_BACKGROUND_EXECUTION_EXCEPTION,
+                                e.getMessage()+" \n(silent content:"+intentContent+")",
                                 ExceptionCode.DETAILED_UNEXPECTED_ERROR+".background.silentExecution",
                                 e);
                 closeBackgroundIsolate();

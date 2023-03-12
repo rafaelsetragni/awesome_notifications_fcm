@@ -25,7 +25,7 @@ class AwesomeNotificationsFcm {
 
   factory AwesomeNotificationsFcm() => _instance;
 
-  @visibleForTesting
+  // @visibleForTesting
   AwesomeNotificationsFcm.private(MethodChannel channel) : _channel = channel;
 
   static final AwesomeNotificationsFcm _instance =
@@ -129,13 +129,17 @@ class AwesomeNotificationsFcm {
     return fcmToken ?? '';
   }
 
-  Future<void> subscribeToTopic(String topic) async {
-    await _channel.invokeMethod(
+  Future<bool> subscribeToTopic(String topic) async {
+    return await _channel.invokeMethod(
         CHANNEL_METHOD_SUBSCRIBE_TOPIC, {NOTIFICATION_TOPIC: topic});
   }
 
-  Future<void> unsubscribeToTopic(String topic) async {
-    await _channel.invokeMethod(
+  Future<bool> unsubscribeToTopic(String topic) async {
+    return await _channel.invokeMethod(
         CHANNEL_METHOD_UNSUBSCRIBE_TOPIC, {NOTIFICATION_TOPIC: topic});
+  }
+
+  Future<bool> deleteToken() async {
+    return await _channel.invokeMethod(CHANNEL_METHOD_DELETE_TOKEN);
   }
 }

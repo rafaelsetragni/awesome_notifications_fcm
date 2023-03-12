@@ -68,7 +68,9 @@ class NotificationController extends ChangeNotifier {
               defaultColor: Colors.deepPurple,
               ledColor: Colors.deepPurple)
         ],
-        debug: debug);
+        debug: debug,
+        languageCode: 'es',
+    );
 
     // Get initial notification action is optional
     _instance.initialAction = await AwesomeNotifications()
@@ -92,7 +94,7 @@ class NotificationController extends ChangeNotifier {
             '+yUTQU3C3WCVf2D534rNF3OnYKUjshNgQN8do0KAihTK7n83eUD60=',
 
             // me.carda.awesome_notifications_fcm_example
-            'azRlt+SJ7XyVgmD1WV+7dDMaRitmKCKOivKaVsNkfAQfQfechRveuKblFnCp4'
+            'UzRlt+SJ7XyVgmD1WV+7dDMaRitmKCKOivKaVsNkfAQfQfechRveuKblFnCp4'
             'zifTPgRUGdFmJDiw1R/rfEtTIlZCBgK3Wa8MzUV4dypZZc5wQIIVsiqi0Zhaq'
             'YtTevjLl3/wKvK8fWaEmUxdOJfFihY8FnlrSA48FW94XWIcFY=',
         ],

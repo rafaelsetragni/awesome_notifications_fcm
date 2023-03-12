@@ -33,6 +33,7 @@ import me.carda.awesome_notifications.core.utils.MapUtils;
 
 import me.carda.awesome_notifications_fcm.core.AwesomeNotificationsFcm;
 import me.carda.awesome_notifications_fcm.core.FcmDefinitions;
+import me.carda.awesome_notifications_fcm.core.licenses.LicenseManager;
 import me.carda.awesome_notifications_fcm.core.listeners.AwesomeFcmSilentListener;
 import me.carda.awesome_notifications_fcm.core.listeners.AwesomeFcmTokenListener;
 import me.carda.awesome_notifications_fcm.core.models.SilentDataModel;
@@ -241,6 +242,10 @@ public class AwesomeNotificationsFcmPlugin
                     channelMethodUnsubscribeFromTopic(call, result);
                     break;
 
+                case FcmDefinitions.CHANNEL_METHOD_DELETE_TOKEN:
+                    channelMethodDeleteToken(call, result);
+                    break;
+
                 default:
                     result.notImplemented();
             }
@@ -326,7 +331,9 @@ public class AwesomeNotificationsFcmPlugin
         isInitialized = success;
         result.success(success);
 
-        awesomeNotificationsFcm.printValidationTest();
+        LicenseManager
+                .getInstance()
+                .printValidationTest(wContext.get());
     }
 
     private void channelMethodSubscribeToTopic(
@@ -383,6 +390,20 @@ public class AwesomeNotificationsFcmPlugin
         if(awesomeNotificationsFcm != null) {
             awesomeNotificationsFcm
                     .unsubscribeOnFcmTopic(topicReference);
+            result.success(true);
+        }
+        else
+            result.success(false);
+    }
+
+    private void channelMethodDeleteToken(
+            @NonNull MethodCall call,
+            @NonNull final Result result
+    ) throws AwesomeNotificationsException {
+        ensureGooglePlayServices();
+
+        if(awesomeNotificationsFcm != null) {
+            awesomeNotificationsFcm.deleteToken();
             result.success(true);
         }
         else

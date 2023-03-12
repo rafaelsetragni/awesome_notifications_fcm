@@ -155,11 +155,15 @@ public class SwiftAwesomeNotificationsFcmPlugin:
                 case FcmDefinitions.CHANNEL_METHOD_SUBSCRIBE_TOPIC:
                     try channelMethodSubscribeTopic(call: call, result: result)
                     return
-                    
+                
                 case FcmDefinitions.CHANNEL_METHOD_UNSUBSCRIBE_TOPIC:
                     try channelMethodUnsubscribeTopic(call: call, result: result)
                     return
-                    
+                
+                case FcmDefinitions.CHANNEL_METHOD_DELETE_TOKEN:
+                    try channelMethodDeleteToken(call: call, result: result)
+                    return
+                
                 default:
                     throw ExceptionFactory
                         .shared
@@ -305,6 +309,25 @@ public class SwiftAwesomeNotificationsFcmPlugin:
         awesomeNotificationsFcm?
             .unsubscribeTopic(
                 onTopic: topic,
+                whenFinished: { success, awesomeException in
+                    if awesomeException == nil {
+                        result(success)
+                    } else {
+                        result(
+                            FlutterError.init(
+                                code: awesomeException!.code,
+                                message: awesomeException!.message,
+                                details: awesomeException!.detailedCode
+                            )
+                        )
+                    }
+                })
+    }
+    
+    private func channelMethodDeleteToken(call: FlutterMethodCall, result: @escaping FlutterResult) throws {
+        
+        awesomeNotificationsFcm?
+            .deleteToken(
                 whenFinished: { success, awesomeException in
                     if awesomeException == nil {
                         result(success)

@@ -323,5 +323,34 @@ public class AwesomeNotificationsFcm:
             }
         })
     }
+    
+    public func deleteToken(
+        whenFinished tokenDeletionCompletion: @escaping (Bool, AwesomeNotificationsException?) -> ()
+    ) {
+        Messaging.messaging().deleteToken { [self] error in
+            let success:Bool = error == nil
+            if AwesomeNotificationsFcm.debug {
+                Logger.d(TAG,
+                         success ?
+                             "Token and all subscriptions deleted" :
+                             "Token deletion failed")
+            }
+
+            if !success {
+                let awesomeException = ExceptionFactory
+                    .shared
+                    .createNewAwesomeException(
+                        className: TAG,
+                        code: FcmExceptionCode.CODE_FCM_EXCEPTION,
+                        message: error!.localizedDescription,
+                        detailedCode: FcmExceptionCode.DETAILED_FCM_EXCEPTION+".deleteToken",
+                        exception: error!)
+
+                tokenDeletionCompletion(success, awesomeException)
+            } else {
+                tokenDeletionCompletion(success, nil)
+            }
+        }
+    }
 }
 
