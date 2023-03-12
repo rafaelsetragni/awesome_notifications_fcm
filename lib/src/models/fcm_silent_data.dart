@@ -54,7 +54,7 @@ class FcmSilentData extends Model {
       }
     }
 
-    return data?.isEmpty ?? true ? null : this;
+    return this;
   }
 
   @override

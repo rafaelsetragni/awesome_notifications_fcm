@@ -18,7 +18,7 @@ Awesome Notifications add-on to send push notifications using FCM (Firebase Clou
 - Create **Push Notifications** for Android and iOS using Flutter and Firebase Cloud Messaging services (FCM).
 - Enable all Awesome Notifications **images**, **layouts**, **emoticons**, **buttons** and **sounds** on push notifications.
 - Dismiss and cancel notifications remotely by Notification ID, Group ID or Channel ID.
-- Use Firebase console (servless) or your backend server to send push notifications
+- Use Firebase console (serveless) or your backend server to send push notifications
 - Get the Firebase Device Token and the Native Device Token.
 - Execute remote background instructions using silent push notifications.
 - Send messages to multiple devices using topic subscription.
@@ -91,7 +91,7 @@ To stay tuned with new updates and get our community support, please subscribe i
 
 # 🛠 Getting Started
 
-In this section, you going to configue your Android and iOS project to use all features available in **awesome_notifications_fcm**:
+In this section, you going to configure your Android and iOS project to use all features available in **awesome_notifications_fcm**:
 
 <br>
 
@@ -259,6 +259,46 @@ Now, your iOS project is configured to use `awesome_notifications_fcm`. *Awesome
 <br>
 <br>
 
+# 🍎⁺ Extra iOS Setup for Background Actions
+
+On iOS, to use any plugin inside background actions, you will need to manually register each plugin you want. Otherwise, you will face the MissingPluginException exception. To avoid this, you need to add the following lines to the didFinishLaunchingWithOptions method in your iOS project's AppDelegate.m/AppDelegate.swift file:
+
+```Swift
+import Flutter
+import awesome_notifications
+import shared_preferences_ios
+//import all_other_plugins_that_i_need
+
+override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+      GeneratedPluginRegistrant.register(with: self)
+
+      // This function register the desired plugins to be used within a notification background action
+      SwiftAwesomeNotificationsPlugin.setPluginRegistrantCallback { registry in          
+          SwiftAwesomeNotificationsPlugin.register(
+            with: registry.registrar(forPlugin: "io.flutter.plugins.awesomenotifications.AwesomeNotificationsPlugin")!)          
+          FLTSharedPreferencesPlugin.register(
+            with: registry.registrar(forPlugin: "io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin")!)
+      }
+
+      // This function register the desired plugins to be used within silent push notifications
+      SwiftAwesomeNotificationsFcmPlugin.setPluginRegistrantCallback { registry in          
+          SwiftAwesomeNotificationsPlugin.register(
+            with: registry.registrar(forPlugin: "io.flutter.plugins.awesomenotifications.AwesomeNotificationsPlugin")!)          
+          FLTSharedPreferencesPlugin.register(
+            with: registry.registrar(forPlugin: "io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin")!)
+      }
+
+      return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+```
+And you can check how to correctly call each plugin opening the file GeneratedPluginRegistrant.m
+
+<br>
+<br>
+<br>
 
 # 📋 Creating a Firebase Project to send Push Notifications
 
@@ -312,7 +352,7 @@ So, to send notifications, first you need to initialize `Firebase`, `AwesomeNoti
 
 ```Dart
 
-  //  *********************************************
+  ///  *********************************************
   ///     INITIALIZATION METHODS
   ///  *********************************************
 
@@ -331,7 +371,7 @@ So, to send notifications, first you need to initialize `Firebase`, `AwesomeNoti
         debug: debug);
   }
 
-  //  *********************************************
+  ///  *********************************************
   ///     REMOTE NOTIFICATION EVENTS
   ///  *********************************************
 
