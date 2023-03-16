@@ -37,8 +37,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "8733efc"
-      resolved-ref: "8733efcda3829dd0e239a731cbb1755695b20f11"
+      ref: a9fbe3e
+      resolved-ref: a9fbe3e5044db4e6e17700c557679cfd8800600d
       url: "https://github.com/rafaelsetragni/awesome_notifications"
     source: git
     version: "0.7.5"

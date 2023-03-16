@@ -1,14 +1,14 @@
 PODS:
   - awesome_notifications (0.7.5-pre.2):
     - Flutter
-    - IosAwnCore (= 0.7.4-pre.2)
-  - awesome_notifications_fcm (0.7.5-pre.2):
+    - IosAwnCore (= 0.7.4-pre.3)
+  - awesome_notifications_fcm (0.7.5-pre.3):
     - awesome_notifications
     - Firebase/Messaging
     - FirebaseCore
     - Flutter
-    - IosAwnCore (= 0.7.4-pre.2)
-    - IosAwnFcmCore
+    - IosAwnCore (= 0.7.4-pre.3)
+    - IosAwnFcmDist (= 0.7.6-pre.2)
   - Firebase/CoreOnly (10.3.0):
     - FirebaseCore (= 10.3.0)
   - Firebase/Crashlytics (10.3.0):
@@ -76,11 +76,11 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.11.0):
     - GoogleUtilities/Logger
-  - IosAwnCore (0.7.4-pre.2)
-  - IosAwnFcmCore (0.7.5-pre.1):
-    - Firebase/Messaging
+  - IosAwnCore (0.7.4-pre.3)
+  - IosAwnFcmDist (0.7.6-pre.2):
     - FirebaseCore
-    - IosAwnCore (= 0.7.4-pre.2)
+    - FirebaseMessaging
+    - IosAwnCore (= 0.7.4-pre.3)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -100,7 +100,6 @@ DEPENDENCIES:
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - IosAwnFcmCore (from `../../../IosAwnFcmCore/`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
 
@@ -115,6 +114,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - IosAwnCore
+    - IosAwnFcmDist
     - nanopb
     - PromisesObjC
     - Toast
@@ -132,16 +132,14 @@ EXTERNAL SOURCES:
     :path: Flutter
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
-  IosAwnFcmCore:
-    :path: "../../../IosAwnFcmCore/"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
 
 SPEC CHECKSUMS:
-  awesome_notifications: b2e83f5275615709ab2a1b47e425affc099b3738
-  awesome_notifications_fcm: 260d69d981474fff6569c28e0d0ac882082b7649
+  awesome_notifications: 12c1eed5b82572c9a05168242218a6a895790f5d
+  awesome_notifications_fcm: 97c0b1c2bd40ab28baf6e2f05992c925111bb140
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
   firebase_core: 1ae9f9aa76e6e1edc14fb181637ad466fd6c6fa4
   firebase_crashlytics: 7fa4fcb9ebd555ac0546fd4ac9f16b4bea5c5218
@@ -154,14 +152,14 @@ SPEC CHECKSUMS:
   fluttertoast: 74526702fea2c060ea55dde75895b7e1bde1c86b
   GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
-  IosAwnCore: 052537b5391f1659b150742c828bd3479bc8b366
-  IosAwnFcmCore: c9357405decc78b79c455ce8f156a6db96bf2dae
+  IosAwnCore: ffa7fae4590c717dff53f5f5188cf129914440e0
+  IosAwnFcmDist: 42e76d8599995b00c779c2749f71af9b42990cba
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: e364bb82490f9690c82edecfccef6872214d8a66
+PODFILE CHECKSUM: c7edd6879b2e417c9dcb991dbdf40691ed2a523e
 
 COCOAPODS: 1.12.0
