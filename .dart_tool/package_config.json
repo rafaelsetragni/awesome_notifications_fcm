@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "_flutterfire_internals",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.0.7",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.0.17",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -15,7 +15,7 @@
     },
     {
       "name": "awesome_notifications",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/git/awesome_notifications-d01d03170cfad48360dd4c7f62b4052a002a45b0/",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/git/awesome_notifications-8733efcda3829dd0e239a731cbb1755695b20f11/",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -38,18 +38,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "cloud_firestore_platform_interface",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/cloud_firestore_platform_interface-5.8.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.16"
-    },
-    {
-      "name": "cloud_firestore_web",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/cloud_firestore_web-3.0.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.16"
-    },
-    {
       "name": "collection",
       "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/collection-1.17.0",
       "packageUri": "lib/",
@@ -63,31 +51,31 @@
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_core-2.1.1",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_core-2.7.1",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_core_platform_interface",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_core_platform_interface-4.5.2",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_core_platform_interface-4.5.3",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_core_web",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_core_web-2.0.1",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_core_web-2.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_crashlytics",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.0.4",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.0.16",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_crashlytics_platform_interface",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_crashlytics_platform_interface-3.3.5",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_crashlytics_platform_interface-3.3.16",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -206,7 +194,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-03-12T05:42:41.247921Z",
+  "generated": "2023-03-16T03:16:40.827884Z",
   "generator": "pub",
-  "generatorVersion": "2.19.3"
+  "generatorVersion": "2.19.4"
 }

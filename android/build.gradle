@@ -1,5 +1,5 @@
 group 'me.carda.awesome_notifications_fcm'
-version '0.7.1'
+version '0.7.1-pre.1'
 
 buildscript {
     ext.kotlin_version = '1.6.1'
@@ -57,8 +57,8 @@ def getRootProjectExtOrCoreProperty(name, firebaseCoreProject) {
 dependencies {
 //    implementation project(':awn_core')
 //    implementation project(':awn_fcm_core')
-    implementation 'me.carda:androidcore:0.7.11-pre.2'
-    implementation 'me.carda:fcmandroidcore:0.7.9-pre.2'
+    implementation 'me.carda:androidcore:0.7.11-pre.3'
+    implementation 'me.carda:fcmandroidcore:0.7.9-pre.4'
 
     compileOnly project(':awesome_notifications')
 

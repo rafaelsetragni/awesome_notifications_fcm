@@ -11,11 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^2.1.1
-  firebase_crashlytics: ^3.0.4
+  firebase_core: ^2.7.1
+  firebase_crashlytics: ^3.0.16
   awesome_notifications: #^0.7.5
     git:
-      ref: "d01d031"
+      ref: "8733efc"
       url: https://github.com/rafaelsetragni/awesome_notifications
 
 dev_dependencies:
