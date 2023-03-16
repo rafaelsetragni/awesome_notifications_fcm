@@ -69,7 +69,7 @@ class NotificationController extends ChangeNotifier {
               ledColor: Colors.deepPurple)
         ],
         debug: debug,
-        languageCode: 'es',
+        languageCode: 'ko',
     );
 
     // Get initial notification action is optional
@@ -207,12 +207,25 @@ class NotificationController extends ChangeNotifier {
   /// Use this method to detect when a new fcm token is received
   @pragma("vm:entry-point")
   static Future<void> myFcmTokenHandle(String token) async {
-    Fluttertoast.showToast(
-        msg: 'Fcm token received',
-        backgroundColor: Colors.blueAccent,
-        textColor: Colors.white,
-        fontSize: 16);
-    debugPrint('Firebase Token:"$token"');
+
+    if (token.isNotEmpty){
+      Fluttertoast.showToast(
+          msg: 'Fcm token received',
+          backgroundColor: Colors.blueAccent,
+          textColor: Colors.white,
+          fontSize: 16);
+
+      debugPrint('Firebase Token:"$token"');
+    }
+    else {
+      Fluttertoast.showToast(
+          msg: 'Fcm token deleted',
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16);
+
+      debugPrint('Firebase Token deleted');
+    }
 
     _instance._firebaseToken = token;
     _instance.notifyListeners();
@@ -352,6 +365,12 @@ class NotificationController extends ChangeNotifier {
     await AwesomeNotifications().resetGlobalBadge();
   }
 
+  static Future<void> deleteToken() async {
+    await AwesomeNotificationsFcm().deleteToken();
+    await Future.delayed(Duration(seconds: 5));
+    await requestFirebaseToken();
+  }
+
   ///  *********************************************
   ///     REMOTE TOKEN REQUESTS
   ///  *********************************************
@@ -381,7 +400,7 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   // The navigator key is necessary to navigate using static methods
-  static final GlobalKey<NavigatorState> navigatorKey =
+  static GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
   static Color mainColor = const Color(0xFF9D50DD);
@@ -526,6 +545,13 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => NotificationController.resetBadge(),
               tooltip: 'Reset Badge',
               child: const Icon(Icons.exposure_zero),
+            ),
+            SizedBox(width: 20),
+            FloatingActionButton(
+              heroTag: '0',
+              onPressed: () => NotificationController.deleteToken(),
+              tooltip: 'Delete token',
+              child: const Icon(Icons.recycling),
             ),
           ],
         ),

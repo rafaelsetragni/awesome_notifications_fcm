@@ -1,3 +1,10 @@
+## [0.7.5]
+### Added
+* Asset and resource media files to push notifications.
+* A new method to delete FCM token and reset all topics.
+* Translation feature to push notifications.
+* AwnAppGroupName parameter to info.plist for setting a fixed App Group name (iOS).
+
 ## [0.7.4+1]
 * Firebase core upgraded to version 2.1.1
 ## [0.7.4]

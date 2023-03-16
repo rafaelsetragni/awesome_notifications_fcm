@@ -14,12 +14,13 @@ import 'package:awesome_notifications_fcm_example/common_widgets/shadow_top.dart
 import 'package:awesome_notifications_fcm_example/common_widgets/simple_button.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/text_divisor.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/text_note.dart';
-import 'package:awesome_notifications_fcm_example/notifications/notification_controller.dart';
 import 'package:awesome_notifications_fcm_example/routes.dart';
 import 'package:awesome_notifications_fcm_example/utils/common_functions.dart';
 
 import 'package:awesome_notifications_fcm_example/notifications/notification_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../main.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -99,6 +100,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     ThemeData themeData = Theme.of(context);
+
+    print(MyApp.navigatorKey);
 
     return Stack(
       children: [

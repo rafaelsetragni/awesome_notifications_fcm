@@ -83,13 +83,13 @@ class AwesomeNotificationsFcm {
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case CHANNEL_METHOD_NEW_NATIVE_TOKEN:
-        final String token = call.arguments;
-        if (_tokenNativeHandler != null) _tokenNativeHandler!(token);
+        final String? token = call.arguments;
+        if (_tokenNativeHandler != null) _tokenNativeHandler!(token ?? '');
         return;
 
       case CHANNEL_METHOD_NEW_FCM_TOKEN:
-        final String token = call.arguments;
-        if (_tokenFcmHandler != null) _tokenFcmHandler!(token);
+        final String? token = call.arguments;
+        if (_tokenFcmHandler != null) _tokenFcmHandler!(token ?? '');
         return;
 
       case CHANNEL_METHOD_SILENT_CALLBACK:

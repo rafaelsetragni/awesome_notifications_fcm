@@ -59,6 +59,7 @@ public class SwiftAwesomeNotificationsFcmPlugin:
     }
     
     public static func loadClassReferences(){
+        DartAwesomeServiceExtension.initialize()
         if FcmBackgroundService.backgroundFcmClassType != nil { return }
         FcmBackgroundService.backgroundFcmClassType = DartFcmBackgroundExecutor.self
     }
