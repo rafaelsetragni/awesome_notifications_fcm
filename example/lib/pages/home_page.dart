@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +19,9 @@ import 'package:awesome_notifications_fcm_example/utils/common_functions.dart';
 import 'package:awesome_notifications_fcm_example/notifications/notification_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../main.dart';
+import '../main_complete.dart';
+import '../notifications/notification_controller.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,6 +37,8 @@ class _HomePageState extends State<HomePage> {
   String _firebaseAppToken = '';
   bool _notificationsAllowed = false;
 
+  bool _isListenerAdded = false;
+
   @override
   void initState() {
     super.initState();
@@ -44,6 +47,27 @@ class _HomePageState extends State<HomePage> {
 
     NotificationUtils.requireUserNotificationPermissions(context)
         .then((isAllowed) => updateNotificationsPermission(isAllowed));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isListenerAdded) {
+      NotificationController().addListener(_onNotificationControllerUpdated);
+      _isListenerAdded = true;
+    }
+  }
+
+  @override
+  void dispose() {
+    NotificationController().removeListener(_onNotificationControllerUpdated);
+    super.dispose();
+  }
+
+  void _onNotificationControllerUpdated(){
+    setSafeState(() {
+      _firebaseAppToken = NotificationController().firebaseToken;
+    });
   }
 
   // If the widget was removed from the tree while the asynchronous platform
@@ -101,7 +125,7 @@ class _HomePageState extends State<HomePage> {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     ThemeData themeData = Theme.of(context);
 
-    print(MyApp.navigatorKey);
+    print(CompleteApp.navigatorKey);
 
     return Stack(
       children: [
@@ -185,6 +209,33 @@ class _HomePageState extends State<HomePage> {
                               context)),
                   SimpleButton('Show permission page',
                       onPressed: () => NotificationUtils.showPermissionPage()),
+
+                  /* ******************************************************************** */
+
+                  TextDivisor(title: 'Translation Methods'),
+                  SimpleButton('Set language to English 🇺🇸',
+                      onPressed: () => NotificationUtils.setLanguageCode('en')
+                  ),
+                  SimpleButton('Set language to Brazilian Portuguese 🇧🇷',
+                      onPressed: () => NotificationUtils.setLanguageCode('pt-br')
+                  ),
+                  SimpleButton('Set language to Portuguese 🇵🇹',
+                      onPressed: () => NotificationUtils.setLanguageCode('pt')
+                  ),
+                  SimpleButton('Set language to Korean 🇰🇷',
+                      onPressed: () => NotificationUtils.setLanguageCode('ko')
+                  ),
+                  SimpleButton('Set language to Chinese 🇨🇳',
+                      onPressed: () => NotificationUtils.setLanguageCode('zh')
+                  ),
+                  SimpleButton('Set language to Spanish 🇪🇸',
+                      onPressed: () => NotificationUtils.setLanguageCode('es')
+                  ),
+                  SimpleButton('Reset language to app defaults',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationUtils.setLanguageCode(null)
+                  ),
 
                   /* ******************************************************************** */
 

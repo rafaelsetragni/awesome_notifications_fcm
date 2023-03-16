@@ -118,6 +118,14 @@ class NotificationUtils {
   }
 
 /* *********************************************
+    TRANSLATION FEATURES
+************************************************ */
+
+  static Future<void> setLanguageCode(String? languageCode) async {
+    await AwesomeNotifications().setLocalization(languageCode: languageCode);
+  }
+
+/* *********************************************
     CANCEL METHODS
 ************************************************ */
 

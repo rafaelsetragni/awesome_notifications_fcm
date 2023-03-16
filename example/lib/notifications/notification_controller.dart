@@ -1,18 +1,19 @@
 import 'dart:isolate';
 import 'dart:ui';
 
-import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:awesome_notifications_fcm_example/main.dart';
-import 'package:awesome_notifications_fcm_example/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:http/http.dart' as http;
 
+import '../main_complete.dart';
+import '../routes.dart';
+
 class NotificationController with ChangeNotifier {
+
   /// *********************************************
   ///   SINGLETON PATTERN
   /// *********************************************
@@ -20,10 +21,7 @@ class NotificationController with ChangeNotifier {
   static final NotificationController _instance =
       NotificationController._internal();
 
-  factory NotificationController() {
-    return _instance;
-  }
-
+  factory NotificationController() => _instance;
   NotificationController._internal();
 
   /// *********************************************
@@ -55,7 +53,8 @@ class NotificationController with ChangeNotifier {
               groupKey: 'alerts',
               channelShowBadge: true)
         ],
-        debug: debug);
+        debug: debug
+    );
   }
 
   static Future<void> initializeRemoteNotifications(
@@ -197,7 +196,7 @@ class NotificationController with ChangeNotifier {
     String targetPage = PAGE_NOTIFICATION_DETAILS;
 
     // Avoid to open the notification details page over another details page already opened
-    MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(targetPage,
+    CompleteApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(targetPage,
         (route) => (route.settings.name != targetPage) || route.isFirst,
         arguments: receivedAction);
   }
