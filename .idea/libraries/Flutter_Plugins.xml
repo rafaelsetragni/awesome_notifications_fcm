@@ -5,7 +5,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.0.16" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_core_web-2.2.2" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_core-2.7.1" />
-      <root url="file://$USER_HOME$/.pub-cache/git/awesome_notifications-8733efcda3829dd0e239a731cbb1755695b20f11" />
+      <root url="file://$PROJECT_DIR$/../awesome_notifications" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

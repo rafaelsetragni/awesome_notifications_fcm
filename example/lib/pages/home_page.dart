@@ -181,6 +181,38 @@ class _HomePageState extends State<HomePage> {
 
                   /* ******************************************************************** */
 
+                  TextDivisor(title: 'Token Features'),
+                  SimpleButton('Request FCM token',
+                      onPressed: () => NotificationUtils.requestFirebaseAppToken()
+                  ),
+                  SimpleButton('Delete the current FCM token',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationUtils.deleteToken()
+                  ),
+
+                  /* ******************************************************************** */
+
+                  TextDivisor(title: 'Topic Features'),
+                  SimpleButton('Subscribe into test_topic',
+                      onPressed: () => NotificationUtils.subscribeToTopic('test_topic')
+                  ),
+                  SimpleButton('Subscribe into test_negative_topic',
+                      onPressed: () => NotificationUtils.subscribeToTopic('test_negative_topic')
+                  ),
+                  SimpleButton('Unsubscribe from test_topic',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationUtils.unsubscribeToTopic('test_topic')
+                  ),
+                  SimpleButton('Unsubscribe from test_topic',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationUtils.unsubscribeToTopic('test_negative_topic')
+                  ),
+
+                  /* ******************************************************************** */
+
                   TextDivisor(title: 'Permission to send Notifications'),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

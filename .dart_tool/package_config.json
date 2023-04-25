@@ -15,7 +15,7 @@
     },
     {
       "name": "awesome_notifications",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/git/awesome_notifications-8733efcda3829dd0e239a731cbb1755695b20f11/",
+      "rootUri": "../../awesome_notifications",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -194,7 +194,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-03-16T03:16:40.827884Z",
+  "generated": "2023-03-24T16:19:40.375870Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }

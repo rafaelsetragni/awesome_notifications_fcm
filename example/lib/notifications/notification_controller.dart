@@ -126,30 +126,24 @@ class NotificationController with ChangeNotifier {
   @pragma("vm:entry-point")
   static Future<void> myNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
-    Fluttertoast.showToast(
-        msg:
-            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedNotification.createdSource)} created',
-        backgroundColor: Colors.green);
+    String message = 'Notification created from ${receivedNotification.createdSource?.name}';
+    Fluttertoast.showToast(msg:message, backgroundColor: Colors.green);
   }
 
   /// Use this method to detect every time that a new notification is displayed
   @pragma("vm:entry-point")
   static Future<void> myNotificationDisplayedMethod(
       ReceivedNotification receivedNotification) async {
-    Fluttertoast.showToast(
-        msg:
-            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedNotification.createdSource)} displayed',
-        backgroundColor: Colors.blue);
+    String message = 'Notification displayed from ${receivedNotification.createdSource?.name}';
+    Fluttertoast.showToast(msg:message, backgroundColor: Colors.blue);
   }
 
   /// Use this method to detect if the user dismissed a notification
   @pragma("vm:entry-point")
   static Future<void> myDismissActionReceivedMethod(
       ReceivedAction receivedAction) async {
-    Fluttertoast.showToast(
-        msg:
-            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedAction.createdSource)} dismissed',
-        backgroundColor: Colors.orange);
+    String message = 'Notification dismissed from ${receivedAction.createdSource?.name}';
+    Fluttertoast.showToast(msg:message, backgroundColor: Colors.orange);
   }
 
   /// Use this method to detect when the user taps on a notification or action button
@@ -241,11 +235,18 @@ class NotificationController with ChangeNotifier {
   @pragma("vm:entry-point")
   static Future<void> myFcmTokenHandle(String token) async {
     Fluttertoast.showToast(
-        msg: 'Fcm token received',
-        backgroundColor: Colors.blueAccent,
+        msg: token.isEmpty
+            ? 'FCM token deleted'
+            : 'FCM token received',
+        backgroundColor: token.isEmpty
+            ? Colors.red
+            : Colors.blueAccent,
         textColor: Colors.white,
         fontSize: 16);
-    debugPrint('Firebase Token:"$token"');
+
+    print(token.isEmpty
+        ? 'Firebase token deleted'
+        : 'Firebase Token:"$token"');
 
     _instance._firebaseToken = token;
     _instance.notifyListeners();

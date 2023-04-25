@@ -12,12 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^2.1.1
+  firebase_core: ^2.8.0
   awesome_notifications: #^0.7.5
-#    path: ../../awesome_notifications
-    git:
-      ref: "a9fbe3e"
-      url: https://github.com/rafaelsetragni/awesome_notifications
+    path: ../../awesome_notifications
+#    git:
+#      ref: "a9fbe3e"
+#      url: https://github.com/rafaelsetragni/awesome_notifications
   awesome_notifications_fcm:
     path: ../
 

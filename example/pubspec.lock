@@ -36,11 +36,9 @@ packages:
   awesome_notifications:
     dependency: "direct main"
     description:
-      path: "."
-      ref: a9fbe3e
-      resolved-ref: a9fbe3e5044db4e6e17700c557679cfd8800600d
-      url: "https://github.com/rafaelsetragni/awesome_notifications"
-    source: git
+      path: "../../awesome_notifications"
+      relative: true
+    source: path
     version: "0.7.5"
   awesome_notifications_fcm:
     dependency: "direct main"
@@ -125,10 +123,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "1c121a478af23755b0b93fd4aa70d3bd32a587dd51ef0a3979091ac0d2317d32"
+      sha256: "75f747cafd7cbd6c00b908e3a7aa59fc31593d46ba8165d9ee8a79e69464a394"
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.1"
+    version: "2.8.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
