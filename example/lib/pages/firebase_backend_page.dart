@@ -146,7 +146,7 @@ class _FirebaseBackendPageState extends State<FirebaseBackendPage> {
                         'Copy push content example',
                         onPressed: () async {
                           Clipboard.setData(
-                              ClipboardData(text: widget.firebaseAppToken));
+                              ClipboardData(text: widget.prettyExampleMap));
                           Fluttertoast.showToast(msg: 'Push data copied');
                         },
                       ),
