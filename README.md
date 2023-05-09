@@ -79,7 +79,7 @@ To stay tuned with new updates and get our community support, please subscribe i
 
 # 📝 Important initial notes
 
-1. This plugin is an add-on of [Awesome Notifications](https://pub.dev/packages/awesome_notification) plugin and, because of it, depends on it.
+1. This plugin is an add-on of [Awesome Notifications](https://pub.dev/packages/awesome_notifications) plugin and, because of it, depends on it.
 2. Push notifications, like local notifications, are not 100% reliable. That means your notification may be delayed or denied due to battery saving modes, background processing blocking, internet connection failures, etc. Keep this in mind when designing your business logic.
 3. On iOS, push notifications are only delivered to real devices, but all other features can be tested using simulators.
 4. To check what is happening with your notification while the app is terminated, you need to read all logs from the device. To do this on Android, use LogCat from Android Studio. On iOS, use the "Console.app" program available on MacOS.
@@ -230,7 +230,7 @@ To do this, run your application and search on debug console for the application
 
 ![image](https://user-images.githubusercontent.com/113704924/194730007-3e278bd3-a24d-481f-a99b-ae18a25ae36a.png)
 
-Them, open your XCode project, go to Targets -> Runner -> Singing and Capabilities -> Click on "+" icon and add "App Groups", "Push Notifications" and "Remote", checking "background fetching" and "remote notification" options.
+Them, open your XCode project, go to Targets -> Runner -> Signing and Capabilities -> Click on "+" icon and add "App Groups", "Push Notifications" and "Remote", checking "background fetching" and "remote notification" options.
 
 ![image](https://user-images.githubusercontent.com/113704924/194729763-adfb1d42-9bba-4aa5-908f-91eae574735e.png)
 
@@ -283,7 +283,7 @@ To allow Firebase send push notifications to iOS devices, its necessary to do an
 
 <br>
 
-1 - Go to https://developer.apple.com, sing into an Apple Account and go to "Certificates" and click on "+" button.  
+1 - Go to https://developer.apple.com, sign into an Apple Account and go to "Certificates" and click on "+" button.  
 2 - Go to Services section and check **Apple Push Notification service SSL** and click on "Continue"  
 3 - Insert the same iOS App ID configured in your Firebase Cloud Messaging.   
 4 - In your MacOS machine, Launch Keychain Access app, located in /Applications/Utilities.   
