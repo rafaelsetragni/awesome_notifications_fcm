@@ -1,6 +1,6 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 // ignore: implementation_imports
 import 'package:awesome_notifications/src/models/model.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 
 import '../fcm_definitions.dart';
 
@@ -29,20 +29,21 @@ class FcmSilentData extends Model {
     for (String key in dataMap.keys) {
       switch (key) {
         case NOTIFICATION_CREATED_DATE:
-          _createdDate = AwesomeAssertUtils.extractValue(
-              NOTIFICATION_CREATED_DATE, dataMap, DateTime);
+          _createdDate = AwesomeAssertUtils.extractValue<DateTime>(
+              NOTIFICATION_CREATED_DATE, dataMap);
           break;
 
         case NOTIFICATION_CREATED_SOURCE:
-          _createdSource = AwesomeAssertUtils.extractEnum(
+          _createdSource = AwesomeAssertUtils.extractEnum<NotificationSource>(
               NOTIFICATION_CREATED_SOURCE, dataMap, NotificationSource.values);
           break;
 
         case NOTIFICATION_CREATED_LIFECYCLE:
-          _createdLifeCycle = AwesomeAssertUtils.extractEnum(
-              NOTIFICATION_CREATED_LIFECYCLE,
-              dataMap,
-              NotificationLifeCycle.values);
+          _createdLifeCycle =
+              AwesomeAssertUtils.extractEnum<NotificationLifeCycle>(
+                  NOTIFICATION_CREATED_LIFECYCLE,
+                  dataMap,
+                  NotificationLifeCycle.values);
           continue;
 
         case SILENT_HANDLE:
@@ -63,10 +64,8 @@ class FcmSilentData extends Model {
     _data!.addAll({
       NOTIFICATION_ID: _id?.toString(),
       NOTIFICATION_CREATED_DATE: _createdDate.toString(),
-      NOTIFICATION_CREATED_SOURCE:
-          AwesomeAssertUtils.toSimpleEnumString(_createdSource),
-      NOTIFICATION_CREATED_LIFECYCLE:
-          AwesomeAssertUtils.toSimpleEnumString(_createdLifeCycle),
+      NOTIFICATION_CREATED_SOURCE: _createdSource?.name,
+      NOTIFICATION_CREATED_LIFECYCLE: _createdLifeCycle?.name,
     });
 
     return _data!;
