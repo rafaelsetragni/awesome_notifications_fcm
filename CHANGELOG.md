@@ -1,3 +1,18 @@
+## [0.7.5-dev.2]
+### Improved
+* Android core dependencies moved to new repository
+* Added new native module switcher to avoid the folder copy at example/android folder.
+* Subtitle added to iOS notifications
+* Fcm token order switched to get called after APNs token return
+* native fromMap methods switched to convenient initializers
+
+## [0.7.5-dev.1]
+### Added
+* Asset and resource media files to push notifications.
+* A new method to delete FCM token and reset all topics.
+* Translation feature to push notifications.
+* AwnAppGroupName parameter to info.plist for setting a fixed App Group name (iOS).
+
 ## [0.7.4+1]
 * Firebase core upgraded to version 2.1.1
 ## [0.7.4]

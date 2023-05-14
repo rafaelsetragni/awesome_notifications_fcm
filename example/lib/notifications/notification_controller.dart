@@ -1,15 +1,19 @@
-import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
+import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:awesome_notifications_fcm_example/main.dart';
-import 'package:awesome_notifications_fcm_example/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:http/http.dart' as http;
 
+import '../main_complete.dart';
+import '../routes.dart';
+
 class NotificationController with ChangeNotifier {
+
   /// *********************************************
   ///   SINGLETON PATTERN
   /// *********************************************
@@ -17,10 +21,7 @@ class NotificationController with ChangeNotifier {
   static final NotificationController _instance =
       NotificationController._internal();
 
-  factory NotificationController() {
-    return _instance;
-  }
-
+  factory NotificationController() => _instance;
   NotificationController._internal();
 
   /// *********************************************
@@ -52,7 +53,8 @@ class NotificationController with ChangeNotifier {
               groupKey: 'alerts',
               channelShowBadge: true)
         ],
-        debug: debug);
+        debug: debug
+    );
   }
 
   static Future<void> initializeRemoteNotifications(
@@ -77,6 +79,7 @@ class NotificationController with ChangeNotifier {
             'YtTevjLl3/wKvK8fWaEmUxdOJfFihY8FnlrSA48FW94XWIcFY=',
         ],
         debug: debug);
+    await initializeIsolateReceivePort();
   }
 
   static Future<void> initializeNotificationListeners() async {
@@ -102,6 +105,19 @@ class NotificationController with ChangeNotifier {
     print('Notification action launched app: $receivedAction');
   }
 
+  static ReceivePort? receivePort;
+  static Future<void> initializeIsolateReceivePort() async {
+    receivePort = ReceivePort('Notification action port in main isolate')
+      ..listen(
+              (silentData) => onActionReceivedImplementationMethod(silentData)
+      );
+
+    IsolateNameServer.registerPortWithName(
+        receivePort!.sendPort,
+        'notification_action_port'
+    );
+  }
+
   ///  *********************************************
   ///    LOCAL NOTIFICATION METHODS
   ///  *********************************************
@@ -110,52 +126,71 @@ class NotificationController with ChangeNotifier {
   @pragma("vm:entry-point")
   static Future<void> myNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
-    Fluttertoast.showToast(
-        msg:
-            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedNotification.createdSource)} created',
-        backgroundColor: Colors.green);
+    String message = 'Notification created from ${receivedNotification.createdSource?.name}';
+    Fluttertoast.showToast(msg:message, backgroundColor: Colors.green);
   }
 
   /// Use this method to detect every time that a new notification is displayed
   @pragma("vm:entry-point")
   static Future<void> myNotificationDisplayedMethod(
       ReceivedNotification receivedNotification) async {
-    Fluttertoast.showToast(
-        msg:
-            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedNotification.createdSource)} displayed',
-        backgroundColor: Colors.blue);
+    String message = 'Notification displayed from ${receivedNotification.createdSource?.name}';
+    Fluttertoast.showToast(msg:message, backgroundColor: Colors.blue);
   }
 
   /// Use this method to detect if the user dismissed a notification
   @pragma("vm:entry-point")
   static Future<void> myDismissActionReceivedMethod(
       ReceivedAction receivedAction) async {
-    Fluttertoast.showToast(
-        msg:
-            'Notification from ${AwesomeAssertUtils.toSimpleEnumString(receivedAction.createdSource)} dismissed',
-        backgroundColor: Colors.orange);
+    String message = 'Notification dismissed from ${receivedAction.createdSource?.name}';
+    Fluttertoast.showToast(msg:message, backgroundColor: Colors.orange);
   }
 
   /// Use this method to detect when the user taps on a notification or action button
-  @pragma("vm:entry-point")
+  @pragma('vm:entry-point')
   static Future<void> myActionReceivedMethod(
       ReceivedAction receivedAction) async {
-    String? actionSourceText =
-        AwesomeAssertUtils.toSimpleEnumString(receivedAction.actionLifeCycle);
 
-    if(receivedAction.actionType == ActionType.SilentBackgroundAction){
-      print('myActionReceivedMethod received a SilentBackgroundAction execution');
-      await executeLongTaskTest();
+    if(
+    receivedAction.actionType == ActionType.SilentAction ||
+        receivedAction.actionType == ActionType.SilentBackgroundAction
+    ){
+      // For background actions, you must hold the execution until the end
+      print('Message sent via notification input: "${receivedAction.buttonKeyInput}"');
+      await executeLongTaskInBackground();
       return;
     }
+    else {
+      if (receivePort == null){
+        // onActionReceivedMethod was called inside a parallel dart isolate.
+        SendPort? sendPort = IsolateNameServer.lookupPortByName(
+            'notification_action_port'
+        );
+
+        if (sendPort != null){
+          // Redirecting the execution to main isolate process (this process is
+          // only necessary when you need to redirect the user to a new page or
+          // use a valid context)
+          sendPort.send(receivedAction);
+          return;
+        }
+      }
+    }
+
+    return onActionReceivedImplementationMethod(receivedAction);
+  }
+
+  static Future<void> onActionReceivedImplementationMethod(
+      ReceivedAction receivedAction
+      ) async {
 
     Fluttertoast.showToast(
-        msg: 'Notification action captured on $actionSourceText');
+        msg: 'Notification action captured on ${receivedAction.actionLifeCycle}');
 
     String targetPage = PAGE_NOTIFICATION_DETAILS;
 
     // Avoid to open the notification details page over another details page already opened
-    MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(targetPage,
+    CompleteApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(targetPage,
         (route) => (route.settings.name != targetPage) || route.isFirst,
         arguments: receivedAction);
   }
@@ -200,11 +235,18 @@ class NotificationController with ChangeNotifier {
   @pragma("vm:entry-point")
   static Future<void> myFcmTokenHandle(String token) async {
     Fluttertoast.showToast(
-        msg: 'Fcm token received',
-        backgroundColor: Colors.blueAccent,
+        msg: token.isEmpty
+            ? 'FCM token deleted'
+            : 'FCM token received',
+        backgroundColor: token.isEmpty
+            ? Colors.red
+            : Colors.blueAccent,
         textColor: Colors.white,
         fontSize: 16);
-    debugPrint('Firebase Token:"$token"');
+
+    print(token.isEmpty
+        ? 'Firebase token deleted'
+        : 'Firebase Token:"$token"');
 
     _instance._firebaseToken = token;
     _instance.notifyListeners();
@@ -219,5 +261,18 @@ class NotificationController with ChangeNotifier {
         textColor: Colors.white,
         fontSize: 16);
     debugPrint('Native Token:"$token"');
+  }
+
+  ///  *********************************************
+  ///     BACKGROUND TASKS TEST
+  ///  *********************************************
+
+  static Future<void> executeLongTaskInBackground() async {
+    print("starting long task");
+    await Future.delayed(const Duration(seconds: 4));
+    final url = Uri.parse("http://google.com");
+    final re = await http.get(url);
+    print(re.body);
+    print("long task done");
   }
 }

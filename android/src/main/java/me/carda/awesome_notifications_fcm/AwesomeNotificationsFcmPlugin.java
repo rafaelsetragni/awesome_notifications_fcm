@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import io.flutter.Log;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 
@@ -21,13 +24,16 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 import io.flutter.view.FlutterCallbackInformation;
 import me.carda.awesome_notifications.core.AwesomeNotificationsExtension;
+import me.carda.awesome_notifications.core.broadcasters.receivers.AwesomeExceptionReceiver;
 import me.carda.awesome_notifications.core.exceptions.AwesomeNotificationsException;
 import me.carda.awesome_notifications.core.exceptions.ExceptionCode;
 import me.carda.awesome_notifications.core.exceptions.ExceptionFactory;
+import me.carda.awesome_notifications.core.listeners.AwesomeExceptionListener;
 import me.carda.awesome_notifications.core.utils.MapUtils;
 
 import me.carda.awesome_notifications_fcm.core.AwesomeNotificationsFcm;
 import me.carda.awesome_notifications_fcm.core.FcmDefinitions;
+import me.carda.awesome_notifications_fcm.core.licenses.LicenseManager;
 import me.carda.awesome_notifications_fcm.core.listeners.AwesomeFcmSilentListener;
 import me.carda.awesome_notifications_fcm.core.listeners.AwesomeFcmTokenListener;
 import me.carda.awesome_notifications_fcm.core.models.SilentDataModel;
@@ -50,6 +56,15 @@ public class AwesomeNotificationsFcmPlugin
     private WeakReference<Context> wContext;
 
     private final Handler uiThreadHandler = new Handler(Looper.getMainLooper());
+
+    private final AwesomeExceptionListener exceptionListener = new AwesomeExceptionListener() {
+        @Override
+        public void onNewAwesomeException(Exception exception) {
+            FirebaseCrashlytics
+                    .getInstance()
+                    .recordException(exception);
+        }
+    };
 
     private final AwesomeFcmTokenListener fcmTokenListener = new AwesomeFcmTokenListener() {
         @Override
@@ -143,6 +158,10 @@ public class AwesomeNotificationsFcmPlugin
                     .subscribeOnAwesomeFcmTokenEvents(fcmTokenListener)
                     .subscribeOnAwesomeSilentEvents(awesomeFcmSilentListener);
 
+            AwesomeExceptionReceiver
+                    .getInstance()
+                    .subscribeOnNotificationEvents(exceptionListener);
+
             wContext = new WeakReference<>(context);
 
             if (AwesomeNotificationsFcm.debug)
@@ -168,6 +187,10 @@ public class AwesomeNotificationsFcmPlugin
             awesomeNotificationsFcm
                     .unsubscribeOnAwesomeFcmTokenEvents(fcmTokenListener)
                     .unsubscribeOnAwesomeSilentEvents(awesomeFcmSilentListener);
+
+            AwesomeExceptionReceiver
+                    .getInstance()
+                    .unsubscribeOnNotificationEvents(exceptionListener);
 
             awesomeNotificationsFcm.dispose();
             awesomeNotificationsFcm = null;
@@ -217,6 +240,10 @@ public class AwesomeNotificationsFcmPlugin
 
                 case FcmDefinitions.CHANNEL_METHOD_UNSUBSCRIBE_TOPIC:
                     channelMethodUnsubscribeFromTopic(call, result);
+                    break;
+
+                case FcmDefinitions.CHANNEL_METHOD_DELETE_TOKEN:
+                    channelMethodDeleteToken(call, result);
                     break;
 
                 default:
@@ -303,6 +330,10 @@ public class AwesomeNotificationsFcmPlugin
 
         isInitialized = success;
         result.success(success);
+
+        LicenseManager
+                .getInstance()
+                .printValidationTest(wContext.get());
     }
 
     private void channelMethodSubscribeToTopic(
@@ -359,6 +390,20 @@ public class AwesomeNotificationsFcmPlugin
         if(awesomeNotificationsFcm != null) {
             awesomeNotificationsFcm
                     .unsubscribeOnFcmTopic(topicReference);
+            result.success(true);
+        }
+        else
+            result.success(false);
+    }
+
+    private void channelMethodDeleteToken(
+            @NonNull MethodCall call,
+            @NonNull final Result result
+    ) throws AwesomeNotificationsException {
+        ensureGooglePlayServices();
+
+        if(awesomeNotificationsFcm != null) {
+            awesomeNotificationsFcm.deleteToken();
             result.success(true);
         }
         else

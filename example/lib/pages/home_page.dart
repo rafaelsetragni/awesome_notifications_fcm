@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,18 +7,21 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/led_light.dart';
-import 'package:awesome_notifications_fcm_example/common_widgets/remarkble_text.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/service_control_panel.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/shadow_top.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/simple_button.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/text_divisor.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/text_note.dart';
-import 'package:awesome_notifications_fcm_example/notifications/notification_controller.dart';
 import 'package:awesome_notifications_fcm_example/routes.dart';
 import 'package:awesome_notifications_fcm_example/utils/common_functions.dart';
 
 import 'package:awesome_notifications_fcm_example/notifications/notification_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../common_widgets/remarkable_text.dart';
+import '../main_complete.dart';
+import '../notifications/notification_controller.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -29,11 +31,13 @@ class HomePage extends StatefulWidget {
 // with WidgetsBindingObserver allows to refresh the notification permission
 // in each app lifecycle change. This way is possible to refresh the permissions
 // led indicator when the user come back from permission page
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   String packageName = 'me.carda.awesome_notifications_fcm_example';
 
   String _firebaseAppToken = '';
   bool _notificationsAllowed = false;
+
+  bool _isListenerAdded = false;
 
   @override
   void initState() {
@@ -43,6 +47,30 @@ class _HomePageState extends State<HomePage> {
 
     NotificationUtils.requireUserNotificationPermissions(context)
         .then((isAllowed) => updateNotificationsPermission(isAllowed));
+
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isListenerAdded) {
+      NotificationController().addListener(_onNotificationControllerUpdated);
+      _isListenerAdded = true;
+    }
+  }
+
+  @override
+  void dispose() {
+    NotificationController().removeListener(_onNotificationControllerUpdated);
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  void _onNotificationControllerUpdated(){
+    setSafeState(() {
+      _firebaseAppToken = NotificationController().firebaseToken;
+    });
   }
 
   // If the widget was removed from the tree while the asynchronous platform
@@ -100,11 +128,12 @@ class _HomePageState extends State<HomePage> {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     ThemeData themeData = Theme.of(context);
 
+    print(CompleteApp.navigatorKey);
+
     return Stack(
       children: [
         Scaffold(
             appBar: AppBar(
-              brightness: Brightness.light,
               centerTitle: false,
               title: Image.asset(
                   'assets/images/awesome-notifications-logo-color.png',
@@ -154,6 +183,38 @@ class _HomePageState extends State<HomePage> {
 
                   /* ******************************************************************** */
 
+                  TextDivisor(title: 'Token Features'),
+                  SimpleButton('Request FCM token',
+                      onPressed: () => NotificationUtils.requestFirebaseAppToken()
+                  ),
+                  SimpleButton('Delete the current FCM token',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationUtils.deleteToken()
+                  ),
+
+                  /* ******************************************************************** */
+
+                  TextDivisor(title: 'Topic Features'),
+                  SimpleButton('Subscribe into test_topic',
+                      onPressed: () => NotificationUtils.subscribeToTopic('test_topic')
+                  ),
+                  SimpleButton('Subscribe into test_negative_topic',
+                      onPressed: () => NotificationUtils.subscribeToTopic('test_negative_topic')
+                  ),
+                  SimpleButton('Unsubscribe from test_topic',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationUtils.unsubscribeToTopic('test_topic')
+                  ),
+                  SimpleButton('Unsubscribe from test_topic',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationUtils.unsubscribeToTopic('test_negative_topic')
+                  ),
+
+                  /* ******************************************************************** */
+
                   TextDivisor(title: 'Permission to send Notifications'),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -182,6 +243,33 @@ class _HomePageState extends State<HomePage> {
                               context)),
                   SimpleButton('Show permission page',
                       onPressed: () => NotificationUtils.showPermissionPage()),
+
+                  /* ******************************************************************** */
+
+                  TextDivisor(title: 'Translation Methods'),
+                  SimpleButton('Set language to English 🇺🇸',
+                      onPressed: () => NotificationUtils.setLanguageCode('en')
+                  ),
+                  SimpleButton('Set language to Brazilian Portuguese 🇧🇷',
+                      onPressed: () => NotificationUtils.setLanguageCode('pt-br')
+                  ),
+                  SimpleButton('Set language to Portuguese 🇵🇹',
+                      onPressed: () => NotificationUtils.setLanguageCode('pt')
+                  ),
+                  SimpleButton('Set language to Korean 🇰🇷',
+                      onPressed: () => NotificationUtils.setLanguageCode('ko')
+                  ),
+                  SimpleButton('Set language to Chinese 🇨🇳',
+                      onPressed: () => NotificationUtils.setLanguageCode('zh')
+                  ),
+                  SimpleButton('Set language to Spanish 🇪🇸',
+                      onPressed: () => NotificationUtils.setLanguageCode('es')
+                  ),
+                  SimpleButton('Reset language to app defaults',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationUtils.setLanguageCode(null)
+                  ),
 
                   /* ******************************************************************** */
 

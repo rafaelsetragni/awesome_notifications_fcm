@@ -1,3 +1,4 @@
+import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 
@@ -115,6 +116,38 @@ class NotificationUtils {
 
   static Future<void> resetBadgeIndicator() async {
     await AwesomeNotifications().resetGlobalBadge();
+  }
+
+/* *********************************************
+    DELETE TOKEN FEATURES
+************************************************ */
+
+  static Future<void> deleteToken() async {
+    await AwesomeNotificationsFcm().deleteToken();
+  }
+
+  static Future<void> requestFirebaseAppToken() async {
+    await AwesomeNotificationsFcm().requestFirebaseAppToken();
+  }
+
+/* *********************************************
+    TOPIC FEATURES
+************************************************ */
+
+  static Future<void> subscribeToTopic(String topicName) async {
+    await AwesomeNotificationsFcm().subscribeToTopic(topicName);
+  }
+
+  static Future<void> unsubscribeToTopic(String topicName) async {
+    await AwesomeNotificationsFcm().unsubscribeToTopic(topicName);
+  }
+
+/* *********************************************
+    TRANSLATION FEATURES
+************************************************ */
+
+  static Future<void> setLanguageCode(String? languageCode) async {
+    await AwesomeNotifications().setLocalization(languageCode: languageCode);
   }
 
 /* *********************************************

@@ -10,10 +10,10 @@ main() async {
   await NotificationController.initializeLocalNotifications(debug: true);
   await NotificationController.initializeRemoteNotifications(debug: true);
   await NotificationController.getInitialNotificationAction();
-  runApp(MyApp());
+  runApp(CompleteApp());
 }
 
-class MyApp extends StatefulWidget {
+class CompleteApp extends StatefulWidget {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
@@ -21,10 +21,10 @@ class MyApp extends StatefulWidget {
   static final Color mainColor = Color(0xFF9D50DD);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  _CompleteAppState createState() => _CompleteAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _CompleteAppState extends State<CompleteApp> {
   @override
   void initState() {
     super.initState();
@@ -42,21 +42,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
         // The navigator key is necessary to allow to navigate through static methods
-        navigatorKey: MyApp.navigatorKey,
+        navigatorKey: CompleteApp.navigatorKey,
         title: 'Awesome Notifications FCM',
-        color: MyApp.mainColor,
+        color: CompleteApp.mainColor,
         theme: ThemeData(
-            primaryColor: MyApp.mainColor,
+            primaryColor: CompleteApp.mainColor,
+            textTheme: TextTheme(
+              headline6: TextStyle(
+                  color: CompleteApp.mainColor, fontWeight: FontWeight.bold
+              ),
+            ),
             appBarTheme: AppBarTheme(
-              brightness: Brightness.light,
               backgroundColor: Colors.white,
-              iconTheme: IconThemeData(color: MyApp.mainColor),
-              textTheme: TextTheme(
-                  headline6: TextStyle(
-                      color: MyApp.mainColor, fontWeight: FontWeight.bold)),
-            )),
+              iconTheme: IconThemeData(color: CompleteApp.mainColor),
+            ),
+        ),
         initialRoute: PAGE_HOME,
         routes: materialRoutes);
   }

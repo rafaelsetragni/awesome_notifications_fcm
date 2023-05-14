@@ -1,10 +1,10 @@
 import 'dart:ui';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications_fcm/src/exceptions/exceptions.dart';
 import 'package:awesome_notifications_fcm/src/fcm_definitions.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 @pragma("vm:entry-point")
 Future<void> silentPushBackgroundMain() async {

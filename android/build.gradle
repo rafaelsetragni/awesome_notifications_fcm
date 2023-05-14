@@ -1,5 +1,5 @@
 group 'me.carda.awesome_notifications_fcm'
-version '0.7.1'
+version '0.7.5-dev.2'
 
 buildscript {
     ext.kotlin_version = '1.6.1'
@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'com.android.tools.build:gradle:7.2.2'
     }
 }
 
@@ -57,20 +57,21 @@ def getRootProjectExtOrCoreProperty(name, firebaseCoreProject) {
 dependencies {
 //    implementation project(':awn_core')
 //    implementation project(':awn_fcm_core')
-    implementation 'me.carda:androidcore:0.7.7'
-    implementation 'me.carda:fcmandroidcore:0.7.6'
+    implementation 'me.carda:AndroidAwnCore:0.7.5-dev.2'
+    implementation 'me.carda:AndroidAwnFcmCore:0.7.5-dev.2'
 
     compileOnly project(':awesome_notifications')
 
-    implementation 'com.google.android.gms:play-services-base:18.1.0'
+    implementation 'com.google.android.gms:play-services-base:18.2.0'
 
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'com.google.guava:guava:31.1-android'
 
     api firebaseCoreProject
     implementation platform("com.google.firebase:firebase-bom:${getRootProjectExtOrCoreProperty("FirebaseSDKVersion", firebaseCoreProject)}")
     implementation 'com.google.firebase:firebase-messaging'//:23.0.1
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
 
     // Required for instrumented tests
     testImplementation 'junit:junit:4.13.2'
