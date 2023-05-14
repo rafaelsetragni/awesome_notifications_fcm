@@ -1,3 +1,11 @@
+## [0.7.5-dev.2]
+### Improved
+* Android core dependencies moved to new repository
+* Added new native module switcher to avoid the folder copy at example/android folder.
+* Subtitle added to iOS notifications
+* Fcm token order switched to get called after APNs token return
+* native fromMap methods switched to convenient initializers
+
 ## [0.7.5-dev.1]
 ### Added
 * Asset and resource media files to push notifications.

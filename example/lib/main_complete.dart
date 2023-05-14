@@ -42,21 +42,22 @@ class _CompleteAppState extends State<CompleteApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
         // The navigator key is necessary to allow to navigate through static methods
         navigatorKey: CompleteApp.navigatorKey,
         title: 'Awesome Notifications FCM',
         color: CompleteApp.mainColor,
         theme: ThemeData(
             primaryColor: CompleteApp.mainColor,
+            textTheme: TextTheme(
+              headline6: TextStyle(
+                  color: CompleteApp.mainColor, fontWeight: FontWeight.bold
+              ),
+            ),
             appBarTheme: AppBarTheme(
-              brightness: Brightness.light,
               backgroundColor: Colors.white,
               iconTheme: IconThemeData(color: CompleteApp.mainColor),
-              textTheme: TextTheme(
-                  headline6: TextStyle(
-                      color: CompleteApp.mainColor, fontWeight: FontWeight.bold)),
-            )),
+            ),
+        ),
         initialRoute: PAGE_HOME,
         routes: materialRoutes);
   }

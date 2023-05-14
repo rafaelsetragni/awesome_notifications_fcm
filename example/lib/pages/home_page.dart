@@ -7,7 +7,6 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/led_light.dart';
-import 'package:awesome_notifications_fcm_example/common_widgets/remarkble_text.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/service_control_panel.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/shadow_top.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/simple_button.dart';
@@ -19,6 +18,7 @@ import 'package:awesome_notifications_fcm_example/utils/common_functions.dart';
 import 'package:awesome_notifications_fcm_example/notifications/notification_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../common_widgets/remarkable_text.dart';
 import '../main_complete.dart';
 import '../notifications/notification_controller.dart';
 
@@ -31,7 +31,7 @@ class HomePage extends StatefulWidget {
 // with WidgetsBindingObserver allows to refresh the notification permission
 // in each app lifecycle change. This way is possible to refresh the permissions
 // led indicator when the user come back from permission page
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   String packageName = 'me.carda.awesome_notifications_fcm_example';
 
   String _firebaseAppToken = '';
@@ -47,6 +47,8 @@ class _HomePageState extends State<HomePage> {
 
     NotificationUtils.requireUserNotificationPermissions(context)
         .then((isAllowed) => updateNotificationsPermission(isAllowed));
+
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
@@ -61,6 +63,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     NotificationController().removeListener(_onNotificationControllerUpdated);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -131,7 +134,6 @@ class _HomePageState extends State<HomePage> {
       children: [
         Scaffold(
             appBar: AppBar(
-              brightness: Brightness.light,
               centerTitle: false,
               title: Image.asset(
                   'assets/images/awesome-notifications-logo-color.png',

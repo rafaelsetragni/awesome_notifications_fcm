@@ -7,11 +7,32 @@
 [![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)](#)
 [![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)](#)
 [![Discord](https://img.shields.io/discord/888523488376279050.svg?style=for-the-badge&colorA=7289da&label=Chat%20on%20Discord)](https://discord.awesome-notifications.carda.me)
-    
-[![pub package](https://img.shields.io/pub/v/awesome_notifications_fcm.svg)](https://pub.dev/packages/awesome_notifications_fcm)
+
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
+[![pub package](https://img.shields.io/pub/v/awesome_notifications_fcm.svg)](https://pub.dev/packages/awesome_notifications_fcm)
 
 Awesome Notifications add-on to send push notifications using FCM (Firebase Cloud Messaging), with all awesome notifications features.
+
+<br>
+<br>
+
+---
+
+# 🔺 Disclaimer 🔺
+
+This version is currently in its ***pre-release*** stage. That means it's under active development, and the features, functionality, and implementation details are subject to change.
+
+While we're doing our best to ensure a smooth experience, you might encounter bugs or issues that we haven't yet identified. We highly encourage users to provide feedback, report bugs, or make feature suggestions to help us improve.
+
+If you're interested in contributing to this project's development and want to have an impact on its future, we'd love for you to join our beta testing program at:
+[https://discord.com/channels/888523488376279050/933445281243082772](https://discord.com/channels/888523488376279050/933445281243082772)
+
+By joining the beta testing program, you can help us make this project the best it can be. We appreciate your interest and support, and we look forward to seeing you on Discord!
+
+---
+
+<br>
+<br>
 
 ### Features
 
@@ -49,25 +70,23 @@ To migrate **firebase_messaging** to **awesome_notifications_fcm**, please take 
 - Include Windows support
 - Include MacOS support
 - Include Linux support
-    
+
+<br>
 <br>
 
-# Donate via PayPal or BuyMeACoffee
+# 💰 Donate via Stripe or BuyMeACoffee
 
-Help us to improve and maintain our work with donations of any amount, via Paypal.
-Your donation will be mainly used to purchase new devices and equipments, which we will use to test and ensure that our plugins works correctly on all platforms and their respective versions.
+Help us improve and maintain our work with donations of any amount via Stripe or BuyMeACoffee. Your donation will mainly be used to purchase new devices and equipment, which we will use to test and ensure that our plugins work correctly on all platforms and their respective versions.
 
-<a href="https://www.paypal.com/donate/?business=9BKB6ZCQLLMZY&no_recurring=0&item_name=Help+us+to+improve+and+maintain+Awesome+Notifications+with+donations+of+any+amount.&currency_code=USD">
-  <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="250px"/>
-</a>
-    
-<a href="https://www.buymeacoffee.com/rafaelsetragni" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-    
+[*![Donate With Stripe](https://github.com/rafaelsetragni/awesome_notifications/blob/68c963206885290f8a44eee4bfc7e7b223610e4a/example/assets/readme/stripe.png?raw=true)*](https://donate.stripe.com/3cs14Yf79dQcbU4001)
+[*![Donate With Buy Me A Coffee](https://github.com/rafaelsetragni/awesome_notifications/blob/95ee986af0aa59ccf9a80959bbf3dd60b5a4f048/example/assets/readme/buy-me-a-coffee.jpeg?raw=true)*](https://www.buymeacoffee.com/rafaelsetragni)
+
+<br>
 <br>
 
-# Discord Chat Server 
+# 💬 Discord Chat Server
 
-To stay tuned with new updates and get our community support, please subscribe into our Discord Chat Server:
+Stay up to date with new updates and get community support by subscribing to our Discord chat server:
 
 [![Discord Banner 3](https://discordapp.com/api/guilds/888523488376279050/widget.png?style=banner3)](https://discord.awesome-notifications.carda.me)
 
@@ -137,7 +156,7 @@ Now, your Android project is configured to use `awesome_notifications_fcm`. *Awe
 
 ## 🍎 *iOS Configuration*
 
-1 - First, ensure to have the last XCode version available instaled with at least Swift 5.5.7 (XCode version 14.A400).
+1 - First, ensure to have the last XCode version available installed with at least Swift 5.5.7 (XCode version 14.A400).
 
 ![image](https://user-images.githubusercontent.com/40064496/194728638-9cada1b9-4f2d-4a30-9fb3-3bb448f36017.png)
 
@@ -215,16 +234,16 @@ class NotificationService: DartAwesomeServiceExtension {
 In *Runner* Target:
 * Build libraries for distribution => NO
 * Only safe API extensions => NO
-* iOS Deployment Target => 11 or greater
+* iOS Deployment Target => 13 or greater
 
 In your *NotificationServiceExtension* Target:
 * Build libraries for distribution => NO
 * Only safe API extensions => YES
-* iOS Deployment Target => 11 or greater
+* iOS Deployment Target => 13 or greater
 
 <br>
 
-7 - Lastly, you need to add 3 capabilities to your XCode projec, specially "App Groups", allowing your target extensions to share data with each other.
+7 - Lastly, you need to add 3 capabilities to your XCode project, specially "App Groups", allowing your target extensions to share data with each other.
  
 To do this, run your application and search on debug console for the application group name automatically generated by Awesome Notifications. This name is unique for each application.
 
@@ -328,10 +347,10 @@ To allow Firebase send push notifications to iOS devices, its necessary to do an
 3 - Insert the same iOS App ID configured in your Firebase Cloud Messaging.   
 4 - In your MacOS machine, Launch Keychain Access app, located in /Applications/Utilities.   
 5 - Choose Keychain Access > Certificate Assistant > Request a Certificate from a Certificate Authority.   
-6 - In the Certificate Assistant dialog, enter all informations needed, leaving the CA Email Address field empty.  
+6 - In the Certificate Assistant dialog, enter all information needed, leaving the CA Email Address field empty.  
 7 - Choose “Saved to disk,” then click Continue.  
 8 - Now, go back to the online certificate process and upload the certificate generated in your local machine to Apple  
-9 - Attention: Download the file and store it in a safe place. This file can be donwload only once.  
+9 - Attention: Download the file and store it in a safe place. This file can be download only once.  
 10 - Lastly, upload this last certificate to Firebase in Project View -> Cloud Messaging -> Apple App Configurations. 
 
 <br> 
@@ -599,7 +618,6 @@ The price of a license key is **$ 9.99 / App**, and it contains:
 * Push Notifications without watermark
 * 1 license Key, expandable to 4 id variations
 * Perpetual Licenses
-* 2 Dedicated Support Meetings
 * 1 Year exclusive support on Discord
 * 1 Year of Free Updates
 
