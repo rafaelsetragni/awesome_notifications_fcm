@@ -1,3 +1,7 @@
+## [0.7.5-dev.2+1]
+### Fixed
+* iOS minimum deployment target increased to 13 due new XCode requirements
+
 ## [0.7.5-dev.2]
 ### Improved
 * Android core dependencies moved to new repository
