@@ -43,11 +43,12 @@ class ServiceControlPanel extends StatelessWidget {
                   ]),
             ),
           ),
-          SimpleButton('Go to $title',
-              width: mediaQueryData.size.width * 0.4,
-              labelColor:
-                  statusControl ? themeData.hintColor : themeData.disabledColor,
-              onPressed: statusControl ? onPressed : null),
+          if (onPressed != null)
+            SimpleButton('Go to $title',
+                width: mediaQueryData.size.width * 0.4,
+                labelColor:
+                    statusControl ? themeData.hintColor : themeData.disabledColor,
+                onPressed: statusControl ? onPressed : null),
         ],
       ),
     );

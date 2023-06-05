@@ -1,10 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import 'package:awesome_notifications/awesome_notifications.dart';
-
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/led_light.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/service_control_panel.dart';
@@ -12,10 +8,9 @@ import 'package:awesome_notifications_fcm_example/common_widgets/shadow_top.dart
 import 'package:awesome_notifications_fcm_example/common_widgets/simple_button.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/text_divisor.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/text_note.dart';
-import 'package:awesome_notifications_fcm_example/routes.dart';
 import 'package:awesome_notifications_fcm_example/utils/common_functions.dart';
-
-import 'package:awesome_notifications_fcm_example/notifications/notification_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../common_widgets/remarkable_text.dart';
@@ -45,8 +40,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
     getFirebaseMessagingToken();
 
-    NotificationUtils.requireUserNotificationPermissions(context)
-        .then((isAllowed) => updateNotificationsPermission(isAllowed));
+    NotificationController.requireUserNotificationPermissions(context)
+        .then((isAllowed) async {
+          updateNotificationsPermission(isAllowed);
+          await NotificationController.requestFirebaseAppToken();
+        });
 
     WidgetsBinding.instance.addObserver(this);
   }
@@ -143,6 +141,24 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             body: ListView(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 children: <Widget>[
+
+                  /* ******************************************************************** */
+
+                  TextDivisor(title: 'Push Service Status'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      ServiceControlPanel(
+                          'Firebase Backend\n Emulator',
+                          !AwesomeStringUtils.isNullOrEmpty(_firebaseAppToken),
+                          themeData,
+                          onPressed: null/*() => Navigator.pushNamed(
+                              context, PAGE_FIREBASE_TEST,
+                              arguments: _firebaseAppToken)*/
+                      ),
+                    ],
+                  ),
+
                   /* ******************************************************************** */
 
                   TextDivisor(title: 'Package name'),
@@ -167,50 +183,34 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
                   /* ******************************************************************** */
 
-                  TextDivisor(title: 'Push Service Status'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      ServiceControlPanel(
-                          'Firebase Backend\n Emulator',
-                          !AwesomeStringUtils.isNullOrEmpty(_firebaseAppToken),
-                          themeData,
-                          onPressed: () => Navigator.pushNamed(
-                              context, PAGE_FIREBASE_TEST,
-                              arguments: _firebaseAppToken)),
-                    ],
-                  ),
-
-                  /* ******************************************************************** */
-
                   TextDivisor(title: 'Token Features'),
                   SimpleButton('Request FCM token',
-                      onPressed: () => NotificationUtils.requestFirebaseAppToken()
+                      onPressed: () => NotificationController.requestFirebaseAppToken()
                   ),
                   SimpleButton('Delete the current FCM token',
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
-                      onPressed: () => NotificationUtils.deleteToken()
+                      onPressed: () => NotificationController.deleteToken()
                   ),
 
                   /* ******************************************************************** */
 
                   TextDivisor(title: 'Topic Features'),
                   SimpleButton('Subscribe into test_topic',
-                      onPressed: () => NotificationUtils.subscribeToTopic('test_topic')
+                      onPressed: () => NotificationController.subscribeToTopic('test_topic')
                   ),
                   SimpleButton('Subscribe into test_negative_topic',
-                      onPressed: () => NotificationUtils.subscribeToTopic('test_negative_topic')
+                      onPressed: () => NotificationController.subscribeToTopic('test_negative_topic')
                   ),
                   SimpleButton('Unsubscribe from test_topic',
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
-                      onPressed: () => NotificationUtils.unsubscribeToTopic('test_topic')
+                      onPressed: () => NotificationController.unsubscribeToTopic('test_topic')
                   ),
                   SimpleButton('Unsubscribe from test_topic',
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
-                      onPressed: () => NotificationUtils.unsubscribeToTopic('test_negative_topic')
+                      onPressed: () => NotificationController.unsubscribeToTopic('test_negative_topic')
                   ),
 
                   /* ******************************************************************** */
@@ -239,36 +239,36 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       '* iOS: notifications are not enabled by default and you must explicitly request it to the user.'),
                   SimpleButton('Request permission',
                       onPressed: () =>
-                          NotificationUtils.requireUserNotificationPermissions(
+                          NotificationController.requireUserNotificationPermissions(
                               context)),
                   SimpleButton('Show permission page',
-                      onPressed: () => NotificationUtils.showPermissionPage()),
+                      onPressed: () => NotificationController.showPermissionPage()),
 
                   /* ******************************************************************** */
 
                   TextDivisor(title: 'Translation Methods'),
                   SimpleButton('Set language to English 🇺🇸',
-                      onPressed: () => NotificationUtils.setLanguageCode('en')
+                      onPressed: () => NotificationController.setLanguageCode('en')
                   ),
                   SimpleButton('Set language to Brazilian Portuguese 🇧🇷',
-                      onPressed: () => NotificationUtils.setLanguageCode('pt-br')
+                      onPressed: () => NotificationController.setLanguageCode('pt-br')
                   ),
                   SimpleButton('Set language to Portuguese 🇵🇹',
-                      onPressed: () => NotificationUtils.setLanguageCode('pt')
+                      onPressed: () => NotificationController.setLanguageCode('pt')
                   ),
                   SimpleButton('Set language to Korean 🇰🇷',
-                      onPressed: () => NotificationUtils.setLanguageCode('ko')
+                      onPressed: () => NotificationController.setLanguageCode('ko')
                   ),
                   SimpleButton('Set language to Chinese 🇨🇳',
-                      onPressed: () => NotificationUtils.setLanguageCode('zh')
+                      onPressed: () => NotificationController.setLanguageCode('zh')
                   ),
                   SimpleButton('Set language to Spanish 🇪🇸',
-                      onPressed: () => NotificationUtils.setLanguageCode('es')
+                      onPressed: () => NotificationController.setLanguageCode('es')
                   ),
                   SimpleButton('Reset language to app defaults',
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
-                      onPressed: () => NotificationUtils.setLanguageCode(null)
+                      onPressed: () => NotificationController.setLanguageCode(null)
                   ),
 
                   /* ******************************************************************** */
@@ -278,16 +278,16 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       'Tap on notification when it appears on your system tray to go to Details page.'),
                   SimpleButton('Show a simple local notification',
                       onPressed: () =>
-                          NotificationUtils.createLocalNotification(
+                          NotificationController.createLocalNotification(
                               context: context, id: 1, channelKey: 'alerts')),
                   SimpleButton('Show a scheduled local notification',
                       onPressed: () =>
-                          NotificationUtils.createLocalNotification(
+                          NotificationController.createLocalNotification(
                               context: context, id: 2, channelKey: 'alerts')),
                   SimpleButton(
                       'Show big picture and\nlarge icon notification simultaneously',
                       onPressed: () =>
-                          NotificationUtils.createLocalNotification(
+                          NotificationController.createLocalNotification(
                               context: context,
                               id: 3,
                               channelKey: 'alerts',
@@ -298,7 +298,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
                   TextDivisor(title: 'Schedule Methods'),
                   SimpleButton('Get current time zone reference name',
-                      onPressed: () => NotificationUtils.getCurrentTimeZone()
+                      onPressed: () => NotificationController.getCurrentTimeZone()
                           .then((timeZone) => showDialog(
                               context: context,
                               builder: (_) => AlertDialog(
@@ -317,7 +317,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                         ],
                                       ))))))),
                   SimpleButton('Get utc time zone reference name',
-                      onPressed: () => NotificationUtils.getUtcTimeZone()
+                      onPressed: () => NotificationController.getUtcTimeZone()
                           .then((timeZone) => showDialog(
                               context: context,
                               builder: (_) => AlertDialog(
@@ -336,7 +336,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                       ))))))),
                   SimpleButton('List all active schedules',
                       onPressed: () =>
-                          NotificationUtils.listScheduledNotifications(
+                          NotificationController.listScheduledNotifications(
                               context)),
 
                   /* ******************************************************************** */
@@ -355,18 +355,18 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       'OBS3: Badge channels for native Android only works on version 8.0 (API level 26) and beyond.'),
                   SimpleButton('Read the badge indicator count',
                       onPressed: () async {
-                    int amount = await NotificationUtils.getBadgeIndicator();
+                    int amount = await NotificationController.getBadgeIndicator();
                     Fluttertoast.showToast(msg: 'Badge count: $amount');
                   }),
                   SimpleButton('Set manually the badge indicator',
                       onPressed: () async {
                     int? amount = await pickBadgeCounter(context);
                     if (amount != null) {
-                      NotificationUtils.setBadgeIndicator(amount);
+                      NotificationController.setBadgeIndicator(amount);
                     }
                   }),
                   SimpleButton('Reset the badge indicator',
-                      onPressed: () => NotificationUtils.resetBadgeIndicator()),
+                      onPressed: () => NotificationController.resetBadgeIndicator()),
 
                   /* ******************************************************************** */
 
@@ -374,21 +374,21 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   SimpleButton('Cancel the first notification',
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
-                      onPressed: () => NotificationUtils.cancelNotification(1)),
+                      onPressed: () => NotificationController.cancelNotification(1)),
                   SimpleButton('Cancel all schedules',
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
-                      onPressed: () => NotificationUtils.cancelAllSchedules()),
+                      onPressed: () => NotificationController.cancelAllSchedules()),
                   SimpleButton('Dismiss all not. from status bar',
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
                       onPressed: () =>
-                          NotificationUtils.dismissAllNotifications()),
+                          NotificationController.dismissAllNotifications()),
                   SimpleButton('Cancel all notifications',
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
                       onPressed: () =>
-                          NotificationUtils.cancelAllNotifications()),
+                          NotificationController.cancelAllNotifications()),
                 ])),
         ShadowTop(),
       ],

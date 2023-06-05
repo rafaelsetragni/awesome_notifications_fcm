@@ -1,3 +1,11 @@
+## [0.7.5-dev.3]
+### Fixed
+* iOS events finished
+### Improved
+* Android and iOS dependencies upgraded
+* Example app improved
+* Firebase sender page deactivated due new OAuth2 V1 protocol
+
 ## [0.7.5-dev.2+1]
 ### Fixed
 * iOS minimum deployment target increased to 13 due new XCode requirements

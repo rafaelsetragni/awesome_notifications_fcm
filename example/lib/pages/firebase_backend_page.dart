@@ -1,13 +1,12 @@
 import 'dart:math';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/simple_button.dart';
 import 'package:awesome_notifications_fcm_example/datasources/firebase_datasource.dart';
-import 'package:awesome_notifications_fcm_example/main.dart';
+import 'package:awesome_notifications_fcm_example/main_complete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -75,7 +74,7 @@ class _FirebaseBackendPageState extends State<FirebaseBackendPage> {
             if (!snapshot.hasData) {
               return Center(
                   child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(MyApp.mainColor),
+                valueColor: AlwaysStoppedAnimation<Color>(CompleteApp.mainColor),
               ));
             } else {
               String lastServerKey = snapshot.data ?? '';
@@ -94,7 +93,7 @@ class _FirebaseBackendPageState extends State<FirebaseBackendPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15.0),
                         child: Text(widget.firebaseAppToken, style: TextStyle(
-                            color: MyApp.mainColor,
+                            color: CompleteApp.mainColor,
                             fontWeight: FontWeight.bold
                         )),
                       ),
@@ -124,7 +123,7 @@ class _FirebaseBackendPageState extends State<FirebaseBackendPage> {
                                 validator: serverKeyValidation,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    prefixIcon: Icon(Icons.lock, color: MyApp.mainColor),
+                                    prefixIcon: Icon(Icons.lock, color: CompleteApp.mainColor),
                                     labelText: ' Firebase Server Key ',
                                     hintText:
                                         'Paste here your Firebase server Key'),
@@ -152,7 +151,7 @@ class _FirebaseBackendPageState extends State<FirebaseBackendPage> {
                       ),
                       SimpleButton(
                         'Send Firebase request',
-                        backgroundColor: MyApp.mainColor,
+                        backgroundColor: CompleteApp.mainColor,
                         labelColor: Colors.white,
                         onPressed: () async {
                             String fcmServerKey =
