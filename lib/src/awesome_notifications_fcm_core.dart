@@ -134,7 +134,7 @@ class AwesomeNotificationsFcm {
         CHANNEL_METHOD_SUBSCRIBE_TOPIC, {NOTIFICATION_TOPIC: topic});
   }
 
-  Future<void> unsubscribeToTopic(String topic) async {
+  Future<void> unsubscribeFromTopic(String topic) async {
     await _channel.invokeMethod(
         CHANNEL_METHOD_UNSUBSCRIBE_TOPIC, {NOTIFICATION_TOPIC: topic});
   }
