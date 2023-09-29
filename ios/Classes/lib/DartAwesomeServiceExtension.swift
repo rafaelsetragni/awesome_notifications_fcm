@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import IosAwnCore
 import IosAwnFcmCore
 import awesome_notifications
 
@@ -16,6 +15,7 @@ open class DartAwesomeServiceExtension: AwesomeServiceExtension {
         _ request: UNNotificationRequest,
         withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
     ){
+        DartAwesomeNotificationsExtension.initialize()
         SwiftAwesomeNotificationsFcmPlugin.loadClassReferences()
         super.didReceive(request, withContentHandler: contentHandler)
     }

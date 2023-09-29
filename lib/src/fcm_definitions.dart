@@ -23,6 +23,7 @@ const CHANNEL_METHOD_NEW_NATIVE_TOKEN = 'newNativeToken';
 const CHANNEL_METHOD_NEW_FCM_TOKEN = 'newFcmToken';
 const CHANNEL_METHOD_SUBSCRIBE_TOPIC = 'subscribeTopic';
 const CHANNEL_METHOD_UNSUBSCRIBE_TOPIC = 'unsubscribeTopic';
+const CHANNEL_METHOD_DELETE_TOKEN = 'deleteToken';
 const CHANNEL_METHOD_SILENT_CALLBACK = 'silentCallbackReference';
 const CHANNEL_METHOD_DART_CALLBACK = 'dartCallbackReference';
 const CHANNEL_METHOD_SHUTDOWN_DART = 'shutdown';

@@ -6,35 +6,35 @@ description: Demonstrates how to use the awesome_notifications_fcm plugin.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.19.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^2.1.1
-  awesome_notifications: ^0.7.4
-#    path: ../../awesome_notifications
+  firebase_core: ^2.16.0
+  awesome_notifications: ^0.7.5
+    #path: ../../awesome_notifications
 #    git:
-#      ref: "b861f36"
+#      ref: "a9fbe3e"
 #      url: https://github.com/rafaelsetragni/awesome_notifications
   awesome_notifications_fcm:
     path: ../
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.4
-  font_awesome_flutter: ^9.2.0
+  cupertino_icons: ^1.0.6
+  font_awesome_flutter: ^10.5.0
 
-  http: ^0.13.4
-  path_provider: ^2.0.9
-  shared_preferences: ^2.0.13
+  http: ^1.1.0
+  path_provider: ^2.1.1
+  shared_preferences: ^2.2.1
 
-  fluttertoast: ^8.0.3
-  numberpicker: ^2.0.1
-  giffy_dialog: ^1.8.0
+  fluttertoast: ^8.2.2
+  numberpicker: ^2.1.2
+  giff_dialog: ^1.0.1
 
-  flutter_launcher_icons: ^0.9.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:

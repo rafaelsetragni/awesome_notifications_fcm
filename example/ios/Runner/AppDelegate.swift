@@ -1,7 +1,7 @@
 import UIKit
 import Flutter
 import fluttertoast
-import shared_preferences_ios
+import shared_preferences_foundation
 import awesome_notifications
 import awesome_notifications_fcm
 
@@ -15,14 +15,16 @@ import awesome_notifications_fcm
         
         SwiftAwesomeNotificationsPlugin.setPluginRegistrantCallback { registry in
             SwiftAwesomeNotificationsPlugin.register(
-              with: registry.registrar(forPlugin: "io.flutter.plugins.awesomenotifications.AwesomeNotificationsPlugin")!)
-            FLTSharedPreferencesPlugin.register(
-              with: registry.registrar(forPlugin: "io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin")!)
+              with: registry.registrar(forPlugin: "AwesomeNotificationsPlugin")!)
+            SwiftAwesomeNotificationsFcmPlugin.register(
+              with: registry.registrar(forPlugin: "AwesomeNotificationsFcmPlugin")!)
+            SharedPreferencesPlugin.register(
+              with: registry.registrar(forPlugin: "SharedPreferencesPlugin")!)
         }
         
         SwiftAwesomeNotificationsFcmPlugin.setPluginRegistrantCallback { registry in
             FluttertoastPlugin.register(
-              with: registry.registrar(forPlugin: "io.flutter.plugins.fluttertoast.FluttertoastPlugin")!)
+              with: registry.registrar(forPlugin: "FluttertoastPlugin")!)
         }
         
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)

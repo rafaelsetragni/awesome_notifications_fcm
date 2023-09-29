@@ -1,9 +1,8 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesome_notifications_fcm_example/pages/firebase_backend_page.dart';
-import 'package:flutter/material.dart';
-
-import 'package:awesome_notifications_fcm_example/pages/notification_details_page.dart';
 import 'package:awesome_notifications_fcm_example/pages/home_page.dart';
+import 'package:awesome_notifications_fcm_example/pages/notification_details_page.dart';
+import 'package:flutter/material.dart';
 
 const String PAGE_HOME = '/';
 const String PAGE_NOTIFICATION_DETAILS = '/notification-details';

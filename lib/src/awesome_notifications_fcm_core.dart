@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications_fcm/src/fcm_definitions.dart';
 import 'package:awesome_notifications_fcm/src/isolates/silent_push_isolate_main.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 
 import 'exceptions/exceptions.dart';
 
@@ -25,7 +24,7 @@ class AwesomeNotificationsFcm {
 
   factory AwesomeNotificationsFcm() => _instance;
 
-  @visibleForTesting
+  // @visibleForTesting
   AwesomeNotificationsFcm.private(MethodChannel channel) : _channel = channel;
 
   static final AwesomeNotificationsFcm _instance =
@@ -83,13 +82,13 @@ class AwesomeNotificationsFcm {
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case CHANNEL_METHOD_NEW_NATIVE_TOKEN:
-        final String token = call.arguments;
-        if (_tokenNativeHandler != null) _tokenNativeHandler!(token);
+        final String? token = call.arguments;
+        if (_tokenNativeHandler != null) _tokenNativeHandler!(token ?? '');
         return;
 
       case CHANNEL_METHOD_NEW_FCM_TOKEN:
-        final String token = call.arguments;
-        if (_tokenFcmHandler != null) _tokenFcmHandler!(token);
+        final String? token = call.arguments;
+        if (_tokenFcmHandler != null) _tokenFcmHandler!(token ?? '');
         return;
 
       case CHANNEL_METHOD_SILENT_CALLBACK:
@@ -129,13 +128,17 @@ class AwesomeNotificationsFcm {
     return fcmToken ?? '';
   }
 
-  Future<void> subscribeToTopic(String topic) async {
-    await _channel.invokeMethod(
+  Future<bool> subscribeToTopic(String topic) async {
+    return await _channel.invokeMethod(
         CHANNEL_METHOD_SUBSCRIBE_TOPIC, {NOTIFICATION_TOPIC: topic});
   }
 
-  Future<void> unsubscribeToTopic(String topic) async {
-    await _channel.invokeMethod(
+  Future<bool> unsubscribeToTopic(String topic) async {
+    return await _channel.invokeMethod(
         CHANNEL_METHOD_UNSUBSCRIBE_TOPIC, {NOTIFICATION_TOPIC: topic});
+  }
+
+  Future<bool> deleteToken() async {
+    return await _channel.invokeMethod(CHANNEL_METHOD_DELETE_TOKEN);
   }
 }
