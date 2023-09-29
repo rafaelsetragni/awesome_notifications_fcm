@@ -1,8 +1,8 @@
 //
 //  NotificationService.swift
-//  AwesomeServiceExtension
+//  AwesomeNotificationService
 //
-//  Created by CardaDev on 06/05/22.
+//  Created by Rafael Setragni on 27/09/23.
 //
 
 import UserNotifications
@@ -10,4 +10,5 @@ import awesome_notifications_fcm
 
 @available(iOS 10.0, *)
 class NotificationService: DartAwesomeServiceExtension {
+
 }

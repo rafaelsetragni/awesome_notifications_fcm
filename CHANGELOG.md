@@ -1,3 +1,13 @@
+## [0.7.5]
+### Added
+* Full support for Flutter 3.13
+* Support for Android 14
+* Support for iOS 17
+* Compatibility with AGP 8
+### Improved
+* Project dependencies upgraded to the latest version available
+* Documentation updated
+
 ## [0.7.5-dev.3]
 ### Fixed
 * iOS events finished

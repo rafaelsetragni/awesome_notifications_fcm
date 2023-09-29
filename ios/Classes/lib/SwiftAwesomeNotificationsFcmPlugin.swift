@@ -96,7 +96,7 @@ public class SwiftAwesomeNotificationsFcmPlugin:
                 application,
                 didReceiveRemoteNotification: userInfo,
                 fetchCompletionHandler: { backgroundFetchResult in
-                    Logger.d(SwiftAwesomeNotificationsFcmPlugin.TAG, "didReceiveRemoteNotification completed with \(backgroundFetchResult)")
+                    Logger.shared.d(SwiftAwesomeNotificationsFcmPlugin.TAG, "didReceiveRemoteNotification completed with \(backgroundFetchResult)")
                     completionHandler(backgroundFetchResult)
                 }) ?? false
     }

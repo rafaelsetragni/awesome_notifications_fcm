@@ -1,8 +1,8 @@
 group 'me.carda.awesome_notifications_fcm'
-version '0.7.5-dev.3'
+version '0.7.5'
 
 buildscript {
-    ext.kotlin_version = '1.6.1'
+    ext.kotlin_version = '1.7.10'
     repositories {
         google()
         mavenCentral()
@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:7.3.0'
     }
 }
 
@@ -25,7 +25,10 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 33
+    if (project.android.hasProperty('namespace')) {
+        namespace 'me.carda.awesome_notifications_fcm'
+    }
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion 21
@@ -56,9 +59,9 @@ def getRootProjectExtOrCoreProperty(name, firebaseCoreProject) {
 
 dependencies {
 //    implementation project(':awn_core')
+    implementation 'me.carda:AndroidAwnCore:0.7.6'
 //    implementation project(':awn_fcm_core')
-    implementation 'me.carda:AndroidAwnCore:0.7.5-dev.3'
-    implementation 'me.carda:AndroidAwnFcmCore:0.7.5-dev.3'
+    implementation 'me.carda:AndroidAwnFcmCore:0.7.6'
 
     compileOnly project(':awesome_notifications')
 
@@ -70,7 +73,6 @@ dependencies {
     api firebaseCoreProject
     implementation platform("com.google.firebase:firebase-bom:${getRootProjectExtOrCoreProperty("FirebaseSDKVersion", firebaseCoreProject)}")
     implementation 'com.google.firebase:firebase-messaging'//:23.0.1
-    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
 
     // Required for instrumented tests
