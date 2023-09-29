@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:http/http.dart' show Client, Response;
-import 'package:flutter/cupertino.dart';
 import 'package:awesome_notifications_fcm_example/utils/common_functions.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' show Client, Response;
+
 import 'datasource.dart';
 
 class HttpDataSource extends DataSource {

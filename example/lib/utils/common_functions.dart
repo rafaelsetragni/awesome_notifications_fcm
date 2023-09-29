@@ -1,13 +1,14 @@
 import 'dart:io';
-
 import 'dart:math' as math;
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/badge_picker.dart';
-import 'package:awesome_notifications_fcm_example/notifications/notification_utils.dart';
-import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+
+import '../notifications/notification_controller.dart';
+
 
 Future<String> saveAssetOnDisk(ImageProvider image, String fileName) async {
   Directory directory = await getApplicationDocumentsDirectory();
@@ -15,7 +16,7 @@ Future<String> saveAssetOnDisk(ImageProvider image, String fileName) async {
   File newFile = File(filePath);
 
   if (!await newFile.exists()) {
-    BitmapHelper bitmapHelper = await BitmapHelper.fromProvider(image);
+    BitmapHelper bitmapHelper = await BitmapHelper.fromImageProvider(image);
     await newFile.writeAsBytes(bitmapHelper.content);
   }
 
@@ -105,7 +106,7 @@ Color getRandomColor() {
 }
 
 Future<int?> pickBadgeCounter(BuildContext context) async {
-  int amount = await NotificationUtils.getBadgeIndicator();
+  int amount = await NotificationController.getBadgeIndicator();
 
   // show the dialog
   return showDialog<int?>(

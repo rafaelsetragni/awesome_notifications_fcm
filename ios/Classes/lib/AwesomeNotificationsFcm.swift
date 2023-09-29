@@ -34,8 +34,6 @@ public class AwesomeNotificationsFcm:
         }
     }
 
-    static var firebaseDeviceToken:String?
-
     private var originalUserCenter:UNUserNotificationCenter?
     private var originalUserCenterDelegate:UNUserNotificationCenterDelegate?
     private var originalDelegateHasDidReceive = false
@@ -73,21 +71,11 @@ public class AwesomeNotificationsFcm:
         FcmDefaultsManager.shared.licenseKeys = licenseKeys
 
         if AwesomeNotificationsFcm.debug {
-            Logger.d(TAG,
-                  "Awesome Notifications FCM service initialized")
-            Logger.d(TAG,
-                  "Awesome Notifications FCM - App Group: "+Definitions.USER_DEFAULT_TAG)
+            Logger.d(TAG, "Awesome Notifications FCM service initialized")
+            Logger.d(TAG, "iOS App Group: \(Definitions.USER_DEFAULT_TAG)")
         }
 
-        if try !LicenseManager.shared.isLicenseKeyValid() {
-            Logger.i(TAG,
-                 "You need to insert a valid license key to use Awesome Notification's FCM " +
-                 "plugin in release mode without watermarks (Bundle ID: \"\(Bundle.main.bundleIdentifier ?? "")\"). " +
-                 "To know more about it, please visit https://www.awesome-notifications.carda.me#prices")
-        }
-        else {
-            Logger.d(TAG,"Awesome Notification's license key validated")
-        }
+        _ = try !LicenseManager.shared.isLicenseKeyValid()
 
         isInitialized = true
         return true
@@ -186,14 +174,12 @@ public class AwesomeNotificationsFcm:
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-
-        AwesomeFcmEventsReceiver
+        TokenManager
             .shared
-            .addNewNativeTokenEvent(withToken: deviceTokenString)
-
-        Messaging.messaging().apnsToken = deviceToken
-        Logger.d(TAG, "Received a new valid APNs token")
+            .application(
+                application,
+                didRegisterForRemoteNotificationsWithDeviceToken: deviceToken
+            )
     }
 
     // For Firebase Messaging versions older than 7.0
@@ -209,59 +195,17 @@ public class AwesomeNotificationsFcm:
     }
 
     private func didReceiveRegistrationToken(_ messaging: Messaging, token: String){
-        Logger.d(TAG, "Received a new valid token")
-        AwesomeNotificationsFcm.firebaseDeviceToken = token
-
-        if isInitialized {
-            AwesomeFcmEventsReceiver
-                .shared
-                .addNewTokenEvent(withToken: token)
-        }
+        TokenManager
+            .shared
+            .didReceiveRegistrationToken(messaging, token: token)
     }
 
     public func requestFirebaseToken(
         whenFinished requestCompletion: @escaping (String?, AwesomeNotificationsException?) -> ()
     ) {
-        if let token:String = AwesomeNotificationsFcm.firebaseDeviceToken {
-            requestCompletion(token, nil)
-            AwesomeFcmEventsReceiver
-                .shared
-                .addNewTokenEvent(withToken: token)
-            return
-        }
-        else {
-            Messaging.messaging().token(completion: { [self] token, error in
-                AwesomeNotificationsFcm.firebaseDeviceToken = token
-                let success:Bool = error == nil
-
-                if AwesomeNotificationsFcm.debug {
-                    Logger.d(TAG,
-                             success ?
-                                 "Retrieve a new valid FCM token" :
-                                 "Fcm token registering failed")
-                }
-
-                if !success {
-                    let awesomeException = ExceptionFactory
-                        .shared
-                        .createNewAwesomeException(
-                            className: TAG,
-                            code: FcmExceptionCode.CODE_FCM_EXCEPTION,
-                            message: error!.localizedDescription,
-                            detailedCode: FcmExceptionCode.DETAILED_FCM_EXCEPTION+".request.token",
-                            exception: error!)
-
-                    requestCompletion(token, awesomeException)
-                } else {
-                    requestCompletion(token, nil)
-                }
-
-                AwesomeFcmEventsReceiver
-                    .shared
-                    .addNewTokenEvent(withToken: token)
-            })
-        }
-
+        TokenManager
+            .shared
+            .requestNewFcmToken(whenFinished: requestCompletion)
     }
 
     public func subscribe(
@@ -303,7 +247,7 @@ public class AwesomeNotificationsFcm:
             if AwesomeNotificationsFcm.debug {
                 Logger.d(TAG,
                          success ?
-                             "Unsubscribed to topic \(topic)" :
+                             "Unsubscribed from topic \(topic)" :
                              "Topic \(topic) unsubscription failed")
             }
 
@@ -322,6 +266,16 @@ public class AwesomeNotificationsFcm:
                 unsubscriptionCompletion(success, nil)
             }
         })
+    }
+    
+    public func deleteToken(
+        whenFinished tokenDeletionCompletion: @escaping (Bool, AwesomeNotificationsException?) -> ()
+    ) {
+        TokenManager
+            .shared
+            .deleteToken(
+                whenFinished: tokenDeletionCompletion
+            )
     }
 }
 

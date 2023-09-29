@@ -7,6 +7,7 @@
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.awn.c2efea3e</string>
+		<string>group.awnFcm.fixedAppGroup</string>
 	</array>
 </dict>
 </plist>

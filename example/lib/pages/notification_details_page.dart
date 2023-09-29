@@ -1,13 +1,10 @@
 import 'dart:math';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:awesome_notifications_fcm_example/common_widgets/shadow_top.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:awesome_notifications/awesome_notifications.dart';
-
-import 'package:awesome_notifications_fcm_example/common_widgets/shadow_top.dart';
 
 class NotificationDetailsPage extends StatefulWidget {
   String get results => receivedNotification.toString();
