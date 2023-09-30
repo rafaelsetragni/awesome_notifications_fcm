@@ -647,8 +647,8 @@ You don't need a real server to send push notifications during the development s
 
 Download and import the Postman projects/collections below into your Postman. Make sure to replace the collection variables according to your Firebase project keys and your devices' tokens:
 
-[V1 FMC Examples.postman_collection.json](https://github.com/rafaelsetragni/awesome_notifications_fcm/blob/9b4aefdd4f55156db768f8dfc35263c03c869c41/example/assets/readme/V1%20FMC%20Examples.postman_collection.json)<br>
-[Legacy FMC Examples.postman_collection.json](https://github.com/rafaelsetragni/awesome_notifications_fcm/blob/9b4aefdd4f55156db768f8dfc35263c03c869c41/example/assets/readme/Legacy%20FMC%20Examples.postman_collection.json)
+[V1 FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/V1%20FMC%20Examples.postman_collection.json)<br>
+[Legacy FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/Legacy%20FMC%20Examples.postman_collection.json)
 
 
 ***Note:*** To use the V1 protocol on Postman, you'll need to generate a fresh token using the [Google Developers OAuth 2.0 Playground](https://developers.google.com/oauthplayground/). To generate it, follow the steps bellow:

@@ -1,3 +1,7 @@
+## [0.7.6]
+### Fixed
+- Corrected the Postman example links.
+
 ## [0.7.5]
 ### Added
 * Full support for Flutter 3.13
