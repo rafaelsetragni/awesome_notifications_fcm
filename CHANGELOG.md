@@ -1,4 +1,4 @@
-## [0.7.5+1]
+## [0.7.6]
 ### Fixed
 - Corrected the Postman example links.
 
