@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'awesome_notifications_fcm'
-  s.version          = '0.7.5'
+  s.version          = '0.8.1'
   s.summary          = 'Complement of Awesome Notifications to allow firebase with all awesome resources in Flutter.'
   s.description      = <<-DESC
 Complement of Awesome Notifications to allow firebase with all awesome resources in Flutter.
@@ -16,9 +16,9 @@ Complement of Awesome Notifications to allow firebase with all awesome resources
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'awesome_notifications'
-  s.dependency 'IosAwnCore', '~> 0.7.7'
+  s.dependency 'IosAwnCore', '~> 0.8.0'
   #  s.dependency 'IosAwnFcmCore'
-  s.dependency 'IosAwnFcmDist', '~> 0.7.6'
+  s.dependency 'IosAwnFcmDist', '~> 0.8.0'
   s.dependency 'FirebaseCore'
   s.dependency 'Firebase/Messaging'
   
