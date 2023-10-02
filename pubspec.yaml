@@ -1,6 +1,6 @@
 name: awesome_notifications_fcm
 description: Awesome Notifications add-on plugin to send push notifications through Firebase Cloud Messaging, enabling all awesome notifications features.
-version: 0.7.6
+version: 0.8.0
 repository: https://github.com/rafaelsetragni/awesome_notifications_fcm
 
 environment:
@@ -14,7 +14,7 @@ dependencies:
   firebase_core: ^2.16.0
   firebase_crashlytics: ^3.3.6
 
-  awesome_notifications: ^0.7.7
+  awesome_notifications: ^0.8.0
     #path: ../awesome_notifications
 #    git:
 #      ref: "a9fbe3e"

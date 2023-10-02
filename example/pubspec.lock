@@ -37,17 +37,17 @@ packages:
     dependency: "direct main"
     description:
       name: awesome_notifications
-      sha256: "327162c36a1476978f89638741da618cac42356aabc39a5035b6c206d8fca978"
+      sha256: e1570782c108c4232aa1cefd37658e409782d961b8d3e93e2c8b50b6ee859e0c
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.7"
+    version: "0.8.0"
   awesome_notifications_fcm:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.7.5"
+    version: "0.8.0"
   boolean_selector:
     dependency: transitive
     description:

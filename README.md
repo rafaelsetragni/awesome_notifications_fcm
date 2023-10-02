@@ -106,7 +106,7 @@ Add the plugins below as dependencies in your `pubspec.yaml` file. By using the 
 
 ```yaml
   # Awesome plugins
-  awesome_notifications_core: ^0.7.6 # use the latest available
+  awesome_notifications_core: ^0.8.0 # use the latest version available
   awesome_notifications: any # <- this version will be managed by core plugin
   awesome_notifications_fcm: any # <- this version will be managed by core plugin
   
@@ -747,7 +747,7 @@ However, to use Awesome Notifications FCM in release mode without the [DEMO] wat
 The license key is priced at **$10/App**, offering you:
 
 - Push Notifications without a watermark
-- One license key, expandable to five ID variations (flavors)
+- One license key, expandable to 5 ID variations (flavors and minor changes)
 - Perpetual licenses
 - One year of exclusive support on Discord
 - One year of free updates

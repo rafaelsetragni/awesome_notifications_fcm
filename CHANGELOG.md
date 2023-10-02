@@ -1,3 +1,7 @@
+## [0.8.0]
+### Fixed
+- All library dependencies updated and bumped to version to 0.8.0 to emphasize the necessity of keeping dependencies up to date at project lock files.
+
 ## [0.7.6]
 ### Fixed
 - Corrected the Postman example links.
