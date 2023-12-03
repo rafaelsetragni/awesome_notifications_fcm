@@ -157,7 +157,7 @@ Now, your Android project is configured to use `awesome_notifications_fcm`. *Awe
 
 2 - Run the command `pod install` inside your iOS project folder.
 
-Note: If it returns any version conflict, `run pod repo update` and `pod update` to update your local repository, and then rename or erase the file "Podfile.lock" inside your iOS folder. Lastly, try to execute the command `pod install` once again.
+Note: If it returns any version conflict, run `pod repo update` and `pod update` to update your local repository, and then rename or erase the file "Podfile.lock" inside your iOS folder. Lastly, try to execute the command `pod install` once again.
 
 ![image](https://user-images.githubusercontent.com/40064496/194728843-5a5fd0a1-8540-4186-95e5-441fe5ebfd2f.png)
 
