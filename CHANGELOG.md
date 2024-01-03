@@ -1,4 +1,4 @@
-## [0.9.0] - 12/29/2023
+## [0.9.0] - 01/02/2024
 ### Breaking Changes
 - **Pod Modifications:** It's now necessary to add the Awesome Notifications pod modification inside the `Podfile` in the iOS folder.
 - **Receive Port and Send Port:** The methods `sendPort.send()` and `receivePort!.listen()` now only accept serialized data, not objects. Convert your data to map format and reconstruct it later from this format.
