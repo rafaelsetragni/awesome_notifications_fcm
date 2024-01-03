@@ -1,14 +1,14 @@
 PODS:
-  - awesome_notifications (0.7.6):
+  - awesome_notifications (0.8.1):
     - Flutter
-    - IosAwnCore (~> 0.7.6)
-  - awesome_notifications_fcm (0.7.5):
+    - IosAwnCore (~> 0.8.0)
+  - awesome_notifications_fcm (0.8.1):
     - awesome_notifications
     - Firebase/Messaging
     - FirebaseCore
     - Flutter
-    - IosAwnCore (~> 0.7.7)
-    - IosAwnFcmDist (~> 0.7.6)
+    - IosAwnCore (~> 0.8.0)
+    - IosAwnFcmDist (~> 0.8.0)
   - Firebase/CoreOnly (10.15.0):
     - FirebaseCore (= 10.15.0)
   - Firebase/Crashlytics (10.15.0):
@@ -87,11 +87,11 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.11.5):
     - GoogleUtilities/Logger
-  - IosAwnCore (0.7.7)
-  - IosAwnFcmDist (0.7.6):
+  - IosAwnCore (0.8.0)
+  - IosAwnFcmDist (0.8.0):
     - FirebaseCore
     - FirebaseMessaging
-    - IosAwnCore (~> 0.7.7)
+    - IosAwnCore (~> 0.8.0)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -156,8 +156,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
 
 SPEC CHECKSUMS:
-  awesome_notifications: ed4a1fc51472a08eb14849d03ba0b27dd170e7a2
-  awesome_notifications_fcm: dbca1bd93ed91d669d085859e47caad731f09f01
+  awesome_notifications: db394d2e061e4583ba0f738ddea611e3986cc3fb
+  awesome_notifications_fcm: 554a9088f81a91dbe8a318abee6b48f43e4a9417
   Firebase: 66043bd4579e5b73811f96829c694c7af8d67435
   firebase_core: 77172d0a9d8d19d07606e24406e4c2fc14d3265b
   firebase_crashlytics: 4365238d33a7a43164f1049f892365de4aee999f
@@ -172,8 +172,8 @@ SPEC CHECKSUMS:
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
-  IosAwnCore: e80c4c73e642d0ee37ec1db5b8341a3a73a5217f
-  IosAwnFcmDist: 29cd6baf957f79bd320a6a8168e6205309571555
+  IosAwnCore: ed1b2b6d84962a758354dbacd9ce525c72ce28a9
+  IosAwnFcmDist: 0ac4da8f9ef8f2db9e5ec5d0c10c8db793ce447d
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4

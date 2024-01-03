@@ -106,7 +106,7 @@ Add the plugins below as dependencies in your `pubspec.yaml` file. By using the 
 
 ```yaml
   # Awesome plugins
-  awesome_notifications_core: ^0.7.6 # use the latest available
+  awesome_notifications_core: ^0.8.0 # use the latest version available
   awesome_notifications: any # <- this version will be managed by core plugin
   awesome_notifications_fcm: any # <- this version will be managed by core plugin
   
@@ -647,8 +647,8 @@ You don't need a real server to send push notifications during the development s
 
 Download and import the Postman projects/collections below into your Postman. Make sure to replace the collection variables according to your Firebase project keys and your devices' tokens:
 
-[V1 FMC Examples.postman_collection.json](https://github.com/rafaelsetragni/awesome_notifications_fcm/blob/9b4aefdd4f55156db768f8dfc35263c03c869c41/example/assets/readme/V1%20FMC%20Examples.postman_collection.json)<br>
-[Legacy FMC Examples.postman_collection.json](https://github.com/rafaelsetragni/awesome_notifications_fcm/blob/9b4aefdd4f55156db768f8dfc35263c03c869c41/example/assets/readme/Legacy%20FMC%20Examples.postman_collection.json)
+[V1 FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/V1%20FMC%20Examples.postman_collection.json)<br>
+[Legacy FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/Legacy%20FMC%20Examples.postman_collection.json)
 
 
 ***Note:*** To use the V1 protocol on Postman, you'll need to generate a fresh token using the [Google Developers OAuth 2.0 Playground](https://developers.google.com/oauthplayground/). To generate it, follow the steps bellow:
@@ -747,7 +747,7 @@ However, to use Awesome Notifications FCM in release mode without the [DEMO] wat
 The license key is priced at **$10/App**, offering you:
 
 - Push Notifications without a watermark
-- One license key, expandable to five ID variations (flavors)
+- One license key, expandable to 5 ID variations (flavors and minor changes)
 - Perpetual licenses
 - One year of exclusive support on Discord
 - One year of free updates
