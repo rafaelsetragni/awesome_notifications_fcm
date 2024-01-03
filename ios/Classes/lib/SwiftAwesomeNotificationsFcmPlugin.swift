@@ -47,7 +47,9 @@ public class SwiftAwesomeNotificationsFcmPlugin:
         awesomeNotificationsFcm!.subscribeOnAwesomeFcmEvents(listener: self)
         
         registrar.addMethodCallDelegate(self, channel: self.flutterChannel!)
-        registrar.addApplicationDelegate(self)
+        if !SwiftUtils.isRunningOnExtension() {
+            registrar.addApplicationDelegate(self)
+        }
         
         loadExternalExtensions(usingFlutterRegistrar: registrar)
     }

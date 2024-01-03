@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		050D91462AC4B95F0062F50B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050D91452AC4B95F0062F50B /* NotificationService.swift */; };
 		050D914A2AC4B95F0062F50B /* AwesomeNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 050D91432AC4B95E0062F50B /* AwesomeNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		05F6FF312B42E6790062D5C2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 05F6FF302B42E6790062D5C2 /* Localizable.xcstrings */; };
+		05F6FF322B42E6790062D5C2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 05F6FF302B42E6790062D5C2 /* Localizable.xcstrings */; };
 		126303DDE5F5B96D678F82C8 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AE46F57FEE038F96844C7A3 /* Pods_Runner.framework */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
@@ -55,6 +57,7 @@
 		0572040328DBC2D800816146 /* IosAwnCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IosAwnCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0572040728DBC2E300816146 /* IosAwnCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IosAwnCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0572040E28DBC3AE00816146 /* IosAwnFcmCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IosAwnFcmCore.framework; path = ../../../IosAwnFcmCoreDist/IosAwnFcmCore.framework; sourceTree = "<group>"; };
+		05F6FF302B42E6790062D5C2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		0AE46F57FEE038F96844C7A3 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
 				C767DD7A2822432E0011C179 /* GoogleService-Info.plist */,
+				05F6FF302B42E6790062D5C2 /* Localizable.xcstrings */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -273,6 +277,14 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
+				ko,
+				"zh-HK",
+				es,
+				"pt-PT",
+				"zh-Hant",
+				"zh-Hans",
+				de,
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
@@ -290,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05F6FF322B42E6790062D5C2 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +312,7 @@
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
+				05F6FF312B42E6790062D5C2 /* Localizable.xcstrings in Resources */,
 				C767DD7B2822432E0011C179 /* GoogleService-Info.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
@@ -474,7 +488,7 @@
 				INFOPLIST_FILE = AwesomeNotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = AwesomeNotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -484,6 +498,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-D TARGET_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = me.carda.awesomeNotificationsFcmExample.AwesomeNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -519,7 +534,7 @@
 				INFOPLIST_FILE = AwesomeNotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = AwesomeNotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -528,6 +543,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-D TARGET_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = me.carda.awesomeNotificationsFcmExample.AwesomeNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -561,7 +577,7 @@
 				INFOPLIST_FILE = AwesomeNotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = AwesomeNotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -570,6 +586,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-D TARGET_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = me.carda.awesomeNotificationsFcmExample.AwesomeNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

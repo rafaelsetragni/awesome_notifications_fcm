@@ -246,7 +246,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
                   /* ******************************************************************** */
 
-                  TextDivisor(title: 'Translation Methods'),
+                  TextDivisor(title: 'Localization 🈳🈂️'),
                   SimpleButton('Set language to English 🇺🇸',
                       onPressed: () => NotificationController.setLanguageCode('en')
                   ),
@@ -254,7 +254,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       onPressed: () => NotificationController.setLanguageCode('pt-br')
                   ),
                   SimpleButton('Set language to Portuguese 🇵🇹',
-                      onPressed: () => NotificationController.setLanguageCode('pt')
+                      onPressed: () => NotificationController.setLanguageCode('pt-pt')
                   ),
                   SimpleButton('Set language to Korean 🇰🇷',
                       onPressed: () => NotificationController.setLanguageCode('ko')
@@ -264,6 +264,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   ),
                   SimpleButton('Set language to Spanish 🇪🇸',
                       onPressed: () => NotificationController.setLanguageCode('es')
+                  ),
+                  SimpleButton('Set language to German 🇩🇪',
+                      onPressed: () => NotificationController.setLanguageCode('de')
                   ),
                   SimpleButton('Reset language to app defaults',
                       backgroundColor: Colors.red,
@@ -291,8 +294,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                               context: context,
                               id: 3,
                               channelKey: 'alerts',
-                              largeIconUrl: '',
-                              bigPictureUrl: '')),
+                              largeIconUrl: 'https://br.web.img3.acsta.net/pictures/19/06/18/17/09/0834720.jpg',
+                              bigPictureUrl: 'https://www.dw.com/image/49519617_303.jpg',
+                          )),
 
                   /* ******************************************************************** */
 
