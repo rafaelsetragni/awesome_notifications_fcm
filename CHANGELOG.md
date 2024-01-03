@@ -1,10 +1,27 @@
+## [0.9.0] - 12/29/2023
+### Breaking Changes
+- **Pod Modifications:** It's now necessary to add the Awesome Notifications pod modification inside the `Podfile` in the iOS folder.
+- **Receive Port and Send Port:** The methods `sendPort.send()` and `receivePort!.listen()` now only accept serialized data, not objects. Convert your data to map format and reconstruct it later from this format.
+- **License Key (Year 2):** With the start of year 2 support for the Awesome Notifications suite, updating your license keys is required. If your purchase was made less than 1 year ago, you're still under the 1-year purchase support and simply need to reply to the license email requesting a free update.
+
+### Improvements
+- **Flutter 3.16.0 Compatibility:** Fully supporting the latest Flutter 3.16.0, ensuring compatibility and optimal performance.
+- **Flattened Data Standard:** Introducing a new method for sending notifications using the V1 protocol without the need for Stringify. This streamlined approach simplifies the notification-sending process.
+- **Full Firebase Console Support:** Leverage all features of Awesome Notifications directly via the Firebase console using the new flattened data standard, enhancing flexibility and control.
+- **Postman Examples Updated with Flattened Standard:** All Postman examples have been updated to incorporate the new flattened data standard, while maintaining support for all other previous push patterns.
+
+### Enhancements
+- **Dependencies Updated:** All project dependencies have been upgraded to their latest versions, ensuring the most secure, stable, and efficient operation.
+- **Refreshed Documentation:** Comprehensive updates to our documentation make integrating and using Awesome Notifications clearer and more straightforward.
+
+
 ## [0.8.0]
 ### Fixed
-- All library dependencies updated and bumped to version to 0.8.0 to emphasize the necessity of keeping dependencies up to date at project lock files.
+* All library dependencies updated and bumped to version to 0.8.0 to emphasize the necessity of keeping dependencies up to date at project lock files.
 
 ## [0.7.6]
 ### Fixed
-- Corrected the Postman example links.
+* Corrected the Postman example links.
 
 ## [0.7.5]
 ### Added
