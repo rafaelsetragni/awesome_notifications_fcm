@@ -1,4 +1,9 @@
-## [0.9.0] - 12/29/2023
+## [0.9.1] - 01/04/2024
+### Enhancements & Fixes
+- **iOS Target Extension Deployment Flexibility:** Updated the iOS pod script to enable manual adjustments of the minimum target deployment. This improvement offers greater control and customization to developers in line with their specific iOS deployment needs.
+- **Expanded Documentation on Data Standards:** Enhanced the documentation to provide comprehensive guidance on the three distinct data standards available for crafting push notifications via FCM. This update aims to clarify and streamline the notification creation process for developers.
+
+## [0.9.0] - 01/02/2024
 ### Breaking Changes
 - **Pod Modifications:** It's now necessary to add the Awesome Notifications pod modification inside the `Podfile` in the iOS folder.
 - **Receive Port and Send Port:** The methods `sendPort.send()` and `receivePort!.listen()` now only accept serialized data, not objects. Convert your data to map format and reconstruct it later from this format.
