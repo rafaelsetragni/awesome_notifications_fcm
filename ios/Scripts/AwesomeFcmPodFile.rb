@@ -31,7 +31,6 @@ def update_awesome_fcm_service_target(target_name, xcodeproj_path, flutter_root)
 
      target.build_configurations.each do |config|
          config.build_settings['ENABLE_BITCODE'] = 'NO'
-         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
          config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'YES'
          config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'NO'
          config.build_settings['OTHER_SWIFT_FLAGS'] = '-D TARGET_EXTENSION'
