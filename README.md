@@ -543,8 +543,9 @@ Send this token to your backend server and this way you got the "device address"
 
 <br>
 
-To utilize all the features available in the legacy protocol when sending push notifications with Awesome Notifications, adhere to the standard below. Note that the Android and iOS sections are optional:
+To utilize all the features available when sending push notifications with Awesome Notifications, you can use one of the 3 standards available:
 
+Json data standard (Legacy protocol):
 ```Json
 {
     "to" : "{{fcm_token_ios}}",
@@ -619,9 +620,42 @@ To utilize all the features available in the legacy protocol when sending push n
 }
 ```
 
-To sending the same content via the V1 protocol, you need to use the flattened data standard. 
-OBS: The expected type in data section is `Map<String, String>`.
+Stringify data standard (V1 protocol):
 
+OBS: The expected type in data section is `Map<String, String>`.
+```Json
+{
+    "message": {
+        "token": "{{fcm_token_ios}}",
+        "android": {
+            "priority": "high"
+        },
+        "apns": {
+            "payload": {
+                "aps": {
+                    "mutable-content": 1,
+                    "badge": 15
+                },
+                "headers": {
+                    "apns-priority": 5
+                }
+            }
+        },
+        "notification": {
+            "title": "Huston! The eagle has landed!",
+            "body": "A small step for a man, but a giant leap to Flutter's community!"
+        },
+        "data": {
+            "content": "{\"id\":-1,\"badge\":1,\"channelKey\":\"alerts\",\"displayOnForeground\":true,\"notificationLayout\":\"BigPicture\",\"largeIcon\":\"https://br.web.img3.acsta.net/pictures/19/06/18/17/09/0834720.jpg\",\"bigPicture\":\"https://www.dw.com/image/49519617_303.jpg\",\"showWhen\":true,\"autoDismissible\":true,\"privacy\":\"Private\",\"payload\":{\"category\":\"like\",\"userId\":\"oUGw1AHfmkQPDuP9DOAT1J0iQ1X2\",\"ownerId\":\"AppleBoy\",\"notifId\":\"liked_279f33c9-9c58-4099-940b-06a463a9d929\",\"pageId\":\"notifsPage\",\"gameAction\":\"\"}}",
+            "actionButtons": "[{\"key\":\"REDIRECT\",\"label\":\"Redirect\",\"autoDismissible\":true},{\"key\":\"CANCEL\",\"label\":\"Dismiss\",\"actionType\":\"DismissAction\",\"isDangerousOption\":true,\"autoDismissible\":true}]"
+        }
+    }
+}
+```
+
+Flattened data standard (V1 protocol):
+
+OBS: The expected type in data section is `Map<String, String>`.
 
 ```Json
 {
@@ -683,18 +717,27 @@ OBS: The expected type in data section is `Map<String, String>`.
 }
 ```
 
+To send FCM V1 push notifications using Postman, you gonna need to request a valid bearer token using [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/):
+
+1. Access [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/).
+2. Choose on Step 1 "Firebase Cloud Messaging API v1" > "https://www.googleapis.com/auth/cloud-platform" then click on "Authorize API"
+3. On Step 2, click over "Exchange authorization code for tokens"
+4. Now just copy the Access Token value and set it as a Bearer Token validation at your Postman requests. In case the access token expires, just request a new one pressing the "Refresh access token" button
+
 ## Using the Firebase Cloud Messaging (Web Console)
 
 <br>
 
 To send notifications using the Firebase cloud message console, you basically need to send the flattened data standard via data section:
 
-1 - Access [Firebase Console](https://console.firebase.google.com/), choose your project or create a new one and go to Messaging section.
-2 - Create a new test message or campaign message.
-3 - Set all fields required until the section 5 (Additional options). You can also test your notification using the button "Send test message", adding the FCM token returned by `AwesomeNotificationsFcm().requestFirebaseAppToken();`.
-4 - At the section 2 (Target), choose the Apps or topics which will receive the notification. The devices need to have at least a valid FCM token and to be subscribed previously in the topic.
-5 - At the section 3 (schedule), set it to `now` or define a future time greater than 10 seconds from now.
-6 - At the section 5 (additional options), you can set the Custom data using the Flattened standard.
+1. Access [Firebase Console](https://console.firebase.google.com/), choose your project or create a new one and go to Messaging section.
+2. Create a new test message or campaign message.
+3. Set all fields required until the section 5 (Additional options). You can also test your notification using the button "Send test message", adding the FCM token returned by `AwesomeNotificationsFcm().requestFirebaseAppToken();`.
+4. At the section 2 (Target), choose the Apps or topics which will receive the notification. The devices need to have at least a valid FCM token and to be subscribed previously in the topic.
+5. At the section 3 (schedule), set it to `now` or define a future time greater than 10 seconds from now.
+6. At the section 5 (additional options), you can set the Custom data using the Flattened standard.
+
+![image](https://github.com/rafaelsetragni/awesome_notifications_fcm/blob/main/example/assets/readme/Awesome_Notifications_FCM-Firebase_console.png?raw=true)
 
 TIP: After edit all fields, save as a Draft and reopen again for edition. Then go back to step 1 and send a test message with all features available.
 
