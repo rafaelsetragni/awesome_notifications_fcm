@@ -1,4 +1,4 @@
-# Awesome Notifications FCM
+# Awesome Notifications FCM - Year 2
 
 ![image](https://user-images.githubusercontent.com/40064496/194728018-8ab6821c-d59d-4b1f-972c-57464c9b9aec.png)
 
@@ -106,7 +106,7 @@ Add the plugins below as dependencies in your `pubspec.yaml` file. By using the 
 
 ```yaml
   # Awesome plugins
-  awesome_notifications_core: ^0.7.6 # use the latest available
+  awesome_notifications_core: ^0.9.0 # use the latest version available
   awesome_notifications: any # <- this version will be managed by core plugin
   awesome_notifications_fcm: any # <- this version will be managed by core plugin
   
@@ -200,7 +200,47 @@ A - You need to change the order of your build phases, moving the `Embed App Ext
 
 4 - Now, it’s time to include the `Flutter` and `Awesome Notifications FCM` libraries in your *Notification Service Extension*. To achieve this, modify your "PodFile", appending the lines below at the file's end. Remember to replace the two instances of `MyAppServiceExtension` with the name of your service extension:
 
-```Ruby
+**Original `Podfile` Configuration:**
+```rb
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      flutter_additional_ios_build_settings target
+    end
+  
+    ################  Awesome Notifications pod modification 1 ###################
+    awesome_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications', 'ios', 'Scripts', 'AwesomePodFile'), '.symlinks')
+    require awesome_pod_file
+    update_awesome_pod_build_settings(installer)
+    ################  Awesome Notifications pod modification 1 ###################
+  end
+  
+  ################  Awesome Notifications pod modification 2 ###################
+  awesome_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications', 'ios', 'Scripts', 'AwesomePodFile'), '.symlinks')
+  require awesome_pod_file
+  update_awesome_main_target_settings('Runner', File.dirname(File.realpath(__FILE__)), flutter_root)
+  ################  Awesome Notifications pod modification 2 ###################
+```
+
+**Modified `Podfile` with Awesome Notifications FCM Configurations:**
+```rb
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+  end
+
+  ################  Awesome Notifications pod modification 1  ###################
+  awesome_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications', 'ios', 'Scripts', 'AwesomePodFile'), '.symlinks')
+  require awesome_pod_file
+  update_awesome_pod_build_settings(installer)
+  ################  Awesome Notifications pod modification 1  ###################
+end
+
+################  Awesome Notifications pod modification 2  ###################
+awesome_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications', 'ios', 'Scripts', 'AwesomePodFile'), '.symlinks')
+require awesome_pod_file
+update_awesome_main_target_settings('Runner', File.dirname(File.realpath(__FILE__)), flutter_root)
+################  Awesome Notifications pod modification 2  ###################
+
 ################  Awesome Notifications FCM pod mod  ###################
 awesome_fcm_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications_fcm', 'ios', 'Scripts', 'AwesomeFcmPodFile'), '.symlinks')
 require awesome_fcm_pod_file
@@ -213,7 +253,8 @@ end
 update_awesome_fcm_service_target('MyAppServiceExtension', File.dirname(File.realpath(__FILE__)), flutter_root)
 ################  Awesome Notifications FCM pod mod  ###################
 ```
-Then execute the command `pod install` to update your target extension.
+
+Then execute the command `pod install` inside your ios folder to update your target extension.
 
 <br>
 
@@ -498,15 +539,6 @@ Send this token to your backend server and this way you got the "device address"
 
 # 📣 Sending Push Notifications
 
-## Using the Firebase Portal
-
-<br>
-
-To send notifications using the Firebase console, follow this excellent tutorial:
-[Complete guide on sending Push using Firebase Cloud Messaging Console](https://enappd.com/blog/sending-push-using-firebase-console/35/)
-
-<br>
-
 ## ✉️ Using Your Backend Server or Postman
 
 <br>
@@ -587,7 +619,8 @@ To utilize all the features available in the legacy protocol when sending push n
 }
 ```
 
-For sending the same content via the V1 protocol, transform each value inside the data section into a JSON encoded String. The expected data type is a String:String map.
+To sending the same content via the V1 protocol, you need to use the flattened data standard. 
+OBS: The expected type in data section is `Map<String, String>`.
 
 
 ```Json
@@ -601,7 +634,7 @@ For sending the same content via the V1 protocol, transform each value inside th
       "payload": {
         "aps": {
           "mutable-content": 1,
-          "badge": 42,
+          "badge": 42
         },
         "headers": {
           "apns-priority": "5"
@@ -614,14 +647,59 @@ For sending the same content via the V1 protocol, transform each value inside th
         "body": "A small step for a man, but a giant leap to Flutter's community!"
     },
     "data" : {
-        "content": "{\"id\":1,\"badge\":42,\"channelKey\":\"alerts\",\"displayOnForeground\":true,\"notificationLayout\":\"BigPicture\",\"largeIcon\":\"https://br.web.img3.acsta.net/pictures/19/06/18/17/09/0834720.jpg\",\"bigPicture\":\"https://www.dw.com/image/49519617_303.jpg\",\"showWhen\":true,\"autoDismissible\":true,\"privacy\":\"Private\",\"payload\":{\"secret\":\"AwesomeNotificationsRocks!\"}}",
-        "actionButtons": "[{\"key\":\"REDIRECT\",\"label\":\"Redirect\",\"autoDismissible\":true},{\"key\":\"DISMISS\",\"label\":\"Dismiss\",\"actionType\":\"DismissAction\",\"isDangerousOption\":true,\"autoDismissible\":true}]"],
-        "Android": "{\"content\":{\"title\":\"Android!Theeaglehaslanded!\",\"payload\":{\"android\":\"androidcustomcontent!\"}}}",
-        "iOS": "{\"content\":{\"title\":\"Jobs!Theeaglehaslanded!\",\"payload\":{\"ios\":\"ioscustomcontent!\"}},\"actionButtons\":[{\"key\":\"REDIRECT\",\"label\":\"Redirectmessage\",\"autoDismissible\":true},{\"key\":\"DISMISS\",\"label\":\"Dismissmessage\",\"actionType\":\"DismissAction\",\"isDangerousOption\":true,\"autoDismissible\":true}]}"
+       "content.id": "1",
+       "content.badge": "42",
+       "content.channelKey": "alerts",
+       "content.displayOnForeground": "true",
+       "content.notificationLayout": "BigPicture",
+       "content.largeIcon": "https://br.web.img3.acsta.net/pictures/19/06/18/17/09/0834720.jpg",
+       "content.bigPicture": "https://www.dw.com/image/49519617_303.jpg",
+       "content.showWhen": "true",
+       "content.autoDismissible": "true",
+       "content.privacy": "Private",
+       "content.payload.secret": "Awesome Notifications Rocks!",
+       "actionButtons.0.key": "REDIRECT",
+       "actionButtons.0.label": "Redirect",
+       "actionButtons.0.autoDismissible": "true",
+       "actionButtons.1.key": "DISMISS",
+       "actionButtons.1.label": "Dismiss",
+       "actionButtons.1.actionType": "DismissAction",
+       "actionButtons.1.isDangerousOption": "true",
+       "actionButtons.1.autoDismissible": "true",
+       "Android.content.title": "Android! The eagle has landed!",
+       "Android.content.payload.android": "android custom content!",
+       "iOS.content.title": "Jobs! The eagle has landed!",
+       "iOS.content.payload.ios": "iOS custom content!",
+       "iOS.actionButtons.0.key": "REDIRECT",
+       "iOS.actionButtons.0.label": "Redirect message",
+       "iOS.actionButtons.0.autoDismissible": "true",
+       "iOS.actionButtons.1.key": "DISMISS",
+       "iOS.actionButtons.1.label": "Dismiss message",
+       "iOS.actionButtons.1.actionType": "DismissAction",
+       "iOS.actionButtons.1.isDangerousOption": "true",
+       "iOS.actionButtons.1.autoDismissible": "true"
     }
   }
 }
 ```
+
+## Using the Firebase Cloud Messaging (Web Console)
+
+<br>
+
+To send notifications using the Firebase cloud message console, you basically need to send the flattened data standard via data section:
+
+1 - Access [Firebase Console](https://console.firebase.google.com/), choose your project or create a new one and go to Messaging section.
+2 - Create a new test message or campaign message.
+3 - Set all fields required until the section 5 (Additional options). You can also test your notification using the button "Send test message", adding the FCM token returned by `AwesomeNotificationsFcm().requestFirebaseAppToken();`.
+4 - At the section 2 (Target), choose the Apps or topics which will receive the notification. The devices need to have at least a valid FCM token and to be subscribed previously in the topic.
+5 - At the section 3 (schedule), set it to `now` or define a future time greater than 10 seconds from now.
+6 - At the section 5 (additional options), you can set the Custom data using the Flattened standard.
+
+TIP: After edit all fields, save as a Draft and reopen again for edition. Then go back to step 1 and send a test message with all features available.
+
+<br>
+<br>
 
 ## 🤐 Sending Silent Push Notifications
 
@@ -629,17 +707,99 @@ To send silent push notifications, avoid using the "notification" section. Use "
 
 ```Json
 {
-    "to" : "{{fcm_token_ios}}",
-    "content_available": true,
-    "priority": "high",
-    "data" : {
+   "message": {
+      "token": "{{fcm_token_ios}}",
+      "apns": {
+         "payload": {
+            "aps": {
+               "content-available": 1
+            }
+         }
+      },
+      "data": {
         "data1": "fb787aa2-6387-4f65-a5a2-125f96ab4c14",
         "data2": "call_voice",
         "data3": "3c3079b7-ab5e-48a5-8c61-b64ebb4910a9",
-        "data4": "5469846578",
-    }
+        "data4": "5469846578"
+      }
+   }
 }
 ```
+
+<br>
+<br>
+
+## 🛰️ Sending RPC (Remote Procedure Calls) for Notification Management
+
+You can remotely control your app's notifications using RPC (Remote Procedure Calls). This feature allows you to dismiss notifications, cancel scheduled notifications, or cancel notifications entirely. Below are the instructions and the distinctions between each action:
+
+### JSON Structure for RPC Commands
+
+Use the following JSON structure to send commands:
+
+```Json
+{
+   "message": {
+      "token": "{{fcm_token_android}}",
+      "apns": {
+         "payload": {
+            "aps": {
+               "content-available": 1
+            }
+         }
+      },
+      "data": {
+         "dismiss": "1,2,42",
+         "dismissByChannel": "channel1,channel_voice",
+         "dismissByGroup": "group1,group2",
+         "dismissAll": "true",
+         "cancelSchedule": "1,2,42",
+         "cancelScheduleByChannel": "channel1,channel_voice",
+         "cancelScheduleByGroup": "group1,group2",
+         "cancelAllSchedules": "true",
+         "cancelNotification": "1,2,42",
+         "cancelNotificationByChannel": "channel1,channel_voice",
+         "cancelNotificationByGroup": "group1,group2",
+         "cancelAllNotifications": "true",
+         "dontCallFlutter": "true"
+      }
+   }
+}
+```
+
+### Explanation of Commands
+
+1. **Dismiss Notifications:**
+   - These commands remove notifications from the notification tray without affecting any scheduled notifications.
+   - `dismiss`: Dismiss specific notifications by ID.
+   - `dismissByChannel`: Dismiss notifications by channel.
+   - `dismissByGroup`: Dismiss notifications by group.
+   - `dismissAll`: Dismiss all notifications.
+
+2. **Cancel Scheduled Notifications:**
+   - These commands cancel scheduled notifications but do not affect notifications already displayed.
+   - `cancelSchedule`: Cancel specific scheduled notifications by ID.
+   - `cancelScheduleByChannel`: Cancel scheduled notifications by channel.
+   - `cancelScheduleByGroup`: Cancel scheduled notifications by group.
+   - `cancelAllSchedules`: Cancel all scheduled notifications.
+
+3. **Cancel Notifications (Including Schedules):**
+   - These commands cancel both displayed notifications and their schedules.
+   - `cancelNotification`: Cancel specific notifications and their schedules by ID.
+   - `cancelNotificationByChannel`: Cancel notifications and their schedules by channel.
+   - `cancelNotificationByGroup`: Cancel notifications and their schedules by group.
+   - `cancelAllNotifications`: Cancel all notifications and their schedules.
+
+### Silent Push Notifications
+
+- To send silent pushes without triggering the Flutter silent callback, set `dontCallFlutter` to `true`.
+- This feature is useful for background updates or when you want to manage notifications silently.
+
+By using these RPC commands, you can effectively manage the notification lifecycle in your application, ensuring a seamless user experience.
+
+
+<br>
+<br>
 
 ## Using REST Programs
 
@@ -647,8 +807,8 @@ You don't need a real server to send push notifications during the development s
 
 Download and import the Postman projects/collections below into your Postman. Make sure to replace the collection variables according to your Firebase project keys and your devices' tokens:
 
-[V1 FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/V1%20FMC%20Examples.postman_collection.json)<br>
-[Legacy FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/Legacy%20FMC%20Examples.postman_collection.json)
+[V1 FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/Firebase_FCM_V1_Example.postman_collection.json)<br>
+[Legacy FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/Firebase_FCM_Example.postman_collection.json)
 
 
 ***Note:*** To use the V1 protocol on Postman, you'll need to generate a fresh token using the [Google Developers OAuth 2.0 Playground](https://developers.google.com/oauthplayground/). To generate it, follow the steps bellow:
@@ -734,26 +894,49 @@ Following these steps will ensure a smooth transition from firebase_messaging to
 <br>
 
 
-# 🔑 License Key
+# 🔑 License Key - Year 2
 
-![image](https://user-images.githubusercontent.com/40064496/196968996-c5b5a11c-db47-4450-b698-a28984fb8e2b.png)
+Local notifications using [Awesome Notifications](https://pub.dev/packages/awesome_notifications) remain 100% free. For using push notifications in [Awesome Notifications FCM](https://pub.dev/packages/awesome_notifications_fcm), two types of license keys are available, each catering to different needs.
 
-Local notifications using [Awesome Notifications](https://pub.dev/packages/awesome_notifications) are always 100% free. Additionally, you can test all push notification features on [Awesome Notifications FCM](https://pub.dev/packages/awesome_notifications_fcm) for free, forever.
+## Common Features
 
-However, to use Awesome Notifications FCM in release mode without the [DEMO] watermark, a license key is required. This key is an RSA digital signature, validated with private and public keys in conjunction with plugin versioning and your App ID/Bundle ID. Once generated for your app, it's permanent, never expiring, and doesn't require an internet connection for validation.
+Both licenses share these attributes:
 
-## Pricing and Benefits
+- **No Watermarks:** Enjoy push notifications without any watermarks.
+- **Perpetual Validity:** License keys never expire.
+- **Offline Validation:** No internet connection needed for license validation.
+- **Expandable:** Each key is expandable to 5 ID variations (flavors and minor changes).
 
-The license key is priced at **$10/App**, offering you:
+## License Types
 
-- Push Notifications without a watermark
-- One license key, expandable to five ID variations (flavors)
-- Perpetual licenses
-- One year of exclusive support on Discord
-- One year of free updates
+### 1. Basic License - Single Plugin Version
 
-By purchasing a license key, you contribute a small fee to assist in the plugin's evolution, helping us acquire new testing devices, hire additional developers, and more.
+**Price:** $5/App
+
+This license is ideal for those who need a cost-effective solution for only a single and specific plugin version. 
+
+**Benefits:**
+
+- Valid for a single library version.
+- Requires a new license for updates or new releases.
+
+### 2. Premium License - Full 1 Year Support
+
+**Price:** $10/App
+
+This license is designed for those seeking ongoing support and updates.
+
+**Benefits:**
+
+- All features of the Basic License.
+- **1 Year of Free Updates:** Use the same license key for all new plugin releases for one year from the purchase date.
+- **Exclusive Discord Support:** Receive dedicated support for one year.
+
+## Contributing to Development
+
+Your purchase contributes to the plugin's development, enabling us to acquire new testing devices, hire additional developers, and more.
 
 ## Purchasing a License Key
 
-Our portal for purchasing and managing license keys is in its final development stages. In the meantime, to acquire a license key, please contact us on our [Discord community](https://discord.awesome-notifications.carda.me).
+Our portal for purchasing and managing license keys is in its final development stages. For now, to acquire a license key, please contact us on our [Discord community](https://discord.awesome-notifications.carda.me).
+

@@ -61,7 +61,9 @@ public class AwesomeNotificationsFcm:
             return true
         }
         
-        UIApplication.shared.registerForRemoteNotifications()
+        if !SwiftUtils.isRunningOnExtension() {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
         
         AwesomeNotificationsFcm.debug = debug
 
@@ -75,7 +77,10 @@ public class AwesomeNotificationsFcm:
             Logger.shared.d(TAG, "iOS App Group: \(Definitions.USER_DEFAULT_TAG)")
         }
 
-        _ = try !LicenseManager.shared.isLicenseKeyValid()
+        let validated = try LicenseManager.shared.isLicenseKeyValid()
+        if validated {
+             Logger.shared.d(TAG,"Awesome Notification's license key validated")
+        }
 
         isInitialized = true
         return true
