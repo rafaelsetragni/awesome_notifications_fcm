@@ -47,7 +47,9 @@ public class SwiftAwesomeNotificationsFcmPlugin:
         awesomeNotificationsFcm!.subscribeOnAwesomeFcmEvents(listener: self)
         
         registrar.addMethodCallDelegate(self, channel: self.flutterChannel!)
-        registrar.addApplicationDelegate(self)
+        if !SwiftUtils.isRunningOnExtension() {
+            registrar.addApplicationDelegate(self)
+        }
         
         loadExternalExtensions(usingFlutterRegistrar: registrar)
     }
@@ -96,7 +98,7 @@ public class SwiftAwesomeNotificationsFcmPlugin:
                 application,
                 didReceiveRemoteNotification: userInfo,
                 fetchCompletionHandler: { backgroundFetchResult in
-                    Logger.d(SwiftAwesomeNotificationsFcmPlugin.TAG, "didReceiveRemoteNotification completed with \(backgroundFetchResult)")
+                    Logger.shared.d(SwiftAwesomeNotificationsFcmPlugin.TAG, "didReceiveRemoteNotification completed with \(backgroundFetchResult)")
                     completionHandler(backgroundFetchResult)
                 }) ?? false
     }

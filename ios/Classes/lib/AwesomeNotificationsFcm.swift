@@ -61,7 +61,9 @@ public class AwesomeNotificationsFcm:
             return true
         }
         
-        UIApplication.shared.registerForRemoteNotifications()
+        if !SwiftUtils.isRunningOnExtension() {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
         
         AwesomeNotificationsFcm.debug = debug
 
@@ -71,11 +73,14 @@ public class AwesomeNotificationsFcm:
         FcmDefaultsManager.shared.licenseKeys = licenseKeys
 
         if AwesomeNotificationsFcm.debug {
-            Logger.d(TAG, "Awesome Notifications FCM service initialized")
-            Logger.d(TAG, "iOS App Group: \(Definitions.USER_DEFAULT_TAG)")
+            Logger.shared.d(TAG, "Awesome Notifications FCM service initialized")
+            Logger.shared.d(TAG, "iOS App Group: \(Definitions.USER_DEFAULT_TAG)")
         }
 
-        _ = try !LicenseManager.shared.isLicenseKeyValid()
+        let validated = try LicenseManager.shared.isLicenseKeyValid()
+        if validated {
+             Logger.shared.d(TAG,"Awesome Notification's license key validated")
+        }
 
         isInitialized = true
         return true
@@ -155,7 +160,7 @@ public class AwesomeNotificationsFcm:
         //Messaging.messaging().delegate = self
 
         if AwesomeNotificationsFcm.debug {
-            Logger.d(TAG, "Awesome Notifications FCM attached to iOS")
+            Logger.shared.d(TAG, "Awesome Notifications FCM attached to iOS")
         }
     }
 
@@ -215,7 +220,7 @@ public class AwesomeNotificationsFcm:
         Messaging.messaging().subscribe(toTopic: topic, completion: { [self] error in
             let success:Bool = error == nil
             if AwesomeNotificationsFcm.debug {
-                Logger.d(TAG,
+                Logger.shared.d(TAG,
                          success ?
                              "Subscribed to topic \(topic)" :
                              "Topic \(topic) subscription failed")
@@ -245,7 +250,7 @@ public class AwesomeNotificationsFcm:
         Messaging.messaging().unsubscribe(fromTopic: topic, completion: { [self] error in
             let success:Bool = error == nil
             if AwesomeNotificationsFcm.debug {
-                Logger.d(TAG,
+                Logger.shared.d(TAG,
                          success ?
                              "Unsubscribed from topic \(topic)" :
                              "Topic \(topic) unsubscription failed")

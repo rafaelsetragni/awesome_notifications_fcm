@@ -1,4 +1,4 @@
-# Awesome Notifications FCM
+# Awesome Notifications FCM - Year 2
 
 ![image](https://user-images.githubusercontent.com/40064496/194728018-8ab6821c-d59d-4b1f-972c-57464c9b9aec.png)
 
@@ -12,24 +12,6 @@
 [![pub package](https://img.shields.io/pub/v/awesome_notifications_fcm.svg)](https://pub.dev/packages/awesome_notifications_fcm)
 
 Awesome Notifications add-on to send push notifications using FCM (Firebase Cloud Messaging), with all awesome notifications features.
-
-<br>
-<br>
-
----
-
-# 🔺 Disclaimer 🔺
-
-This version is currently in its ***pre-release*** stage. That means it's under active development, and the features, functionality, and implementation details are subject to change.
-
-While we're doing our best to ensure a smooth experience, you might encounter bugs or issues that we haven't yet identified. We highly encourage users to provide feedback, report bugs, or make feature suggestions to help us improve.
-
-If you're interested in contributing to this project's development and want to have an impact on its future, we'd love for you to join our beta testing program at:
-[https://discord.com/channels/888523488376279050/933445281243082772](https://discord.com/channels/888523488376279050/933445281243082772)
-
-By joining the beta testing program, you can help us make this project the best it can be. We appreciate your interest and support, and we look forward to seeing you on Discord!
-
----
 
 <br>
 <br>
@@ -74,9 +56,9 @@ To migrate **firebase_messaging** to **awesome_notifications_fcm**, please take 
 <br>
 <br>
 
-# 💰 Donate via Stripe or BuyMeACoffee
+# 💰 Support Us with a Donation
+You can make a significant difference by contributing any amount via Stripe or BuyMeACoffee. Your generous donation will primarily fund the procurement of new devices and equipment, enabling us to rigorously test and guarantee the seamless functionality of our plugins across all platforms and versions. Join us in enhancing and sustaining the quality of our work. Your support is invaluable!
 
-Help us improve and maintain our work with donations of any amount via Stripe or BuyMeACoffee. Your donation will mainly be used to purchase new devices and equipment, which we will use to test and ensure that our plugins work correctly on all platforms and their respective versions.
 
 [*![Donate With Stripe](https://github.com/rafaelsetragni/awesome_notifications/blob/68c963206885290f8a44eee4bfc7e7b223610e4a/example/assets/readme/stripe.png?raw=true)*](https://donate.stripe.com/3cs14Yf79dQcbU4001)
 [*![Donate With Buy Me A Coffee](https://github.com/rafaelsetragni/awesome_notifications/blob/95ee986af0aa59ccf9a80959bbf3dd60b5a4f048/example/assets/readme/buy-me-a-coffee.jpeg?raw=true)*](https://www.buymeacoffee.com/rafaelsetragni)
@@ -98,11 +80,15 @@ Stay up to date with new updates and get community support by subscribing to our
 
 # 📝 Important initial notes
 
-1. This plugin is an add-on of [Awesome Notifications](https://pub.dev/packages/awesome_notification) plugin and, because of it, depends on it.
-2. Push notifications, like local notifications, are not 100% reliable. That means your notification may be delayed or denied due to battery saving modes, background processing blocking, internet connection failures, etc. Keep this in mind when designing your business logic.
-3. On iOS, push notifications are only delivered to real devices, but all other features can be tested using simulators.
-4. To check what is happening with your notification while the app is terminated, you need to read all logs from the device. To do this on Android, use LogCat from Android Studio. On iOS, use the "Console.app" program available on MacOS.
-5. If your app was forced to stop on any platform, all notifications will no longer be delivered until your app is reopened.
+1. ***Plugin Dependency:*** This plugin functions as an add-on of the [awesome_notifications](https://pub.dev/packages/awesome_notifications) plugin and inherently depends on it.
+   
+2. ***Notification Reliability:*** Be mindful that like local notifications, push notifications are not guaranteed to be 100% reliable. They may be delayed or denied due to factors such as battery-saving modes, background processing restrictions, and internet connection issues. Plan your business logic accordingly.
+   
+3. ***iOS Device Restrictions:*** On iOS, push notifications are exclusively delivered to real devices. However, other features may be tested using simulators.
+   
+4. ***Notification Troubleshooting:*** To investigate issues with notifications while the app is terminated, review the device logs. Utilize LogCat in Android Studio for Android, and "Console.app" on MacOS for iOS.
+   
+5. ***App Termination:*** Note that if your app is forcibly closed on any platform, all subsequent notifications will not be delivered until your app is actively reopened.
 
 <br>
 <br>
@@ -116,34 +102,41 @@ In this section, you going to configure your Android and iOS project to use all 
 
 ## *Plugin Dependencies*
 
-Add the plugins bellow as a dependency in your `pubspec.yaml` file:
+Add the plugins below as dependencies in your `pubspec.yaml` file. By using the [awesome_notifications_core](https://pub.dev/packages/awesome_notifications_core) plugin, the versions of all compatible dependencies are managed automatically:
+
 ```yaml
-  firebase_core: ^1.24.1
-  awesome_notifications: ^0.7.X
-  awesome_notifications_fcm: ^0.7.X
+  # Awesome plugins
+  awesome_notifications_core: ^0.9.0 # use the latest version available
+  awesome_notifications: any # <- this version will be managed by core plugin
+  awesome_notifications_fcm: any # <- this version will be managed by core plugin
+  
+  # Firebase plugins
+  firebase_core: ^X.X.X # use the latest available
+  firebase_crashlytics: ^X.X.X # use the latest available
 ```
-OBS: Always certificate to use the last versions of all these plugins.
+Note: Always ensure to use the latest versions of all these plugins.
 
 <br>
 <br>
 
 ## 🤖 *Android Configuration*
 
-1 - You MUST apply Google Play Services in your project to use FCM services. To do that, first you need to import `com.google.gms:google-services` package into your Android project, adding the line bellow in your `build.gralde` file, located at "android" folder. (Certifies to use the latest version)
+1 - You MUST apply Google Play Services to your project to use FCM services. To do this, first, you need to import the `com.google.gms:google-services` package into your Android project by adding the line below in your `build.gradle` file, located in the "android" folder. (Ensure to use the latest version)
 
 ```gradle
 buildscript {
     ...
     dependencies {
         ...
-        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.google.gms:google-services:4.3.15'
         ...
     }
     ...
 }
 ```
 
-2 - Them, you need to apply google play services, adding the line bellow at the end of `build.gralde` file, located at "android/app" folder.
+2 - Then, you need to apply Google Play services by adding the line below at the end of the build.gradle file, located in the "android/app" folder.
 
 ```gradle
 apply plugin: 'com.google.gms.google-services'
@@ -156,7 +149,7 @@ Now, your Android project is configured to use `awesome_notifications_fcm`. *Awe
 
 ## 🍎 *iOS Configuration*
 
-1 - First, ensure to have the last XCode version available installed with at least Swift 5.5.7 (XCode version 14.A400).
+1 - First, ensure you have the latest XCode and cocoapods installed, with at least Swift 5.5.7.
 
 ![image](https://user-images.githubusercontent.com/40064496/194728638-9cada1b9-4f2d-4a30-9fb3-3bb448f36017.png)
 
@@ -164,20 +157,17 @@ Now, your Android project is configured to use `awesome_notifications_fcm`. *Awe
 
 2 - Run the command `pod install` inside your iOS project folder.
 
-OBS: In case it returns some version conflict, run `pod repo update` to update your local repository and then rename/erase the file "Podfile.lock" inside your iOS folder. For last, try to execute the command `pod install` once again.
+Note: If it returns any version conflict, `run pod repo update` and `pod update` to update your local repository, and then rename or erase the file "Podfile.lock" inside your iOS folder. Lastly, try to execute the command `pod install` once again.
 
 ![image](https://user-images.githubusercontent.com/40064496/194728843-5a5fd0a1-8540-4186-95e5-441fe5ebfd2f.png)
 
 <br>
 
-3 - To be able to add pictures and buttons on iOS push notifications, its necessary to create a *Notification target extension* using XCode. Target extensions are a type of lightweight application capable to run on background for specific tasks.
+3 - To add pictures and buttons to iOS push notifications, it is necessary to create a *Notification Target Extension* using XCode. Target extensions are a type of lightweight application able to run in the background for specific tasks, in this case, to customize notifications before they are delivered.
 
-To do that, you need to open your Flutter project using XCode.
-Go to your iOS project folder and open the file *Runner.xcfworkspace*.
+To do this, open your Flutter project using XCode. Go to your iOS project folder and open the file *Runner.xcfworkspace*.
 
-
-
-With your project opened, go to "*File -> New -> Target*"
+With your project opened, go to *"File -> New -> Target"*
 
 ![image](https://user-images.githubusercontent.com/40064496/194728921-ae8c464c-a53b-4d93-a71a-ea417fc620ce.png)
 
@@ -185,15 +175,72 @@ With your project opened, go to "*File -> New -> Target*"
 
 ![image](https://user-images.githubusercontent.com/40064496/194729005-3f645f12-f782-43fc-b686-6bad5a2f65e5.png)
 
-... and add a name to your target extension, ending with "ServiceExtension".
+... and add a name to your target extension at your choice (remember to make it clear that it's related to notifications).
 
 ![image](https://user-images.githubusercontent.com/40064496/194729045-7956c95f-26ec-4f4a-9649-5f1bb0fbc575.png)
 
+And once more, run the command `pod install` inside your iOS project folder.
+
+At this moment, ensure that both targets have the same minimal deployment target and try to run your application. If you succeed up to this point, you should see a notification with a title ending with `[modified]`.
+
+
+😖 Here are some common issues that may arise at this step:
+
+1 - My notification is being displayed, but without the title ending with `[modified]`.<br>
+A - Your Notification Service Extension is not being called. This may happen if your NSE is not attached to your main Runner target.
+Ensure that your NSE is attached to the Runner target and that both have the same minimal deployment target value.
+
+2 - My application is not being compiled, and I got the error `DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS, use TOOLCHAIN_DIR instead`.<br>
+A - Your CocoaPods or Xcode is outdated. You need to update or reinstall both of them, clear your project, and build everything again. Do not set your build to the legacy version as this is not the correct solution.
+
+3 - My application is not being compiled, and I got the error `Cycle inside; building could produce unreliable results: Xcode Error`.<br>
+A - You need to change the order of your build phases, moving the `Embed App Extensions` in front of `Link Binary with Libraries`. This may be necessary for some projects since Xcode 15.
+
 <br>
 
-4 - Now, you need to include `Flutter` and `Awesome Notifications FCM` libraries to your *Notification Service Extension*. To do that you need to modify your "PodFile", adding the lines bellow at the end of the file, replacing the 2 mentions of `MyAppServiceExtension` by your service extension name:
+4 - Now, it’s time to include the `Flutter` and `Awesome Notifications FCM` libraries in your *Notification Service Extension*. To achieve this, modify your "PodFile", appending the lines below at the file's end. Remember to replace the two instances of `MyAppServiceExtension` with the name of your service extension:
 
-```Ruby
+**Original `Podfile` Configuration:**
+```rb
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      flutter_additional_ios_build_settings target
+    end
+  
+    ################  Awesome Notifications pod modification 1 ###################
+    awesome_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications', 'ios', 'Scripts', 'AwesomePodFile'), '.symlinks')
+    require awesome_pod_file
+    update_awesome_pod_build_settings(installer)
+    ################  Awesome Notifications pod modification 1 ###################
+  end
+  
+  ################  Awesome Notifications pod modification 2 ###################
+  awesome_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications', 'ios', 'Scripts', 'AwesomePodFile'), '.symlinks')
+  require awesome_pod_file
+  update_awesome_main_target_settings('Runner', File.dirname(File.realpath(__FILE__)), flutter_root)
+  ################  Awesome Notifications pod modification 2 ###################
+```
+
+**Modified `Podfile` with Awesome Notifications FCM Configurations:**
+```rb
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+  end
+
+  ################  Awesome Notifications pod modification 1  ###################
+  awesome_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications', 'ios', 'Scripts', 'AwesomePodFile'), '.symlinks')
+  require awesome_pod_file
+  update_awesome_pod_build_settings(installer)
+  ################  Awesome Notifications pod modification 1  ###################
+end
+
+################  Awesome Notifications pod modification 2  ###################
+awesome_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications', 'ios', 'Scripts', 'AwesomePodFile'), '.symlinks')
+require awesome_pod_file
+update_awesome_main_target_settings('Runner', File.dirname(File.realpath(__FILE__)), flutter_root)
+################  Awesome Notifications pod modification 2  ###################
+
 ################  Awesome Notifications FCM pod mod  ###################
 awesome_fcm_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications_fcm', 'ios', 'Scripts', 'AwesomeFcmPodFile'), '.symlinks')
 require awesome_fcm_pod_file
@@ -206,11 +253,12 @@ end
 update_awesome_fcm_service_target('MyAppServiceExtension', File.dirname(File.realpath(__FILE__)), flutter_root)
 ################  Awesome Notifications FCM pod mod  ###################
 ```
-Them execute the command `pod install` to update your target extension. 
+
+Then execute the command `pod install` inside your ios folder to update your target extension.
 
 <br>
 
-5 - At this point, your target extension is able to use awesome notifications library. Inside your Target extension folder, edit the file `NotificationService.swift`, replacing the class `UNNotificationServiceExtension` by `DartAwesomeServiceExtension` and erasing all Notification Service content. The final file should look like this:
+5 - With these steps, your target extension can now utilize the awesome notifications library. Inside your Target extension folder, modify the file `NotificationService.swift`. Replace the class `UNNotificationServiceExtension` with `DartAwesomeServiceExtension` and erase all other Notification Service content. Your final file should resemble this:
 
 ```Swift
 import UserNotifications
@@ -224,56 +272,88 @@ class NotificationService: DartAwesomeServiceExtension {
 
 <br>
 
-
-6 - Also to build the app correctly, you need to ensure to set some `build settings` options for each of your app targets. In your project view, click on *Runner -> Target Runner -> Build settings*...  
+6 - To ensure the app builds correctly, you must set specific `build settings` options for each of your app targets. In your project view, click on *Runner -> Target Runner -> Build Settings*...
 
 ![image](https://user-images.githubusercontent.com/40064496/195867655-c6cfc753-274e-4eff-b435-3d26e46e3b8a.png)
 
-... and set the following options:
+... and configure the following options:
 
 In *Runner* Target:
 * Build libraries for distribution => NO
 * Only safe API extensions => NO
-* iOS Deployment Target => 13 or greater
+* iOS Deployment Target => 11 or greater
 
 In your *NotificationServiceExtension* Target:
 * Build libraries for distribution => NO
 * Only safe API extensions => YES
-* iOS Deployment Target => 13 or greater
+* iOS Deployment Target => 11 or greater
 
 <br>
 
-7 - Lastly, you need to add 3 capabilities to your XCode project, specially "App Groups", allowing your target extensions to share data with each other.
- 
-To do this, run your application and search on debug console for the application group name automatically generated by Awesome Notifications. This name is unique for each application.
+7 - Lastly, it's essential to add three capabilities to your XCode project, especially "App Groups", which allows your target extensions to share data with each other.
+
+Run your application and search on the debug console for the application group name automatically generated by Awesome Notifications. This name is unique for each application.
 
 ![image](https://user-images.githubusercontent.com/113704924/194730007-3e278bd3-a24d-481f-a99b-ae18a25ae36a.png)
 
-Them, open your XCode project, go to Targets -> Runner -> Singing and Capabilities -> Click on "+" icon and add "App Groups", "Push Notifications" and "Remote", checking "background fetching" and "remote notification" options.
+Then, open your XCode project and navigate to Targets -> Runner -> Signing and Capabilities. Click on the "+" icon and add "App Groups", "Push Notifications", and "Background Modes", ensuring you check both "Background fetch" and "Remote notification" options.
 
 ![image](https://user-images.githubusercontent.com/113704924/194729763-adfb1d42-9bba-4aa5-908f-91eae574735e.png)
 
-On "App Groups", you need to add the app group name automatically generated by awesome notifications. This app group name MUST start with "group.". Them add the same "App Group" capability with the same app group name on your notification target extension.
+Under "App Groups", add the app group name automatically generated by Awesome Notifications. This name MUST start with "group.". Add the same "App Group" capability with the same app group name on your notification target extension.
 
 ![image](https://user-images.githubusercontent.com/113704924/194729936-eb5877b9-0ed1-43d5-879a-07a4f13f253e.png)
+
+If you prefer using a custom name instead of the generated one, you can open each `info.plist` file of Runner and your NSE, and add the property `AwnAppGroupName` with your fixed app group name, ensuring it begins with "group.".
+
+
+![image](https://github.com/rafaelsetragni/awesome_notifications_fcm/blob/3138a8311076e8a54a5830fa71532cd135e65847/example/assets/images/Screenshot-fixed-app-group.png?raw=true)
 
 <br>
 
 Now, your iOS project is configured to use `awesome_notifications_fcm`. *Awesome!!* (phew!)
+
+😖 Common Issues and Solutions:
+
+1 - **Issue:** My notification is being displayed, but only with the simple title and body.
+
+> Solution A: Ensure your Notification Service Extension (NSE) and main Runner target are connected via App Groups, using the same and valid App Group name starting with "group.".<br>
+
+> Solution B: Your push content might not contain the flag "mutable_content" set to true.
+ 
+> Solution C: If your push notification content is invalid, it will still be displayed on iOS. In such cases, "INVALID" is set as the category by Awesome Notifications. You can filter out these notifications, but you need Apple's permission to use this filter.
+
+2 - **Issue:** The notification is displayed correctly with all awesome features when the app is in the Foreground. In Background or Terminated state, nothing happens.
+
+> Solution: Utilize the "Console.app" on MacOS to track the device console in these states and read the logs to identify the problem.
+
+3 - **Issue:** Tapping the notification when the app is closed causes the app to become translucent and then close itself.
+
+> Solution: This occurs because apps built with Flutter can't run on iOS in debug mode without the debugger being attached. To resolve, open your project in XCode, go to Debugger > Attach to process by PID or name, and choose Runner. The debugger will be attached as your app starts up, allowing you to debug the app being awakened by a notification action (tap).
+
 
 <br>
 
 
 ## 📝 Important notes
 
-1. Push notifications on iOS DO NOT support IDs/Identifiers.
-2. Push notifications are only delivered to real devices, all other features can be tested using simulators.
-3. Push notifications are always delivered, even in a catastrophic error in your configuration, json package or notification service extension. In these cases, your notification is displayed as simply as possible. To allow you to avoid such situation, awesome sets these notifications with category `"INVALID"`, and you can filter this category editing your info.plist, but you need to ask Apple for permission to do it. To know more about, please check [com.apple.developer.usernotifications.filtering](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_usernotifications_filtering).
-3. If you do not set `"mutable_content"` to true, your notification will not be delivered to NSE (Notification Service Extension) and modified to have awesome notification customizations. Instead, it will be delivered only with originals title and body content.
-4. If you do not set `"content_available"` to true, your silent push notification will not be delivered.
-5. Is recommended to set the badge value in the notification section at same time as in data, because in NSE failures, iOS will reade the badge value present in notification section. Meantime, Android FCM library does not delivery badge value inside notification section, so you need to set it inside data section.
-6. You must not use silent push notifications to often, otherwise Apple will starts to block your device to run on background. You can use "Console.app" on MacOS to get the device's logs and check if your app is getting blocked.
-7. Your push notifications can be denied on iOS if your users don't open your app for a long time. This limitation is canceled as soon as your user reopen your application manually.
+1. ***iOS Push Notifications and IDs:*** iOS push notifications do not support IDs/Identifiers.
+
+2. ***Device Restrictions:*** Push notifications are delivered exclusively to real devices. However, other features may be tested using simulators.
+
+3. ***Delivery Assurance:*** Push notifications are invariably delivered, even amidst configuration, JSON package, or Notification Service Extension errors. In such scenarios, notifications appear in their simplest form. To mitigate this, notifications with errors are categorized as `"INVALID"`. You can filter this category by modifying your info.plist, albeit with Apple’s permission. Learn more at [com.apple.developer.usernotifications.filtering](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_usernotifications_filtering).
+   
+4. ***Setting "mutable_content":*** Ensure to set `"mutable_content"` to true. Failing to do so results in your notification bypassing the Notification Service Extension (NSE), and being delivered with only the original title and body content.
+
+5. ***Setting "content_available":*** Set `"content_available"` to true to ensure the delivery of your silent push notification.
+
+6. ***Badge Value Recommendations:*** It's advisable to set the badge value in both the notification and data sections. In cases of NSE failures, iOS reads the badge value from the notification section, while the Android FCM library requires it within the data section.
+
+7. ***Frequency of Silent Push Notifications:*** Refrain from frequently sending silent push notifications as Apple may begin to restrict your device's background operation. Utilize the "Console.app" on MacOS to monitor the device's logs and ascertain any blocking.
+
+8. ***User Inactivity:*** Note that your push notifications may be denied on iOS if users do not access your app for an extended period. This limitation is lifted once the user reopens your application manually.
+
+
 
 <br>
 <br>
@@ -325,10 +405,10 @@ To send push notifications using FCM (Firebase Cloud Message) you need to have a
 
 First, you need to create an Firebase account and activate the Firebase service called `Cloud Messaging`:
 
-1 - Sign in Firebase at https://firebase.google.com  
-2 - Click Go to console  
-3 - Click + Add project and follow the prompts to create a project. You can name your project anything you want  
-4 - Once the project is created, the project configuration page is automatically open. Search for the link `Cloud Messaging` and add the service into your Firebase Account  
+1. Sign in Firebase at https://firebase.google.com  
+2. Click Go to console  
+3. Click + Add project and follow the prompts to create a project. You can name your project anything you want  
+4. Once the project is created, the project configuration page is automatically open. Search for the link `Cloud Messaging` and add the service into your Firebase Account  
 
 After activate the service, a new configuration page will be displayed. This process can be repeated and edited if necessary at any time, for all platforms that you need.
 
@@ -336,22 +416,22 @@ In this configuration page, set correctly your app id and, on second section, do
 
 <br>
 
-## Adding APNs Certificate into your Firebase account
+## 📃 Adding APNs Certificate into your Firebase account
 
 To allow Firebase send push notifications to iOS devices, its necessary to do an extra step to create the APNs certificate.
 
 <br>
 
-1 - Go to https://developer.apple.com, sing into an Apple Account and go to "Certificates" and click on "+" button.  
-2 - Go to Services section and check **Apple Push Notification service SSL** and click on "Continue"  
-3 - Insert the same iOS App ID configured in your Firebase Cloud Messaging.   
-4 - In your MacOS machine, Launch Keychain Access app, located in /Applications/Utilities.   
-5 - Choose Keychain Access > Certificate Assistant > Request a Certificate from a Certificate Authority.   
-6 - In the Certificate Assistant dialog, enter all information needed, leaving the CA Email Address field empty.  
-7 - Choose “Saved to disk,” then click Continue.  
-8 - Now, go back to the online certificate process and upload the certificate generated in your local machine to Apple  
-9 - Attention: Download the file and store it in a safe place. This file can be download only once.  
-10 - Lastly, upload this last certificate to Firebase in Project View -> Cloud Messaging -> Apple App Configurations. 
+1. Go to https://developer.apple.com, sing into an Apple Account and go to "Certificates" and click on "+" button.  
+2. Go to Services section and check **Apple Push Notification service SSL** and click on "Continue"  
+3. Insert the same iOS App ID configured in your Firebase Cloud Messaging.   
+4. In your MacOS machine, Launch Keychain Access app, located in /Applications/Utilities.   
+5. Choose Keychain Access > Certificate Assistant > Request a Certificate from a Certificate Authority.   
+6. In the Certificate Assistant dialog, enter all information needed, leaving the CA Email Address field empty.  
+7. Choose “Saved to disk,” then click Continue.  
+8. Now, go back to the online certificate process and upload the certificate generated in your local machine to Apple  
+9. Attention: Download the file and store it in a safe place. This file can be download only once.  
+10. Lastly, upload this last certificate to Firebase in Project View -> Cloud Messaging -> Apple App Configurations. 
 
 <br> 
 
@@ -459,20 +539,11 @@ Send this token to your backend server and this way you got the "device address"
 
 # 📣 Sending Push Notifications
 
-## Using Firebase portal
+## ✉️ Using Your Backend Server or Postman
 
 <br>
 
-To send notifications using Firebase console, you can check this excelent tutorial about how to send push notifications on Firebase Console:
-[Complete guide on sending Push using Firebase Cloud Messaging Console](https://enappd.com/blog/sending-push-using-firebase-console/35/)
-
-<br>
-
-## Using your backend server / Postman
-
-<br>
-
-To send push notifications in awesome notifications with all features available, you must use the standard below (Android and iOS sections are optional):
+To utilize all the features available in the legacy protocol when sending push notifications with Awesome Notifications, adhere to the standard below. Note that the Android and iOS sections are optional:
 
 ```Json
 {
@@ -548,81 +619,324 @@ To send push notifications in awesome notifications with all features available,
 }
 ```
 
-To send silent push notifications, you must not use "notification" section and you need to use "content_available" instead of "mutable_content":
+To sending the same content via the V1 protocol, you need to use the flattened data standard. 
+OBS: The expected type in data section is `Map<String, String>`.
+
 
 ```Json
 {
-    "to" : "{{fcm_token_ios}}",
-    "content_available": true,
-    "priority": "high",
+  "message": {
+    "token" : "{{fcm_token_ios}}",
+    "android": {
+      "priority": "high"
+    },
+    "apns": {
+      "payload": {
+        "aps": {
+          "mutable-content": 1,
+          "badge": 42
+        },
+        "headers": {
+          "apns-priority": "5"
+        }
+      }
+    },
+    "notification": {
+        "badge": 42,
+        "title": "Huston! The eagle has landed!",
+        "body": "A small step for a man, but a giant leap to Flutter's community!"
+    },
     "data" : {
-        "data1": "fb787aa2-6387-4f65-a5a2-125f96ab4c14",
-        "data2": "call_voice",
-        "data3": "3c3079b7-ab5e-48a5-8c61-b64ebb4910a9",
-        "data4": "5469846578",
+       "content.id": "1",
+       "content.badge": "42",
+       "content.channelKey": "alerts",
+       "content.displayOnForeground": "true",
+       "content.notificationLayout": "BigPicture",
+       "content.largeIcon": "https://br.web.img3.acsta.net/pictures/19/06/18/17/09/0834720.jpg",
+       "content.bigPicture": "https://www.dw.com/image/49519617_303.jpg",
+       "content.showWhen": "true",
+       "content.autoDismissible": "true",
+       "content.privacy": "Private",
+       "content.payload.secret": "Awesome Notifications Rocks!",
+       "actionButtons.0.key": "REDIRECT",
+       "actionButtons.0.label": "Redirect",
+       "actionButtons.0.autoDismissible": "true",
+       "actionButtons.1.key": "DISMISS",
+       "actionButtons.1.label": "Dismiss",
+       "actionButtons.1.actionType": "DismissAction",
+       "actionButtons.1.isDangerousOption": "true",
+       "actionButtons.1.autoDismissible": "true",
+       "Android.content.title": "Android! The eagle has landed!",
+       "Android.content.payload.android": "android custom content!",
+       "iOS.content.title": "Jobs! The eagle has landed!",
+       "iOS.content.payload.ios": "iOS custom content!",
+       "iOS.actionButtons.0.key": "REDIRECT",
+       "iOS.actionButtons.0.label": "Redirect message",
+       "iOS.actionButtons.0.autoDismissible": "true",
+       "iOS.actionButtons.1.key": "DISMISS",
+       "iOS.actionButtons.1.label": "Dismiss message",
+       "iOS.actionButtons.1.actionType": "DismissAction",
+       "iOS.actionButtons.1.isDangerousOption": "true",
+       "iOS.actionButtons.1.autoDismissible": "true"
     }
+  }
 }
 ```
 
-It's not required to have a real server to send push notifications. You can use REST programs to emulate your backend sending push notifications, like [Postman](https://www.postman.com).
+## Using the Firebase Cloud Messaging (Web Console)
 
-Below is a Postman project/collection containing all avaliable Awesome Notifications FCM features to be changed and tested at your will:  
-[Firebase FMC Example.postman_collection.json](https://github.com/rafaelsetragni/awesome_notifications_fcm/blob/9b4aefdd4f55156db768f8dfc35263c03c869c41/example/assets/readme/Firebase%20FMC%20Example.postman_collection.json)
+<br>
 
-To use it, download the json file and import it as collection into your Postman, remembering to replace the variables according to your Firebase project keys and your devices' tokens.
+To send notifications using the Firebase cloud message console, you basically need to send the flattened data standard via data section:
+
+1 - Access [Firebase Console](https://console.firebase.google.com/), choose your project or create a new one and go to Messaging section.
+2 - Create a new test message or campaign message.
+3 - Set all fields required until the section 5 (Additional options). You can also test your notification using the button "Send test message", adding the FCM token returned by `AwesomeNotificationsFcm().requestFirebaseAppToken();`.
+4 - At the section 2 (Target), choose the Apps or topics which will receive the notification. The devices need to have at least a valid FCM token and to be subscribed previously in the topic.
+5 - At the section 3 (schedule), set it to `now` or define a future time greater than 10 seconds from now.
+6 - At the section 5 (additional options), you can set the Custom data using the Flattened standard.
+
+TIP: After edit all fields, save as a Draft and reopen again for edition. Then go back to step 1 and send a test message with all features available.
 
 <br>
 <br>
 
-# 🚚 How to migrate `firebase_messaging` plugin.
+## 🤐 Sending Silent Push Notifications
 
-To migrate from `firebase_messaging` you just need to replace firebase methods by its equivalents on Awesome Notifications and Awesome Notifications FCM:
+To send silent push notifications, avoid using the "notification" section. Use "content_available" instead of "mutable_content":
 
-* `FirebaseMessaging.onMessageOpenedApp` -> `AwesomeNotifications.getInitialNotificationAction()`
-
-* `FirebaseMessaging.onMessage` -> `static Future <void> onActionReceivedMethod(ReceivedAction receivedAction)`
-
-* `FirebaseMessaging.onBackgroundMessage` -> `static Future<void> mySilentDataHandle(FcmSilentData silentData)`
-
-* `FirebaseMessaging.requestPermission` -> `AwesomeNotifications().requestPermissionToSendNotifications()`
-
-
-To access non-static resources inside the static methods, you can use some design patterns:
-
-* Singleton classes
-* Static Flutter Navigator Key defined in MaterialApp widget
-
-
-To switch the execution from background isolate to the main isolate of your application, where you have a valid context to redirect the users, use `ReceivePort` and `SendPort` classes.
-
-```Dart
-
+```Json
+{
+   "message": {
+      "token": "{{fcm_token_ios}}",
+      "apns": {
+         "payload": {
+            "aps": {
+               "content-available": 1
+            }
+         }
+      },
+      "data": {
+        "data1": "fb787aa2-6387-4f65-a5a2-125f96ab4c14",
+        "data2": "call_voice",
+        "data3": "3c3079b7-ab5e-48a5-8c61-b64ebb4910a9",
+        "data4": "5469846578"
+      }
+   }
+}
 ```
-(work in progress)
+
+<br>
+<br>
+
+## 🛰️ Sending RPC (Remote Procedure Calls) for Notification Management
+
+You can remotely control your app's notifications using RPC (Remote Procedure Calls). This feature allows you to dismiss notifications, cancel scheduled notifications, or cancel notifications entirely. Below are the instructions and the distinctions between each action:
+
+### JSON Structure for RPC Commands
+
+Use the following JSON structure to send commands:
+
+```Json
+{
+   "message": {
+      "token": "{{fcm_token_android}}",
+      "apns": {
+         "payload": {
+            "aps": {
+               "content-available": 1
+            }
+         }
+      },
+      "data": {
+         "dismiss": "1,2,42",
+         "dismissByChannel": "channel1,channel_voice",
+         "dismissByGroup": "group1,group2",
+         "dismissAll": "true",
+         "cancelSchedule": "1,2,42",
+         "cancelScheduleByChannel": "channel1,channel_voice",
+         "cancelScheduleByGroup": "group1,group2",
+         "cancelAllSchedules": "true",
+         "cancelNotification": "1,2,42",
+         "cancelNotificationByChannel": "channel1,channel_voice",
+         "cancelNotificationByGroup": "group1,group2",
+         "cancelAllNotifications": "true",
+         "dontCallFlutter": "true"
+      }
+   }
+}
+```
+
+### Explanation of Commands
+
+1. **Dismiss Notifications:**
+   - These commands remove notifications from the notification tray without affecting any scheduled notifications.
+   - `dismiss`: Dismiss specific notifications by ID.
+   - `dismissByChannel`: Dismiss notifications by channel.
+   - `dismissByGroup`: Dismiss notifications by group.
+   - `dismissAll`: Dismiss all notifications.
+
+2. **Cancel Scheduled Notifications:**
+   - These commands cancel scheduled notifications but do not affect notifications already displayed.
+   - `cancelSchedule`: Cancel specific scheduled notifications by ID.
+   - `cancelScheduleByChannel`: Cancel scheduled notifications by channel.
+   - `cancelScheduleByGroup`: Cancel scheduled notifications by group.
+   - `cancelAllSchedules`: Cancel all scheduled notifications.
+
+3. **Cancel Notifications (Including Schedules):**
+   - These commands cancel both displayed notifications and their schedules.
+   - `cancelNotification`: Cancel specific notifications and their schedules by ID.
+   - `cancelNotificationByChannel`: Cancel notifications and their schedules by channel.
+   - `cancelNotificationByGroup`: Cancel notifications and their schedules by group.
+   - `cancelAllNotifications`: Cancel all notifications and their schedules.
+
+### Silent Push Notifications
+
+- To send silent pushes without triggering the Flutter silent callback, set `dontCallFlutter` to `true`.
+- This feature is useful for background updates or when you want to manage notifications silently.
+
+By using these RPC commands, you can effectively manage the notification lifecycle in your application, ensuring a seamless user experience.
+
+
+<br>
+<br>
+
+## Using REST Programs
+
+You don't need a real server to send push notifications during the development stage. Use REST programs like [Postman](https://www.postman.com) to emulate your backend for sending push notifications.
+
+Download and import the Postman projects/collections below into your Postman. Make sure to replace the collection variables according to your Firebase project keys and your devices' tokens:
+
+[V1 FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/Firebase_FCM_V1_Example.postman_collection.json)<br>
+[Legacy FMC Examples.postman_collection.json](https://raw.githubusercontent.com/rafaelsetragni/awesome_notifications_fcm/main/example/assets/readme/Firebase_FCM_Example.postman_collection.json)
+
+
+***Note:*** To use the V1 protocol on Postman, you'll need to generate a fresh token using the [Google Developers OAuth 2.0 Playground](https://developers.google.com/oauthplayground/). To generate it, follow the steps bellow:
+
+1. **Authorize APIs**:
+   - In Step 1, select the "Firebase Cloud Messaging API v1 > https://www.googleapis.com/auth/cloud-platform".
+   - Click "Authorize APIs".
+   
+2. **Login and Grant Access**:
+   - Log in with the Google account linked to your FCM project on the Firebase console.
+   - Allow the API to access your account.
+   
+3. **Exchange Authorization Code**:
+   - In Step 2, click "Exchange authorization code for tokens".
+   
+4. **Refresh and Copy Access Token**:
+   - Click "Refresh access token".
+   - Copy the "Access token" and paste it into the respective field in your Postman collection variable.
+
+By following these steps, you ensure that your Postman is configured with a valid access token for sending notifications using the V1 protocol.
+
+
+<br>
+<br>
+
+# 🚚 How to Migrate `firebase_messaging` Plugin
+
+Migrating from `firebase_messaging` requires you to replace Firebase methods with their equivalents in Awesome Notifications and Awesome Notifications FCM:
+
+- `FirebaseMessaging.onMessageOpenedApp` -> `AwesomeNotifications.getInitialNotificationAction()`
+- `FirebaseMessaging.onMessage` -> `static Future<void> onActionReceivedMethod(ReceivedAction receivedAction)`
+- `FirebaseMessaging.onBackgroundMessage` -> `static Future<void> mySilentDataHandle(FcmSilentData silentData)`
+- `FirebaseMessaging.requestPermission` -> `AwesomeNotifications().requestPermissionToSendNotifications()`
+
+## Accessing Non-Static Resources
+
+To access non-static resources inside static methods, consider using design patterns such as Singleton classes or defining a Static Flutter Navigator Key in the MaterialApp widget.
+
+## Switching Execution from Background to Main Isolate
+
+To switch the execution from a background isolate to the main isolate of your application (where you have a valid context to redirect users), use the `ReceivePort` and `SendPort` classes. Below is a basic example:
+
+```dart
+import 'dart:isolate';
+
+static ReceivePort? receivePort;
+static Future<void> initializeIsolateReceivePort() async {
+  receivePort = ReceivePort('Silent action port in main isolate')
+    ..listen((silentData) => mySilentDataHandle(silentData));
+
+  // This initialization only happens on main isolate
+  IsolateNameServer.registerPortWithName(
+      receivePort!.sendPort, 'silent_action_port');
+}
+
+@pragma('vm:entry-point')
+void mySilentDataHandle(FcmSilentData silentData) {
+    // this process is only necessary when you need to have access to features
+    // only available if you have a valid context. Since parallel isolates do not
+    // have valid context, you need redirect the execution to main isolate.
+    if (receivePort == null) {
+      print(
+          'onActionReceivedMethod was called inside a parallel dart isolate.');
+      SendPort? sendPort =
+          IsolateNameServer.lookupPortByName('silent_action_port');
+
+      if (sendPort != null) {
+        print('Redirecting the execution to main isolate process.');
+        sendPort.send(receivedAction);
+        return;
+      }
+    }
+
+    // Execute the rest of your code
+}
+```
+
+In this example, `mySilentDataHandle` function is responsible for creating a `ReceivePort`, spawning a new isolate, and listening for messages from the new isolate. The handleData function in the new isolate sends a message back to the main isolate through the `SendPort`.
+
+Following these steps will ensure a smooth transition from firebase_messaging to using Awesome Notifications for managing your push notifications.
+
 <br>
 <br>
 
 
-# 🔑 License key.
+# 🔑 License Key - Year 2
 
-![image](https://user-images.githubusercontent.com/40064496/196968996-c5b5a11c-db47-4450-b698-a28984fb8e2b.png)
+Local notifications using [Awesome Notifications](https://pub.dev/packages/awesome_notifications) remain 100% free. For using push notifications in [Awesome Notifications FCM](https://pub.dev/packages/awesome_notifications_fcm), two types of license keys are available, each catering to different needs.
 
-Local notifications using [Awesome Notifications]() are always 100% free to use. And you can also test all push notifications features on [Awesome Notifications FCM]() for free, Forever.
+## Common Features
 
-But to use Awesome Notifications FCM on release mode without the watermark [DEMO], you need to purchase a license key. This license key is a RSA digital signature, validated with private and public keys in conjunction with plugin versionings and your App ID / Bundle ID. Because of it, once the license key is generated for your app, its forever. It will never expires and do not require internet connection to be validated.
+Both licenses share these attributes:
 
-<br>
+- **No Watermarks:** Enjoy push notifications without any watermarks.
+- **Perpetual Validity:** License keys never expire.
+- **Offline Validation:** No internet connection needed for license validation.
+- **Expandable:** Each key is expandable to 5 ID variations (flavors and minor changes).
 
-The price of a license key is **$ 9.99 / App**, and it contains:
+## License Types
 
-* Push Notifications without watermark
-* 1 license Key, expandable to 4 id variations
-* Perpetual Licenses
-* 1 Year exclusive support on Discord
-* 1 Year of Free Updates
+### 1. Basic License - Single Plugin Version
 
-<br>
+**Price:** $5/App
 
-That way, you only pay a small contribution and help keep the plugin evolving and supporting it, as well as purchasing new devices to test, hiring new developers, etc.
+This license is ideal for those who need a cost-effective solution for only a single and specific plugin version. 
 
-The Awesome Notification's portal to purchasing and managing your license keys is now in the final stages of development. So for now, to purchase the license key, get in contact with us on our Discord community at https://discord.awesome-notifications.carda.me .
+**Benefits:**
+
+- Valid for a single library version.
+- Requires a new license for updates or new releases.
+
+### 2. Premium License - Full 1 Year Support
+
+**Price:** $10/App
+
+This license is designed for those seeking ongoing support and updates.
+
+**Benefits:**
+
+- All features of the Basic License.
+- **1 Year of Free Updates:** Use the same license key for all new plugin releases for one year from the purchase date.
+- **Exclusive Discord Support:** Receive dedicated support for one year.
+
+## Contributing to Development
+
+Your purchase contributes to the plugin's development, enabling us to acquire new testing devices, hire additional developers, and more.
+
+## Purchasing a License Key
+
+Our portal for purchasing and managing license keys is in its final development stages. For now, to acquire a license key, please contact us on our [Discord community](https://discord.awesome-notifications.carda.me).
+
