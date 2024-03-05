@@ -1,3 +1,7 @@
+## [0.9.2] - 2024-11-01
+### Enhancements & Fixes
+- **Refined Notification ID Handling for Stringify and Legacy Data Standards:** Altered the priority logic for push notification IDs in cases using stringify and legacy data standards. Now, Awesome IDs take precedence over Firebase IDs. This change enables more effective management of push notifications, allowing new notifications to replace or update previous ones with the same ID. It brings a higher level of control and dynamism to notification behavior.
+
 ## [0.9.1] - 01/04/2024
 ### Enhancements & Fixes
 - **iOS Target Extension Deployment Flexibility:** Updated the iOS pod script to enable manual adjustments of the minimum target deployment. This improvement offers greater control and customization to developers in line with their specific iOS deployment needs.
