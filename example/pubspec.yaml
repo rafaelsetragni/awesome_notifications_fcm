@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^2.24.2
-  awesome_notifications: ^0.9.0
+  firebase_core: ^2.27.1
+  awesome_notifications: ^0.9.3
 #    path: ../../awesome_notifications
 #    git:
 #      ref: "a9fbe3e"
@@ -24,10 +24,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  font_awesome_flutter: ^10.6.0
+  font_awesome_flutter: ^10.7.0
 
-  http: ^1.1.2
-  path_provider: ^2.1.1
+  http: ^1.2.1
+  path_provider: ^2.1.2
   shared_preferences: ^2.2.2
 
   fluttertoast: ^8.2.4
