@@ -32,7 +32,7 @@ class SimpleButton extends StatelessWidget {
             ),
           ),
           style: ElevatedButton.styleFrom(
-            primary: backgroundColor ?? Colors.grey.shade200,
+            backgroundColor: backgroundColor ?? Colors.grey.shade200,
             textStyle: TextStyle(
               color: labelColor ?? Colors.black87
             )
