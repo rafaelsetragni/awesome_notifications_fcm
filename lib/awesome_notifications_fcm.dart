@@ -6,7 +6,7 @@ export 'src/awesome_notifications_fcm_core.dart';
 export 'src/models/fcm_silent_data.dart';
 
 /// Method structure to listen to an incoming action with dart
-typedef Future<void> PushTokenHandler(String token);
+typedef PushTokenHandler = Future<void> Function(String token);
 
 /// Method structure to listen to an notification event with dart
-typedef Future<void> FcmSilentDataHandler(FcmSilentData silentData);
+typedef FcmSilentDataHandler = Future<void> Function(FcmSilentData silentData);

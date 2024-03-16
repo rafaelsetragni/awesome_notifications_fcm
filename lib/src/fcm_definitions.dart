@@ -27,5 +27,17 @@ const CHANNEL_METHOD_DELETE_TOKEN = 'deleteToken';
 const CHANNEL_METHOD_SILENT_CALLBACK = 'silentCallbackReference';
 const CHANNEL_METHOD_DART_CALLBACK = 'dartCallbackReference';
 const CHANNEL_METHOD_SHUTDOWN_DART = 'shutdown';
+const CHANNEL_METHOD_SEND_PUSH_TOKEN = 'sendPushToken';
+const CHANNEL_METHOD_SEND_PUSH_TOPIC = 'sendPushTopic';
+const CHANNEL_METHOD_SEND_PUSH_CONDITION = 'sendPushCondition';
+
+const NOTIFICATION_FCM_OPTIONS = 'fcmOptions';
+const NOTIFICATION_FCM_DRY_RUN = 'driRun';
+const NOTIFICATION_OPTION_APNS = 'apns';
+const NOTIFICATION_OPTION_ANDROID = 'android';
+const NOTIFICATION_OPTION_WEB = 'webPush';
+const NOTIFICATION_OPTION_PRIORITY = 'priority';
 
 const NOTIFICATION_FCM_DATA = 'data';
+const CLIENT_EMAIL = 'clientEmail';
+const PRIVATE_KEY = 'privateKey';

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:awesome_notifications/awesome_notifications.dart' show NOTIFICATION_ID, NOTIFICATION_PAYLOAD, NotificationModel;
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:awesome_notifications_fcm/src/fcm_definitions.dart';
 import 'package:awesome_notifications_fcm/src/isolates/silent_push_isolate_main.dart';
+import 'package:awesome_notifications_fcm/src/models/fcm_options.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -36,7 +38,7 @@ class AwesomeNotificationsFcm {
   /// Initializes the plugin, setting the [onFcmTokenHandle] and [onFcmSilentDataHandle]
   /// listeners to capture Firebase Messaging events and the [licenseKeys] necessary
   /// to validate the release use of this plugin.
-  /// You should call this method only once at main_complete.dart.
+  /// You should call this method only once at main.dart.
   /// [debug]: enables the console log prints
   Future<bool> initialize(
       {required PushTokenHandler onFcmTokenHandle,
@@ -136,6 +138,57 @@ class AwesomeNotificationsFcm {
   Future<bool> unsubscribeToTopic(String topic) async {
     return await _channel.invokeMethod(
         CHANNEL_METHOD_UNSUBSCRIBE_TOPIC, {NOTIFICATION_TOPIC: topic});
+  }
+
+  Future<bool> sendPushUsingTokens({
+    required String projectSenderId,
+    required String clientEmail,
+    required String privateKeyPem,
+    required List<String> fcmTokens,
+    required NotificationModel notificationModel,
+    required FcmOptions? fcmOptions,
+    bool dryRun = false,
+  }) async {
+    return await _channel.invokeMethod(CHANNEL_METHOD_SEND_PUSH_TOKEN, {
+      NOTIFICATION_ID: fcmTokens,
+      NOTIFICATION_FCM_DATA: notificationModel.toMap(),
+      NOTIFICATION_FCM_OPTIONS: fcmOptions?.toMap(),
+      NOTIFICATION_FCM_DRY_RUN: dryRun,
+    });
+  }
+
+  Future<bool> sendPushUsingTopics({
+    required String projectSenderId,
+    required String clientEmail,
+    required String privateKeyPem,
+    required List<String> topics,
+    required NotificationModel notificationModel,
+    required FcmOptions? fcmOptions,
+    bool dryRun = false,
+  }) async {
+    return await _channel.invokeMethod(CHANNEL_METHOD_SEND_PUSH_TOPIC, {
+      NOTIFICATION_ID: topics,
+      NOTIFICATION_FCM_DATA: notificationModel.toMap(),
+      NOTIFICATION_FCM_OPTIONS: fcmOptions?.toMap(),
+      NOTIFICATION_FCM_DRY_RUN: dryRun,
+    });
+  }
+
+  Future<bool> sendPushUsingCondition({
+    required String projectSenderId,
+    required String clientEmail,
+    required String privateKeyPem,
+    required String condition,
+    required NotificationModel notificationModel,
+    required FcmOptions? fcmOptions,
+    bool dryRun = false,
+  }) async {
+    return await _channel.invokeMethod(CHANNEL_METHOD_SEND_PUSH_CONDITION, {
+      NOTIFICATION_ID: condition,
+      NOTIFICATION_FCM_DATA: notificationModel.toMap(),
+      NOTIFICATION_FCM_OPTIONS: fcmOptions?.toMap(),
+      NOTIFICATION_FCM_DRY_RUN: dryRun,
+    });
   }
 
   Future<bool> deleteToken() async {

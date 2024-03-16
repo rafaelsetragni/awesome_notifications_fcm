@@ -23,12 +23,13 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
 import io.flutter.view.FlutterCallbackInformation;
-import me.carda.awesome_notifications.core.AwesomeNotificationsExtension;
+import me.carda.awesome_notifications.core.Definitions;
 import me.carda.awesome_notifications.core.broadcasters.receivers.AwesomeExceptionReceiver;
 import me.carda.awesome_notifications.core.exceptions.AwesomeNotificationsException;
 import me.carda.awesome_notifications.core.exceptions.ExceptionCode;
 import me.carda.awesome_notifications.core.exceptions.ExceptionFactory;
 import me.carda.awesome_notifications.core.listeners.AwesomeExceptionListener;
+import me.carda.awesome_notifications.core.models.NotificationModel;
 import me.carda.awesome_notifications.core.utils.MapUtils;
 
 import me.carda.awesome_notifications_fcm.core.AwesomeNotificationsFcm;
@@ -36,6 +37,7 @@ import me.carda.awesome_notifications_fcm.core.FcmDefinitions;
 import me.carda.awesome_notifications_fcm.core.licenses.LicenseManager;
 import me.carda.awesome_notifications_fcm.core.listeners.AwesomeFcmSilentListener;
 import me.carda.awesome_notifications_fcm.core.listeners.AwesomeFcmTokenListener;
+import me.carda.awesome_notifications_fcm.core.models.FcmOptions;
 import me.carda.awesome_notifications_fcm.core.models.SilentDataModel;
 import me.carda.awesome_notifications_fcm.core.managers.FcmDefaultsManager;
 
@@ -246,6 +248,10 @@ public class AwesomeNotificationsFcmPlugin
                     channelMethodDeleteToken(call, result);
                     break;
 
+                case FcmDefinitions.CHANNEL_METHOD_SEND_PUSH_TOKEN:
+                    channelMethodSendPushUsingTokens(call, result);
+                    break;
+
                 default:
                     result.notImplemented();
             }
@@ -408,6 +414,76 @@ public class AwesomeNotificationsFcmPlugin
         }
         else
             result.success(false);
+    }
+
+    private void channelMethodSendPushUsingTokens(
+            @NonNull MethodCall call,
+            @NonNull final Result result
+    ) throws AwesomeNotificationsException {
+        if(awesomeNotificationsFcm == null) {
+            throw ExceptionFactory
+                    .getInstance()
+                    .createNewAwesomeException(
+                            TAG,
+                            ExceptionCode.CODE_INVALID_ARGUMENTS,
+                            "Awesome FCM was not initialized",
+                            ExceptionCode.DETAILED_INVALID_ARGUMENTS+".fcm.sendPush");
+        }
+
+        Map<String, Object> arguments = call.arguments();
+        if(arguments == null){
+            throw ExceptionFactory
+                    .getInstance()
+                    .createNewAwesomeException(
+                            TAG,
+                            ExceptionCode.CODE_INVALID_ARGUMENTS,
+                            "Required arguments are missing",
+                            ExceptionCode.DETAILED_INVALID_ARGUMENTS+".fcm.sendPush");
+        }
+
+        try {
+            String projectSenderId = (String) arguments.get(FcmDefinitions.SILENT_HANDLE);
+            String clientEmail = (String) arguments.get(FcmDefinitions.CLIENT_EMAIL);
+            String privateKeyPem = (String) arguments.get(FcmDefinitions.PRIVATE_KEY);
+            List<String> tokens = (List<String>) arguments.get(Definitions.NOTIFICATION_ID);
+            Map<String, Object> notificationData = (Map<String, Object>) arguments.get(FcmDefinitions.NOTIFICATION_FCM_DATA);
+            Map<String, Object> optionsData = (Map<String, Object>) arguments.get(FcmDefinitions.NOTIFICATION_FCM_DATA);
+            NotificationModel notificationModel = new NotificationModel().fromMap(notificationData);
+            FcmOptions fcmOptions = new FcmOptions().fromMap(optionsData);
+
+            if(projectSenderId == null){
+                throw ExceptionFactory
+                        .getInstance()
+                        .createNewAwesomeException(
+                                TAG,
+                                ExceptionCode.CODE_INVALID_ARGUMENTS,
+                                "Silent push callback is not static or global",
+                                ExceptionCode.DETAILED_INVALID_ARGUMENTS+".fcm.background.silentCallback");
+            }
+
+            result.success(awesomeNotificationsFcm.sendPushNotificationWithTokens(
+                    projectSenderId,
+                    clientEmail,
+                    privateKeyPem,
+                    tokens,
+                    notificationModel,
+                    fcmOptions
+            ));
+        } catch (Exception exception) {
+            AwesomeNotificationsException awesomeException =
+                    ExceptionFactory
+                            .getInstance()
+                            .createNewAwesomeException(
+                                    TAG,
+                                    ExceptionCode.CODE_UNKNOWN_EXCEPTION,
+                                    ExceptionCode.DETAILED_UNEXPECTED_ERROR+"."+exception.getClass().getSimpleName(),
+                                    exception);
+
+            result.error(
+                    awesomeException.getCode(),
+                    awesomeException.getMessage(),
+                    awesomeException.getDetailedCode());
+        }
     }
 
     private void channelMethodIsFcmAvailable(

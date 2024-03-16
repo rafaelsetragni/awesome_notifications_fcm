@@ -7,8 +7,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
-import '../main_complete.dart';
+import '../main.dart';
 import '../routes.dart';
 
 class NotificationController with ChangeNotifier {
@@ -535,8 +536,30 @@ class NotificationController with ChangeNotifier {
     );
   }
 
-/* *********************************************
-    PERMISSION METHODS
-************************************************ */
+  /* *********************************************
+      ENCRYPTION METHODS
+  ************************************************ */
 
+  static RsaKeyPair? keyPair;
+  static Future<String?> generateAndSetNewDecryptionKey() async {
+    final encryptionAlgorithm = RsaAlgorithm.rsaEncryptionOAEPSHA256AESGCM;
+    keyPair = await AwesomeNotifications()
+        .generateNewRSAPairKey(encryptionAlgorithm: encryptionAlgorithm);
+    final privateKey = keyPair?.privateKey;
+    if (privateKey == null) return null;
+
+    final success = await AwesomeNotifications().setDecryptionKey(
+        encryptionAlgorithm: encryptionAlgorithm,
+        privateKey: privateKey
+    );
+    if (success) return privateKey;
+    return null;
+  }
+
+  static String? get publicKey => keyPair?.publicKey;
+  static String? get privateKey => keyPair?.publicKey;
+
+  static Future<void> deleteDecryptionKey() async {
+
+  }
 }

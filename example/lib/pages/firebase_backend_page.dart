@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesome_notifications_fcm_example/common_widgets/simple_button.dart';
 import 'package:awesome_notifications_fcm_example/datasources/firebase_datasource.dart';
-import 'package:awesome_notifications_fcm_example/main_complete.dart';
+import 'package:awesome_notifications_fcm_example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';

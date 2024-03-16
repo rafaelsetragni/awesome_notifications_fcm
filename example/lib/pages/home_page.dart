@@ -11,10 +11,12 @@ import 'package:awesome_notifications_fcm_example/common_widgets/text_note.dart'
 import 'package:awesome_notifications_fcm_example/utils/common_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 import '../common_widgets/remarkable_text.dart';
-import '../main_complete.dart';
+import '../main.dart';
 import '../notifications/notification_controller.dart';
 
 
@@ -30,6 +32,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   String packageName = 'me.carda.awesome_notifications_fcm_example';
 
   String _firebaseAppToken = '';
+  String _privateKey = '', _publicKey = '';
   bool _notificationsAllowed = false;
 
   bool _isListenerAdded = false;
@@ -191,6 +194,56 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       backgroundColor: Colors.red,
                       labelColor: Colors.white,
                       onPressed: () => NotificationController.deleteToken()
+                  ),
+
+                  /* ******************************************************************** */
+
+                  TextDivisor(title: 'Encrypted Notifications'),
+                  TextNote(
+              'To receive encrypted local and push notifications, it is necessary first'
+                      ' to generate and set the private key used to decrypt the protected'
+                      '  content.\n\n'
+                      'In case the encrypted content fails to decrypt or is not defined, the default values'
+                      ' (non-protected fields) will be used instead.'),
+                  Column(
+                    children: [
+                      ServiceControlPanel(
+                          'Encryption key',
+                          _privateKey.isNotEmpty,
+                          themeData,
+                          onPressed: null
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width * 0.72,
+                          height: MediaQuery.sizeOf(context).width * 0.72,
+                          child: Opacity(
+                            opacity: _privateKey.isEmpty ? 0.08 : 1.0,
+                            child: PrettyQrView.data(
+                              data: _privateKey,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SimpleButton('Generate and set new Encryption Key',
+                      onPressed: () => NotificationController.generateAndSetNewDecryptionKey().then((value) {
+                        setState(() {
+                          _privateKey = value ?? '';
+                        });
+                      })
+                  ),
+                  SimpleButton('Show public key',
+                      onPressed: _privateKey.isNotEmpty
+                          ? () => showPublicKey(context)
+                          : null
+                  ),
+                  SimpleButton('Delete Encryption Key',
+                      backgroundColor: Colors.red,
+                      labelColor: Colors.white,
+                      onPressed: () => NotificationController.deleteDecryptionKey()
                   ),
 
                   /* ******************************************************************** */
@@ -396,6 +449,41 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 ])),
         ShadowTop(),
       ],
+    );
+  }
+
+  Future<void> showPublicKey(BuildContext context) async {
+    final publicKey = NotificationController.publicKey;
+    if (publicKey == null) return;
+
+    print('Public key:\n\n$publicKey\n\n');
+    Clipboard.setData(ClipboardData(text: publicKey));
+
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Public Key:'),
+              SizedBox(height: 20),
+              PrettyQrView.data(
+                data: publicKey,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

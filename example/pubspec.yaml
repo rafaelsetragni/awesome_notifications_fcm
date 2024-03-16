@@ -33,6 +33,7 @@ dependencies:
   fluttertoast: ^8.2.4
   numberpicker: ^2.1.2
   giff_dialog: ^1.0.1
+  pretty_qr_code: ^3.2.1
 
   flutter_launcher_icons: ^0.13.1
 
