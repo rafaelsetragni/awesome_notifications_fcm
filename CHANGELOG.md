@@ -1,3 +1,14 @@
+## 0.9.3 - 2024-03-15
+### Enhancements
+- Enhanced the Awesome FCM interpreter logic to prioritize Awesome Notifications customizations over Firebase remote configurations. This change allows developers to fully utilize Awesome Notifications features without being constrained by Firebase's configuration settings.
+
+### Dependency Updates
+- Updated all core dependencies to version 0.9.3, ensuring the package remains robust against the latest software environment changes and continues to provide a secure, efficient notification service.
+
+## [0.9.2] - 2024-11-01
+### Enhancements & Fixes
+- **Refined Notification ID Handling for Stringify and Legacy Data Standards:** Altered the priority logic for push notification IDs in cases using stringify and legacy data standards. Now, Awesome IDs take precedence over Firebase IDs. This change enables more effective management of push notifications, allowing new notifications to replace or update previous ones with the same ID. It brings a higher level of control and dynamism to notification behavior.
+
 ## [0.9.1] - 01/04/2024
 ### Enhancements & Fixes
 - **iOS Target Extension Deployment Flexibility:** Updated the iOS pod script to enable manual adjustments of the minimum target deployment. This improvement offers greater control and customization to developers in line with their specific iOS deployment needs.

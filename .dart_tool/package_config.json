@@ -15,7 +15,7 @@
     },
     {
       "name": "awesome_notifications",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/awesome_notifications-0.9.0",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/awesome_notifications-0.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -69,7 +69,7 @@
     },
     {
       "name": "firebase_crashlytics",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.4.8",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.4.9",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -110,32 +110,50 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "matcher",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/matcher-0.12.16",
+      "name": "leak_tracker",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/leak_tracker-10.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "leak_tracker_flutter_testing",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "leak_tracker_testing",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/leak_tracker_testing-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "matcher",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/matcher-0.12.16+1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/material_color_utilities-0.5.0",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/material_color_utilities-0.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/meta-1.10.0",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/meta-1.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/path-1.8.3",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/path-1.9.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.7",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -188,10 +206,10 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "web",
-      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/web-0.3.0",
+      "name": "vm_service",
+      "rootUri": "file:///Users/rafaelsetragni/.pub-cache/hosted/pub.dev/vm_service-13.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.0"
     },
     {
       "name": "awesome_notifications_fcm",
@@ -200,7 +218,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2024-01-03T21:44:54.566043Z",
+  "generated": "2024-03-16T05:16:35.476889Z",
   "generator": "pub",
-  "generatorVersion": "3.2.3"
+  "generatorVersion": "3.3.1"
 }

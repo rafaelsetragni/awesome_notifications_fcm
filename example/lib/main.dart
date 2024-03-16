@@ -432,11 +432,13 @@ class _AppState extends State<MyApp> {
     pageStack.add(MaterialPageRoute(
         builder: (_) =>
             const MyHomePage(title: 'Awesome Notifications FCM Example App')));
-    if (initialRouteName == routeNotification &&
-        NotificationController().initialAction != null) {
+    final initialAction = NotificationController().initialAction;
+    print("initial action: ${initialAction}");
+    if (initialAction != null) {
       pageStack.add(MaterialPageRoute(
           builder: (_) => NotificationPage(
-              receivedAction: NotificationController().initialAction!)));
+              receivedAction: initialAction
+          )));
     }
     return pageStack;
   }
