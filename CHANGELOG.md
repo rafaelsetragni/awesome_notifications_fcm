@@ -1,20 +1,30 @@
-## 0.9.3 - 2024-03-15
+## [0.9.3+1] - 2024-15-03
+### Transition Support from Github to Discord Community
+- **GitHub Issues Closure**: Effective immediately, GitHub issues will no longer be open for new support requests. Existing issues will remain accessible as an archive and resource.
+- **Discord Community Support**: All support for Awesome Notifications has transitioned to our Discord community. This move aims to provide a more dynamic, interactive, and efficient support experience.
+- **Reasons for Change**:
+    - *Community Rules Respect*: Numerous issues posted on GitHub have not adhered to our community guidelines, impacting heavily on support efficiency and effectiveness.
+    - *Efficiency and Effectiveness*: Managing support through GitHub has become exceedingly time-consuming, particularly when posts omit critical information or disregard guidelines.
+    - *Quality of Support*: Our Discord community allows for real-time engagement, resource sharing, and a closer-knit user and developer interaction, which wasn't true for GitHub.
+- **Next Steps for Users**: We encourage all users to join our Discord community [https://discord.awesome-notifications.carda.me/](https://discord.awesome-notifications.carda.me/) for ongoing support, updates, and to connect with fellow users and the development team.
+
+## 0.9.3 - 2024-15-03
 ### Enhancements
 - Enhanced the Awesome FCM interpreter logic to prioritize Awesome Notifications customizations over Firebase remote configurations. This change allows developers to fully utilize Awesome Notifications features without being constrained by Firebase's configuration settings.
 
 ### Dependency Updates
 - Updated all core dependencies to version 0.9.3, ensuring the package remains robust against the latest software environment changes and continues to provide a secure, efficient notification service.
 
-## [0.9.2] - 2024-11-01
+## [0.9.2] - 2024-01-11
 ### Enhancements & Fixes
 - **Refined Notification ID Handling for Stringify and Legacy Data Standards:** Altered the priority logic for push notification IDs in cases using stringify and legacy data standards. Now, Awesome IDs take precedence over Firebase IDs. This change enables more effective management of push notifications, allowing new notifications to replace or update previous ones with the same ID. It brings a higher level of control and dynamism to notification behavior.
 
-## [0.9.1] - 01/04/2024
+## [0.9.1] - 2024-01-04
 ### Enhancements & Fixes
 - **iOS Target Extension Deployment Flexibility:** Updated the iOS pod script to enable manual adjustments of the minimum target deployment. This improvement offers greater control and customization to developers in line with their specific iOS deployment needs.
 - **Expanded Documentation on Data Standards:** Enhanced the documentation to provide comprehensive guidance on the three distinct data standards available for crafting push notifications via FCM. This update aims to clarify and streamline the notification creation process for developers.
 
-## [0.9.0] - 01/02/2024
+## [0.9.0] - 2024-01-02
 ### Breaking Changes
 - **Pod Modifications:** It's now necessary to add the Awesome Notifications pod modification inside the `Podfile` in the iOS folder.
 - **Receive Port and Send Port:** The methods `sendPort.send()` and `receivePort!.listen()` now only accept serialized data, not objects. Convert your data to map format and reconstruct it later from this format.
