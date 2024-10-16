@@ -1,3 +1,22 @@
+## 0.10.0 - 2024-10-11
+### Breaking Changes
+- **Pod Modifications:** Installation of `flutterfire_cli` is now necessary to configure Firebase with the latest features, ensuring the project is up-to-date with Firebase best practices.
+- **iOS Minimum Deployment Target Increased to 13:** AUpdated the minimum deployment target for iOS to 13 to comply with the latest Firebase Core library restrictions.
+- **Minimum Android SDK Increased to 23:** Elevated to utilize modern Android capabilities and security features, aligning with best security resources for Android platform.
+
+### Improvements
+- **Flutter 3.24.0 Compatibility:** Fully supporting the latest Flutter 3.24.0, ensuring compatibility and optimal performance across all platforms.
+
+### Deprecations
+- **Deprecation of `sendPushNotification` Method:**
+  - As part of our transition to modern messaging patterns, the `sendPushNotification` method has been marked as deprecated. This change follows Google's announcement to decommission FCM upstream messaging in June 2024.  
+  - Developers are now encouraged to implement a REST API on their server to handle communication from devices and use the Firebase Admin SDK to send notifications.  
+  - The deprecated method now triggers a `NotImplementedError` with a clear message and detailed Javadoc documentation to guide developers in migrating to the new approach. This method will be **removed in version 1.0.0**.
+
+### Enhancements
+- **Dependencies Updated:** All project dependencies have been upgraded to their latest versions, ensuring the most secure, stable, and efficient operation.
+- **Refreshed Documentation:** Comprehensive updates to our documentation make integrating and using Awesome Notifications clearer and more straightforward, enhancing developer experience and facilitating easier integration.
+
 ## [0.9.3+1] - 2024-15-03
 ### Transition Support from Github to Discord Community
 - **GitHub Issues Closure**: Effective immediately, GitHub issues will no longer be open for new support requests. Existing issues will remain accessible as an archive and resource.
@@ -8,7 +27,7 @@
     - *Quality of Support*: Our Discord community allows for real-time engagement, resource sharing, and a closer-knit user and developer interaction, which wasn't true for GitHub.
 - **Next Steps for Users**: We encourage all users to join our Discord community [https://discord.awesome-notifications.carda.me/](https://discord.awesome-notifications.carda.me/) for ongoing support, updates, and to connect with fellow users and the development team.
 
-## 0.9.3 - 2024-15-03
+## 0.9.3 - 2024-03-15
 ### Enhancements
 - Enhanced the Awesome FCM interpreter logic to prioritize Awesome Notifications customizations over Firebase remote configurations. This change allows developers to fully utilize Awesome Notifications features without being constrained by Firebase's configuration settings.
 

@@ -36,7 +36,7 @@ Awesome Notifications add-on to send push notifications using FCM (Firebase Clou
 
 # ⚠️ ATTENTION ⚠️ <br> Users from `firebase_messaging` plugin
 
-This plugin contains all features available in `firebase_messaging` plugin + all Awesome Notification features. Because of this, `awesome_notifications_fcm` plugin is incompatible with `firebase_messaging`, as both plugins will compete each other to acquire global notification resources.
+This plugin is a replacement of `firebase_messaging`, built specially to share and use all `awesome_notifications` features. Because of it, it contains all features available in `firebase_messaging` plugin + all `awesome_notifications` features.
 
 So, you **MUST not use** `firebase_messaging` with `awesome_notifications_fcm`. All other Firebase plugins are compatible with awesome notification plugins.
     
@@ -106,41 +106,43 @@ Add the plugins below as dependencies in your `pubspec.yaml` file. By using the 
 
 ```yaml
   # Awesome plugins
-  awesome_notifications_core: ^0.9.0 # use the latest version available
-  awesome_notifications: any # <- this version will be managed by core plugin
-  awesome_notifications_fcm: any # <- this version will be managed by core plugin
+  awesome_notifications_core: ^0.10.0 # use the latest version available
+  awesome_notifications: ^0.10.0 # use the latest version available
+  awesome_notifications_fcm: ^0.10.0 # use the latest version available
   
   # Firebase plugins
   firebase_core: ^X.X.X # use the latest available
   firebase_crashlytics: ^X.X.X # use the latest available
+  
+  # The firebase_messaging plugin is not necessary. awesome_notifications_fcm is a replacement for it
+  # firebase_messaging: ^X.X.X 
 ```
 Note: Always ensure to use the latest versions of all these plugins.
 
 <br>
 <br>
 
-## 🤖 *Android Configuration*
+## *Installing Flutterfire*
 
-1 - You MUST apply Google Play Services to your project to use FCM services. To do this, first, you need to import the `com.google.gms:google-services` package into your Android project by adding the line below in your `build.gradle` file, located in the "android" folder. (Ensure to use the latest version)
+To use Awesome Notifications Fcm and receive push notifications using all awesome features, first you need to enable Firebase at your project with flutterfire_cli.
 
-```gradle
-buildscript {
-    ...
-    dependencies {
-        ...
-        classpath 'com.android.tools.build:gradle:7.3.0'
-        classpath 'com.google.gms:google-services:4.3.15'
-        ...
-    }
-    ...
-}
+1 - Install the required command line tools
+
+If you haven't already, install [Firebase CLI](https://firebase.google.com/docs/cli#setup_update_cli).
+
+Then you need to log into Firebase using your Google account by running the following command:
+
+```sh
+firebase login
 ```
 
-2 - Then, you need to apply Google Play services by adding the line below at the end of the build.gradle file, located in the "android/app" folder.
+And lastly install the FlutterFire CLI by running the following command at the root of your project:
 
-```gradle
-apply plugin: 'com.google.gms.google-services'
+```sh
+dart pub global activate flutterfire_cli
 ```
+
+OBS: Please, pay attention to select the correct `Firebase project` and set the correct `Application ID`/`Bundle ID`.
 
 Now, your Android project is configured to use `awesome_notifications_fcm`. *Awesome!!*
 
@@ -281,12 +283,12 @@ class NotificationService: DartAwesomeServiceExtension {
 In *Runner* Target:
 * Build libraries for distribution => NO
 * Only safe API extensions => NO
-* iOS Deployment Target => 11 or greater
+* iOS Deployment Target => 13 or greater
 
 In your *NotificationServiceExtension* Target:
 * Build libraries for distribution => NO
 * Only safe API extensions => YES
-* iOS Deployment Target => 11 or greater
+* iOS Deployment Target => 13 or greater
 
 <br>
 
