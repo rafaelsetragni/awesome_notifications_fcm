@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -15,9 +16,6 @@ Future<void> main() async {
   await NotificationController.getInitialNotificationAction();
   runApp(const MyApp());
 }
-
-
-
 
 ///  *********************************************
 ///     NOTIFICATION CONTROLLER
@@ -56,20 +54,20 @@ class NotificationController extends ChangeNotifier {
   static Future<void> initializeLocalNotifications(
       {required bool debug}) async {
     await AwesomeNotifications().initialize(
-        null, //'resource://drawable/res_app_icon',//
-        [
-          NotificationChannel(
-              channelKey: 'alerts',
-              channelName: 'Alerts',
-              channelDescription: 'Notification tests as alerts',
-              playSound: true,
-              importance: NotificationImportance.High,
-              defaultPrivacy: NotificationPrivacy.Private,
-              defaultColor: Colors.deepPurple,
-              ledColor: Colors.deepPurple)
-        ],
-        debug: debug,
-        languageCode: 'ko',
+      null, //'resource://drawable/res_app_icon',//
+      [
+        NotificationChannel(
+            channelKey: 'alerts',
+            channelName: 'Alerts',
+            channelDescription: 'Notification tests as alerts',
+            playSound: true,
+            importance: NotificationImportance.High,
+            defaultPrivacy: NotificationPrivacy.Private,
+            defaultColor: Colors.deepPurple,
+            ledColor: Colors.deepPurple)
+      ],
+      debug: debug,
+      languageCode: 'ko',
     );
 
     // Get initial notification action is optional
@@ -85,9 +83,9 @@ class NotificationController extends ChangeNotifier {
         onNativeTokenHandle: NotificationController.myNativeTokenHandle,
         onFcmSilentDataHandle: NotificationController.mySilentDataHandle,
         licenseKeys:
-        // On this example app, the app ID / Bundle Id are different
-        // for each platform, so i used the main Bundle ID + 1 variation
-        [
+            // On this example app, the app ID / Bundle Id are different
+            // for each platform, so i used the main Bundle ID + 1 variation
+            [
           // me.carda.awesomeNotificationsFcmExample
           '2024-01-02==kZDwJQkSR7mrjEgDk7afWDSrqYCiqW6Ao/7wn/w6v5OKOgAnoEWt'
               'gqO0ELI1BxWNzSde2gbaW+9Ki6Tx94pU2gQRJuJxXGsvcmCRla1mB/0U/rPh'
@@ -116,13 +114,10 @@ class NotificationController extends ChangeNotifier {
   static Future<void> initializeIsolateReceivePort() async {
     receivePort = ReceivePort('Notification action port in main isolate')
       ..listen(
-        (silentData) => onActionReceivedImplementationMethod(silentData)
-      );
+          (silentData) => onActionReceivedImplementationMethod(silentData));
 
     IsolateNameServer.registerPortWithName(
-        receivePort!.sendPort,
-        'notification_action_port'
-    );
+        receivePort!.sendPort, 'notification_action_port');
   }
 
   ///  *********************************************
@@ -144,24 +139,20 @@ class NotificationController extends ChangeNotifier {
   @pragma('vm:entry-point')
   static Future<void> onActionReceivedMethod(
       ReceivedAction receivedAction) async {
-
-    if(
-        receivedAction.actionType == ActionType.SilentAction ||
-        receivedAction.actionType == ActionType.SilentBackgroundAction
-    ){
+    if (receivedAction.actionType == ActionType.SilentAction ||
+        receivedAction.actionType == ActionType.SilentBackgroundAction) {
       // For background actions, you must hold the execution until the end
-      print('Message sent via notification input: "${receivedAction.buttonKeyInput}"');
+      print(
+          'Message sent via notification input: "${receivedAction.buttonKeyInput}"');
       await executeLongTaskInBackground();
       return;
-    }
-    else {
-      if (receivePort == null){
+    } else {
+      if (receivePort == null) {
         // onActionReceivedMethod was called inside a parallel dart isolate.
-        SendPort? sendPort = IsolateNameServer.lookupPortByName(
-            'notification_action_port'
-        );
+        SendPort? sendPort =
+            IsolateNameServer.lookupPortByName('notification_action_port');
 
-        if (sendPort != null){
+        if (sendPort != null) {
           // Redirecting the execution to main isolate process (this process is
           // only necessary when you need to redirect the user to a new page or
           // use a valid context)
@@ -175,12 +166,11 @@ class NotificationController extends ChangeNotifier {
   }
 
   static Future<void> onActionReceivedImplementationMethod(
-      ReceivedAction receivedAction
-  ) async {
+      ReceivedAction receivedAction) async {
     MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(
         '/notification-page',
-            (route) =>
-        (route.settings.name != '/notification-page') || route.isFirst,
+        (route) =>
+            (route.settings.name != '/notification-page') || route.isFirst,
         arguments: receivedAction);
   }
 
@@ -213,8 +203,7 @@ class NotificationController extends ChangeNotifier {
   /// Use this method to detect when a new fcm token is received
   @pragma("vm:entry-point")
   static Future<void> myFcmTokenHandle(String token) async {
-
-    if (token.isNotEmpty){
+    if (token.isNotEmpty) {
       Fluttertoast.showToast(
           msg: 'Fcm token received',
           backgroundColor: Colors.blueAccent,
@@ -222,8 +211,7 @@ class NotificationController extends ChangeNotifier {
           fontSize: 16);
 
       debugPrint('Firebase Token:"$token"');
-    }
-    else {
+    } else {
       Fluttertoast.showToast(
           msg: 'Fcm token deleted',
           backgroundColor: Colors.red,
@@ -357,8 +345,7 @@ class NotificationController extends ChangeNotifier {
               key: 'REPLY',
               label: 'Reply Message',
               requireInputText: true,
-              actionType: ActionType.SilentAction
-          ),
+              actionType: ActionType.SilentAction),
           NotificationActionButton(
               key: 'DISMISS',
               label: 'Dismiss',
@@ -395,9 +382,6 @@ class NotificationController extends ChangeNotifier {
   }
 }
 
-
-
-
 ///  *********************************************
 ///     MAIN WIDGET
 ///  *********************************************
@@ -406,8 +390,7 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   // The navigator key is necessary to navigate using static methods
-  static GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static Color mainColor = const Color(0xFF9D50DD);
 
@@ -436,9 +419,7 @@ class _AppState extends State<MyApp> {
     print("initial action: ${initialAction}");
     if (initialAction != null) {
       pageStack.add(MaterialPageRoute(
-          builder: (_) => NotificationPage(
-              receivedAction: initialAction
-          )));
+          builder: (_) => NotificationPage(receivedAction: initialAction)));
     }
     return pageStack;
   }
@@ -471,10 +452,6 @@ class _AppState extends State<MyApp> {
     );
   }
 }
-
-
-
-
 
 ///  *********************************************
 ///     HOME PAGE
@@ -559,7 +536,7 @@ class _MyHomePageState extends State<MyHomePage> {
               heroTag: '0',
               onPressed: () => NotificationController.deleteToken(),
               tooltip: 'Delete token',
-              child: const Icon(Icons.recycling),
+              child: const Icon(CupertinoIcons.trash),
             ),
           ],
         ),
@@ -568,18 +545,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-
-
-
 ///  *********************************************
 ///     NOTIFICATION PAGE
 ///  *********************************************
 
 class NotificationPage extends StatelessWidget {
-  const NotificationPage({
-    super.key,
-    required this.receivedAction
-  });
+  const NotificationPage({super.key, required this.receivedAction});
 
   final ReceivedAction receivedAction;
 
