@@ -5,7 +5,7 @@ import shared_preferences_foundation
 import awesome_notifications
 import awesome_notifications_fcm
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
     override func application(
         _ application: UIApplication,

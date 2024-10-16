@@ -48,7 +48,7 @@ class _CompleteAppState extends State<CompleteApp> {
         theme: ThemeData(
             primaryColor: CompleteApp.mainColor,
             textTheme: TextTheme(
-              headline6: TextStyle(
+              titleLarge: TextStyle(
                   color: CompleteApp.mainColor, fontWeight: FontWeight.bold
               ),
             ),
