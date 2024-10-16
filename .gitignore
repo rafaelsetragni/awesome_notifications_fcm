@@ -8,3 +8,5 @@ example/android/app/GooglePlaySign.jks
 build/
 
 example/firebase.json
+
+example/lib/firebase_options.dart
