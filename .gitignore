@@ -6,3 +6,5 @@ example/android/awn_core
 example/android/app/GooglePlaySign.jks
 
 build/
+
+example/firebase.json
