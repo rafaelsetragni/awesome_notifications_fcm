@@ -10,3 +10,9 @@ build/
 example/firebase.json
 
 example/lib/firebase_options.dart
+
+.dart_tool/
+
+.idea/
+
+example/android/app/.cxx/
