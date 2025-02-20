@@ -1,3 +1,7 @@
+## [0.10.1] - 2025-02-19
+### Fixed
+- **Updated Android native library to fully support Flutter 3.27:** Removed deprecated Flutter V1 libraries on Android, ensuring compatibility with Flutter 3.27.
+
 ## 0.10.0 - 2024-10-11
 ### Breaking Changes
 - **Pod Modifications:** Installation of `flutterfire_cli` is now necessary to configure Firebase with the latest features, ensuring the project is up-to-date with Firebase best practices.
