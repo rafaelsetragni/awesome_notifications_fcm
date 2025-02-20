@@ -76,22 +76,6 @@ public class FcmDartBackgroundExecutor extends FcmBackgroundExecutor implements 
         return true;
     }
 
-    private static io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback
-            pluginRegistrantCallback;
-
-    /**
-     * Sets the {@code io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback} used to
-     * register plugins with the newly spawned isolate.
-     *
-     * <p>Note: this is only necessary for applications using the V1 engine embedding API as plugins
-     * are automatically registered via reflection in the V2 engine embedding API. If not set,
-     * background message callbacks will not be able to utilize functionality from other plugins.
-     */
-    public static void setPluginRegistrant(
-            io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback callback) {
-        pluginRegistrantCallback = callback;
-    }
-
     private static void addSilentIntent(@NonNull Intent intent){
         silentDataQueue.add(intent);
     }
