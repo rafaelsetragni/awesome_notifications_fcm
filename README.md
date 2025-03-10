@@ -367,6 +367,7 @@ On iOS, to use any plugin inside background actions, you will need to manually r
 ```Swift
 import Flutter
 import awesome_notifications
+import awesome_notifications_fcm
 import shared_preferences_ios
 //import all_other_plugins_that_i_need
 
