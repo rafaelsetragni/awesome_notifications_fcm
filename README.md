@@ -1,6 +1,6 @@
-# Awesome Notifications FCM - Year 2
+# Awesome Notifications FCM - Year 3
 
-![image](https://user-images.githubusercontent.com/40064496/194728018-8ab6821c-d59d-4b1f-972c-57464c9b9aec.png)
+![image](https://bit.ly/4aEGmDg)
 
 <div>
 
@@ -52,6 +52,15 @@ To migrate **firebase_messaging** to **awesome_notifications_fcm**, please take 
 - Include Windows support
 - Include MacOS support
 - Include Linux support
+
+<br>
+<br>
+
+# 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) before submitting a pull request.
+
+**Important:** All pull requests must target the `development` branch. PRs aimed at `master` will be rejected.
 
 <br>
 <br>
@@ -112,7 +121,6 @@ Add the plugins below as dependencies in your `pubspec.yaml` file. By using the 
   
   # Firebase plugins
   firebase_core: ^X.X.X # use the latest available
-  firebase_crashlytics: ^X.X.X # use the latest available
   
   # The firebase_messaging plugin is not necessary. awesome_notifications_fcm is a replacement for it
   # firebase_messaging: ^X.X.X 
@@ -937,51 +945,4 @@ Following these steps will ensure a smooth transition from firebase_messaging to
 
 <br>
 <br>
-
-
-# 🔑 License Key - Year 2
-
-Local notifications using [Awesome Notifications](https://pub.dev/packages/awesome_notifications) remain 100% free. For using push notifications in [Awesome Notifications FCM](https://pub.dev/packages/awesome_notifications_fcm), two types of license keys are available, each catering to different needs.
-
-## Common Features
-
-Both licenses share these attributes:
-
-- **No Watermarks:** Enjoy push notifications without any watermarks.
-- **Perpetual Validity:** License keys never expire.
-- **Offline Validation:** No internet connection needed for license validation.
-- **Expandable:** Each key is expandable to 5 ID variations (flavors and minor changes).
-
-## License Types
-
-### 1. Basic License - Single Plugin Version
-
-**Price:** $5/App
-
-This license is ideal for those who need a cost-effective solution for only a single and specific plugin version. 
-
-**Benefits:**
-
-- Valid for a single library version.
-- Requires a new license for updates or new releases.
-
-### 2. Premium License - Full 1 Year Support
-
-**Price:** $10/App
-
-This license is designed for those seeking ongoing support and updates.
-
-**Benefits:**
-
-- All features of the Basic License.
-- **1 Year of Free Updates:** Use the same license key for all new plugin releases for one year from the purchase date.
-- **Exclusive Discord Support:** Receive dedicated support for one year.
-
-## Contributing to Development
-
-Your purchase contributes to the plugin's development, enabling us to acquire new testing devices, hire additional developers, and more.
-
-## Purchasing a License Key
-
-Our portal for purchasing and managing license keys is in its final development stages. For now, to acquire a license key, please contact us on our [Discord community](https://discord.awesome-notifications.carda.me).
 
