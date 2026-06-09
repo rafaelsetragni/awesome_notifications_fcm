@@ -16,12 +16,12 @@ Complement of Awesome Notifications to allow firebase with all awesome resources
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'awesome_notifications'
-  s.dependency 'IosAwnCore', '~> 0.10.0'
-  s.dependency 'IosAwnFcmCore', '~> 0.10.1'
+  s.dependency 'IosAwnCore', '~> 0.12.0'
+  s.dependency 'IosAwnFcmCore', '~> 0.12.0'
   s.dependency 'FirebaseCore'
   s.dependency 'Firebase/Messaging'
-  
-  s.platform = :ios, '13.0'
+
+  s.platform = :ios, '15.0'
   s.swift_version = '5.3'
   s.static_framework = true
 

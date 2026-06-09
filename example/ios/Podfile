@@ -31,8 +31,8 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  # pod 'IosAwnCore', :path => '../../../IosAwnCore/'
-  # pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
+  pod 'IosAwnCore', :path => '../../../IosAwnCore/'
+  pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 
