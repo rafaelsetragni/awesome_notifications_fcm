@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'awesome_notifications_fcm'
-  s.version          = '0.10.0'
+  s.version          = '0.12.0'
   s.summary          = 'Complement of Awesome Notifications to allow firebase with all awesome resources in Flutter.'
   s.description      = <<-DESC
 Complement of Awesome Notifications to allow firebase with all awesome resources in Flutter.
