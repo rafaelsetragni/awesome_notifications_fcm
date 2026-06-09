@@ -1,3 +1,11 @@
+## [0.12.0] - 2026-06-09
+### Breaking changes
+- **License keys removed:** Awesome Notifications FCM no longer requires or validates license keys, and the unlicensed `[DEMO]` watermark has been removed on both iOS and Android. The `licenseKeys` parameter of `initialize(...)` has been removed — delete that argument from your call.
+- **iOS minimum deployment target raised to 15:** Required by Firebase 12.
+### Changed
+- **Firebase updated to 12:** `FirebaseCore` and `Firebase/Messaging` are now `~> 12.0` on iOS, and the Firebase Dart constraints were widened to allow `firebase_core` 4.x (`>=3.12.0 <5.0.0`). Note: Firebase 12 requires Xcode 16 or newer.
+- **Requires awesome_notifications, IosAwnCore and IosAwnFcmCore 0.12.0.**
+
 ## [0.10.1] - 2025-02-19
 ### Fixed
 - **Updated Android native library to fully support Flutter 3.27:** Removed deprecated Flutter V1 libraries on Android, ensuring compatibility with Flutter 3.27.
