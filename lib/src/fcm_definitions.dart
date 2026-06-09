@@ -4,7 +4,6 @@ const SILENT_DATA_BACKGROUND_HANDLE = 'onSilentDataHandle';
 const CHANNEL_DART_BACKGROUND_HANDLE = 'onDartBackgroundHandle';
 
 const DEBUG_MODE = 'debug';
-const LICENSE_KEYS = 'licenseKeys';
 const TOKEN_HANDLE = 'tokenHandle';
 const SILENT_HANDLE = 'fcmSilentHandle';
 const DART_BG_HANDLE = 'fcmDartBGHandle';
