@@ -220,14 +220,12 @@ public class SwiftAwesomeNotificationsFcmPlugin:
         let dartBgHandle:Int64 = arguments[FcmDefinitions.DART_BG_HANDLE] as? Int64 ?? 0
         
         let debug:Bool = arguments[FcmDefinitions.DEBUG_MODE] as? Bool ?? false
-        let licenseKeys:[String] = arguments[FcmDefinitions.LICENSE_KEYS] as? [String] ?? []
-        
+
         result(
             try awesomeNotificationsFcm?
                     .initialize(
                         silentHandle: silentHandle,
                         dartBgHandle: dartBgHandle,
-                        licenseKeys: licenseKeys,
                         debug: debug) ?? false
         )
     }

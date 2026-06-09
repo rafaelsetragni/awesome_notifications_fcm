@@ -54,7 +54,6 @@ public class AwesomeNotificationsFcm:
     public func initialize(
         silentHandle:Int64,
         dartBgHandle:Int64,
-        licenseKeys:[String],
         debug:Bool
     ) throws -> Bool {
         if isInitialized {
@@ -70,16 +69,10 @@ public class AwesomeNotificationsFcm:
         FcmDefaultsManager.shared.debug = debug
         FcmDefaultsManager.shared.silentCallback = silentHandle
         FcmDefaultsManager.shared.backgroundCallback = dartBgHandle
-        FcmDefaultsManager.shared.licenseKeys = licenseKeys
 
         if AwesomeNotificationsFcm.debug {
             Logger.shared.d(TAG, "Awesome Notifications FCM service initialized")
             Logger.shared.d(TAG, "iOS App Group: \(Definitions.USER_DEFAULT_TAG)")
-        }
-
-        let validated = try LicenseManager.shared.isLicenseKeyValid()
-        if validated {
-             Logger.shared.d(TAG,"Awesome Notification's license key validated")
         }
 
         isInitialized = true
