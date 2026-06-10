@@ -15,7 +15,6 @@ dependencies:
   plugin_platform_interface: ^2.1.8
 
   firebase_core: ">=3.12.0 <5.0.0"
-  firebase_crashlytics: ">=4.3.3 <6.0.0"
 
   awesome_notifications: ^0.12.0
 #    path: ../awesome_notifications
@@ -43,7 +42,7 @@ flutter:
         package: me.carda.awesome_notifications_fcm
         pluginClass: AwesomeNotificationsFcmPlugin
       ios:
-        pluginClass: AwesomeNotificationsFcmPlugin
+        pluginClass: SwiftAwesomeNotificationsFcmPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

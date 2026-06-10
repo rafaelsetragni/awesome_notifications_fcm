@@ -12,6 +12,7 @@ import FirebaseCore
 import FirebaseMessaging
 import IosAwnCore
 import IosAwnFcmCore
+import UserNotifications
 
 public class AwesomeNotificationsFcm:
                         NSObject,

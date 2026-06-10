@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '13.0'
+platform :ios, '15.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -31,8 +31,10 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  pod 'IosAwnCore', :path => '../../../IosAwnCore/'
-  pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
+  # Under Swift Package Manager these cores are resolved through Package.swift.
+  # Uncomment only when building this example with SPM disabled (CocoaPods).
+  # pod 'IosAwnCore', :path => '../../../IosAwnCore/'
+  # pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 
@@ -59,15 +61,46 @@ require awesome_pod_file
 update_awesome_main_target_settings('Runner', File.dirname(File.realpath(__FILE__)), flutter_root)
 ################  Awesome Notifications pod modification 2  ###################
 
-################  Awesome Notifications FCM pod mod  ###################
+################  Awesome Notifications FCM service extension  ###################
+# The Notification Service Extension is Flutter-free: it extends IosAwnFcmCore's
+# AwesomeServiceExtension directly, and Flutter assets resolve through the extension-safe
+# bundle-path resolver in IosAwnCore. It links IosAwnFcmCore through Swift Package Manager
+# (wired into the extension target by the script below), so it needs no CocoaPods here.
 awesome_fcm_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications_fcm', 'ios', 'Scripts', 'AwesomeFcmPodFile'), '.symlinks')
 require awesome_fcm_pod_file
-target 'AwesomeNotificationService' do
-    use_frameworks!
-    use_modular_headers!
-  
-    install_awesome_fcm_ios_pod_target File.dirname(File.realpath(__FILE__))
-end
 update_awesome_fcm_service_target('AwesomeNotificationService', File.dirname(File.realpath(__FILE__)), flutter_root)
+
+# Link IosAwnFcmCore into the extension target as a local Swift Package (Flutter-free,
+# extension-safe; pulls Firebase through firebase-ios-sdk SPM — same as the app, so there
+# is no duplicate Firebase). A published setup would point this at the released tag instead.
+def add_local_spm_to_target(target_name, xcodeproj_path, relative_path, product_name)
+    project = Xcodeproj::Project.open(File.join(xcodeproj_path, 'Runner.xcodeproj'))
+    target = project.targets.find { |t| t.name == target_name }
+    return if target.nil?
+
+    pkg_ref = project.root_object.package_references.find { |r|
+        r.is_a?(Xcodeproj::Project::Object::XCLocalSwiftPackageReference) && r.relative_path == relative_path
+    }
+    if pkg_ref.nil?
+        pkg_ref = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
+        pkg_ref.relative_path = relative_path
+        project.root_object.package_references << pkg_ref
+    end
+
+    unless target.package_product_dependencies.any? { |p| p.product_name == product_name }
+        prod = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
+        prod.package = pkg_ref
+        prod.product_name = product_name
+        target.package_product_dependencies << prod
+
+        build_file = project.new(Xcodeproj::Project::Object::PBXBuildFile)
+        build_file.product_ref = prod
+        target.frameworks_build_phase.files << build_file
+    end
+
+    project.save
+    puts "[Awesome Notifications FCM] Linked #{product_name} (SPM) into '#{target_name}'"
+end
+add_local_spm_to_target('AwesomeNotificationService', File.dirname(File.realpath(__FILE__)), '../../../IosAwnFcmCore', 'IosAwnFcmCore')
 ################  Awesome Notifications FCM pod mod  ###################
 

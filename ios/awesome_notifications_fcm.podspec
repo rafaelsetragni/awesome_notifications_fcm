@@ -13,7 +13,8 @@ Complement of Awesome Notifications to allow firebase with all awesome resources
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Rafael Setragni' => 'rafaelsetra@gmail.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  # Shared with Package.swift so CocoaPods and Swift Package Manager build the same sources.
+  s.source_files = 'awesome_notifications_fcm/Sources/awesome_notifications_fcm/**/*'
   s.dependency 'Flutter'
   s.dependency 'awesome_notifications'
   s.dependency 'IosAwnCore', '~> 0.12.0'
@@ -27,7 +28,9 @@ Complement of Awesome Notifications to allow firebase with all awesome resources
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = {
-    'DEFINES_MODULE' => 'NO',
+    # Pure-Swift pod (the Objective-C registrant shim was removed for SPM): the module
+    # must be defined so the generated plugin registrant can `@import awesome_notifications_fcm`.
+    'DEFINES_MODULE' => 'YES',
     'ENABLE_BITCODE' => 'NO',
     'ONLY_ACTIVE_ARCH' => 'YES',
     'APPLICATION_EXTENSION_API_ONLY' => 'NO',
