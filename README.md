@@ -112,7 +112,6 @@ Add the plugins below as dependencies in your `pubspec.yaml` file. By using the 
   
   # Firebase plugins
   firebase_core: ^X.X.X # use the latest available
-  firebase_crashlytics: ^X.X.X # use the latest available
   
   # The firebase_messaging plugin is not necessary. awesome_notifications_fcm is a replacement for it
   # firebase_messaging: ^X.X.X 
