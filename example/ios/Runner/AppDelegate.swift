@@ -6,19 +6,13 @@ import awesome_notifications
 import awesome_notifications_fcm
 
 @main
-@objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
+@objc class AppDelegate: FlutterAppDelegate {
     override func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-    }
-
-    // Plugin registration moves here under the UIScene lifecycle (launchOptions are nil
-    // in didFinishLaunchingWithOptions after migrating).
-    func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
-        GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
-
+        GeneratedPluginRegistrant.register(with: self)
+        
         SwiftAwesomeNotificationsPlugin.setPluginRegistrantCallback { registry in
             SwiftAwesomeNotificationsPlugin.register(
               with: registry.registrar(forPlugin: "AwesomeNotificationsPlugin")!)
@@ -27,10 +21,12 @@ import awesome_notifications_fcm
             SharedPreferencesPlugin.register(
               with: registry.registrar(forPlugin: "SharedPreferencesPlugin")!)
         }
-
+        
         SwiftAwesomeNotificationsFcmPlugin.setPluginRegistrantCallback { registry in
             FluttertoastPlugin.register(
               with: registry.registrar(forPlugin: "FluttertoastPlugin")!)
         }
+        
+        return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 }
