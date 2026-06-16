@@ -1,9 +1,12 @@
-## [0.12.0] - 2026-06-09
+## [0.12.0] - 2026-06-16
 ### Breaking changes
 - **License keys removed:** Awesome Notifications FCM no longer requires or validates license keys, and the unlicensed `[DEMO]` watermark has been removed on both iOS and Android. The `licenseKeys` parameter of `initialize(...)` has been removed — delete that argument from your call.
-- **iOS minimum deployment target raised to 15:** Required by Firebase 12.
+- **Firebase updated to 12 / `firebase_core` 4.x required:** iOS now uses `FirebaseCore` and `Firebase/Messaging` `~> 12.0`, and the Dart `firebase_core` constraint is now `>=4.0.0 <5.0.0` (the native core no longer accepts the Firebase 11 line). Firebase 12 raises the iOS minimum deployment target to **15** and requires **Xcode 16 or newer**.
+- **Crashlytics integration removed:** the optional Firebase Crashlytics wiring (Dart dependency, Android exception listener, and the example's crash-symbol upload phase) was removed.
+### Added
+- **Swift Package Manager support (iOS):** the plugin ships a `Package.swift` and installs through Swift Package Manager, keeping CocoaPods support during the transition. The Notification Service Extension is now Flutter-free — it extends `IosAwnFcmCore`'s `AwesomeServiceExtension` directly and links the core through SwiftPM, with Firebase resolved once via `firebase-ios-sdk`.
 ### Changed
-- **Firebase updated to 12:** `FirebaseCore` and `Firebase/Messaging` are now `~> 12.0` on iOS, and the Firebase Dart constraints were widened to allow `firebase_core` 4.x (`>=3.12.0 <5.0.0`). Note: Firebase 12 requires Xcode 16 or newer.
+- **Android cores moved to Maven Central:** `me.carda:AndroidAwnCore` and `me.carda:AndroidAwnFcmCore` are now published on Maven Central instead of JitPack; the JitPack repository was removed and the dependencies resolve through `mavenCentral()`.
 - **Requires awesome_notifications, IosAwnCore and IosAwnFcmCore 0.12.0.**
 
 ## [0.10.1] - 2025-02-19

@@ -464,10 +464,6 @@ So, to send notifications, first you need to initialize `Firebase`, `AwesomeNoti
         onFcmSilentDataHandle: NotificationController.mySilentDataHandle,
         onFcmTokenHandle: NotificationController.myFcmTokenHandle,
         onNativeTokenHandle: NotificationController.myNativeTokenHandle,
-        // This license key is necessary only to remove the watermark for
-        // push notifications in release mode. To know more about it, please
-        // visit http://awesome-notifications.carda.me#prices
-        licenseKey: null,
         debug: debug);
   }
 
