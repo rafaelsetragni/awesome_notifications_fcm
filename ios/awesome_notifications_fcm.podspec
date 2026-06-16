@@ -19,8 +19,8 @@ Complement of Awesome Notifications to allow firebase with all awesome resources
   s.dependency 'awesome_notifications'
   s.dependency 'IosAwnCore', '~> 0.12.0'
   s.dependency 'IosAwnFcmCore', '~> 0.12.0'
-  s.dependency 'FirebaseCore'
-  s.dependency 'Firebase/Messaging'
+  s.dependency 'FirebaseCore', '~> 12.0'
+  s.dependency 'Firebase/Messaging', '~> 12.0'
 
   s.platform = :ios, '15.0'
   s.swift_version = '5.3'

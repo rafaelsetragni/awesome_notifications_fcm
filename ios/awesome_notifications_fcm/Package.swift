@@ -19,14 +19,11 @@ let package = Package(
         // Firebase moves off CocoaPods onto its official Swift Package; this is what
         // resolves the duplicate-Firebase clash when the app is built with SPM enabled.
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.0.0"),
-        // Standalone (non-Flutter) native cores. Flutter symlinks plugins into
-        // ephemeral/Packages/.packages, which breaks relative paths to non-plugin
-        // packages, so absolute paths are used for local validation. Before publishing,
-        // switch these to the released tags:
-        //   .package(url: "https://github.com/rafaelsetragni/IosAwnCore.git", from: "0.12.0")
-        //   .package(url: "https://github.com/rafaelsetragni/IosAwnFcmCore.git", from: "0.12.0")
-        .package(name: "IosAwnCore", path: "/Users/rafaelsetragni/Development/Repositories/Plugins/IosAwnCore"),
-        .package(name: "IosAwnFcmCore", path: "/Users/rafaelsetragni/Development/Repositories/Plugins/IosAwnFcmCore"),
+        // Standalone (non-Flutter) native cores referenced by their released tags — Flutter
+        // symlinks plugins into ephemeral/Packages/.packages, which breaks relative paths to
+        // non-plugin packages, so these must be URL+tag (not local paths).
+        .package(url: "https://github.com/rafaelsetragni/IosAwnCore.git", from: "0.12.0"),
+        .package(url: "https://github.com/rafaelsetragni/IosAwnFcmCore.git", from: "0.12.0"),
     ],
     targets: [
         .target(
