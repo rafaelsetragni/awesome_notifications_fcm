@@ -1,12 +1,10 @@
 ## [0.12.0] - 2026-06-16
 ### Breaking changes
-- **License keys removed:** Awesome Notifications FCM no longer requires or validates license keys, and the unlicensed `[DEMO]` watermark has been removed on both iOS and Android. The `licenseKeys` parameter of `initialize(...)` has been removed — delete that argument from your call.
-- **Firebase updated to 12 / `firebase_core` 4.x required:** iOS now uses `FirebaseCore` and `Firebase/Messaging` `~> 12.0`, and the Dart `firebase_core` constraint is now `>=4.0.0 <5.0.0` (the native core no longer accepts the Firebase 11 line). Firebase 12 raises the iOS minimum deployment target to **15** and requires **Xcode 16 or newer**.
-- **Crashlytics integration removed:** the optional Firebase Crashlytics wiring (Dart dependency, Android exception listener, and the example's crash-symbol upload phase) was removed.
+- **`licenseKeys` parameter removed:** deprecated and ignored since 0.11.0, the `licenseKeys` argument of `initialize(...)` has now been removed — delete it from your call.
 ### Added
-- **Swift Package Manager support (iOS):** the plugin ships a `Package.swift` and installs through Swift Package Manager, keeping CocoaPods support during the transition. The Notification Service Extension is now Flutter-free — it extends `IosAwnFcmCore`'s `AwesomeServiceExtension` directly and links the core through SwiftPM, with Firebase resolved once via `firebase-ios-sdk`.
+- **Swift Package Manager support (iOS):** the plugin ships a `Package.swift` and installs through Swift Package Manager, keeping CocoaPods support during the transition. The Notification Service Extension is Flutter-free — it extends `IosAwnFcmCore`'s `AwesomeServiceExtension` directly and links the core through SwiftPM, with Firebase resolved once via `firebase-ios-sdk`.
 ### Changed
-- **Android cores moved to Maven Central:** `me.carda:AndroidAwnCore` and `me.carda:AndroidAwnFcmCore` are now published on Maven Central instead of JitPack; the JitPack repository was removed and the dependencies resolve through `mavenCentral()`.
+- **Native cores updated to 0.12.0.** The Android cores `me.carda:AndroidAwnCore` and `me.carda:AndroidAwnFcmCore` are now published on **Maven Central** instead of JitPack (resolved through `mavenCentral()`), and the iOS cores `IosAwnCore`/`IosAwnFcmCore` are consumed through Swift Package Manager from their published 0.12.0 tags.
 - **Requires awesome_notifications, IosAwnCore and IosAwnFcmCore 0.12.0.**
 
 ## [0.10.1] - 2025-02-19
