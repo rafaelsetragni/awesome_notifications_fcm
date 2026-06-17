@@ -218,7 +218,7 @@ public class SwiftAwesomeNotificationsFcmPlugin:
         
         let silentHandle:Int64 = arguments[FcmDefinitions.SILENT_HANDLE] as? Int64 ?? 0
         let dartBgHandle:Int64 = arguments[FcmDefinitions.DART_BG_HANDLE] as? Int64 ?? 0
-        
+
         let debug:Bool = arguments[FcmDefinitions.DEBUG_MODE] as? Bool ?? false
 
         result(

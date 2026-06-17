@@ -16,3 +16,5 @@ example/lib/firebase_options.dart
 .idea/
 
 example/android/app/.cxx/
+
+example/ios/Flutter/ephemeral/

@@ -60,11 +60,11 @@ public class AwesomeNotificationsFcm:
         if isInitialized {
             return true
         }
-        
+
         if !SwiftUtils.isRunningOnExtension() {
             UIApplication.shared.registerForRemoteNotifications()
         }
-        
+
         AwesomeNotificationsFcm.debug = debug
 
         FcmDefaultsManager.shared.debug = debug
