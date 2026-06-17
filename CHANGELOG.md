@@ -7,6 +7,23 @@
 - **Native cores updated to 0.12.0.** The Android cores `me.carda:AndroidAwnCore` and `me.carda:AndroidAwnFcmCore` are now published on **Maven Central** instead of JitPack (resolved through `mavenCentral()`), and the iOS cores `IosAwnCore`/`IosAwnFcmCore` are consumed through Swift Package Manager from their published 0.12.0 tags.
 - **Requires awesome_notifications, IosAwnCore and IosAwnFcmCore 0.12.0.**
 
+## [0.11.0] - 2025-02-12
+### Breaking changes
+- **`licenseKeys` parameter deprecated:** License keys are no longer required. The license validation has been completely removed from the native core libraries (AndroidAwnFcmCore and IosAwnFcmCore). The `licenseKeys` parameter in `initialize()` is now ignored and will be removed in a future version.
+- **iOS minimum deployment target raised to 15.0:** The minimum iOS deployment target has been increased from iOS 13 to iOS 15, aligning with the awesome_notifications core plugin requirements.
+- **Android minimum SDK raised to 23:** The minimum Android SDK has been increased from 21 to 23, matching the core plugin.
+- **`firebase_crashlytics` dependency removed:** The plugin no longer depends on or integrates with Firebase Crashlytics. Internal exceptions are now logged via the standard platform logger. Apps that need crash reporting should integrate Crashlytics independently.
+- **`firebase_core` minimum version raised to 4.0.0:** Required to support Firebase iOS SDK 12.x and Firebase Android BOM 33.x, which are needed by IosAwnFcmCore 0.11.0 and AndroidAwnFcmCore 0.11.0. Update your `firebase_core` dependency to `^4.0.0`.
+- **Build system updated:** AGP 8.1.0 → 8.1.4, Gradle 8.3 → 8.13, compileSdk 34 → 36, dependencies updated (guava 33.5.0, annotation 1.9.1).
+
+### Removed
+- **License key validation removed:** The entire license validation system has been removed, making the plugin fully open source and free to use without restrictions.
+- **Firebase Crashlytics integration removed:** The `FirebaseCrashlytics.recordException()` call and the `firebase_crashlytics` dependency have been removed from all layers (Dart, Android, iOS).
+
+### Updated
+- **Native libraries updated:** AndroidAwnCore and AndroidAwnFcmCore updated to 0.11.0, IosAwnCore and IosAwnFcmCore updated to 0.11.0.
+- **Dependencies updated:** All project dependencies have been upgraded to their latest versions, ensuring compatibility with awesome_notifications 0.11.0.
+
 ## [0.10.1] - 2025-02-19
 ### Fixed
 - **Updated Android native library to fully support Flutter 3.27:** Removed deprecated Flutter V1 libraries on Android, ensuring compatibility with Flutter 3.27.
