@@ -1,0 +1,8 @@
+build/
+**/.DS_Store
+*.iml
+.idea/
+**/.idea/
+# Never publish Firebase config (contains project API keys)
+example/ios/Runner/GoogleService-Info.plist
+example/android/app/google-services.json
