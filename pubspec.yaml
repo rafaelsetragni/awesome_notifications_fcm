@@ -14,7 +14,7 @@ dependencies:
 
   plugin_platform_interface: ^2.1.8
 
-  firebase_core: ">=4.0.0 <5.0.0"
+  firebase_core: ^4.4.0
 
   awesome_notifications: ^0.12.0
 #    path: ../awesome_notifications
