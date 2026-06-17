@@ -31,6 +31,8 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
+  # Under Swift Package Manager these cores are resolved through Package.swift.
+  # Uncomment only when building this example with SPM disabled (CocoaPods).
   # pod 'IosAwnCore', :path => '../../../IosAwnCore/'
   # pod 'IosAwnFcmCore', :path => '../../../IosAwnFcmCore/'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
@@ -59,15 +61,56 @@ require awesome_pod_file
 update_awesome_main_target_settings('Runner', File.dirname(File.realpath(__FILE__)), flutter_root)
 ################  Awesome Notifications pod modification 2  ###################
 
-################  Awesome Notifications FCM pod mod  ###################
+################  Awesome Notifications FCM service extension  ###################
+# The Notification Service Extension is Flutter-free: it extends IosAwnFcmCore's
+# AwesomeServiceExtension directly, and Flutter assets resolve through the extension-safe
+# bundle-path resolver in IosAwnCore. It links IosAwnFcmCore through Swift Package Manager
+# (wired into the extension target by the script below), so it needs no CocoaPods here.
 awesome_fcm_pod_file = File.expand_path(File.join('plugins', 'awesome_notifications_fcm', 'ios', 'Scripts', 'AwesomeFcmPodFile'), '.symlinks')
 require awesome_fcm_pod_file
-target 'AwesomeNotificationService' do
-    use_frameworks!
-    use_modular_headers!
-  
-    install_awesome_fcm_ios_pod_target File.dirname(File.realpath(__FILE__))
-end
 update_awesome_fcm_service_target('AwesomeNotificationService', File.dirname(File.realpath(__FILE__)), flutter_root)
+
+# Link IosAwnFcmCore into the extension target as a REMOTE Swift Package (the published
+# 0.12.0 tag), Flutter-free and extension-safe; pulls Firebase through firebase-ios-sdk SPM —
+# same as the app, so there is no duplicate Firebase. Using the released tag makes the example
+# exercise the online core, exactly as a consumer of the published plugin would.
+def add_remote_spm_to_target(target_name, xcodeproj_path, repository_url, minimum_version, product_name)
+    project = Xcodeproj::Project.open(File.join(xcodeproj_path, 'Runner.xcodeproj'))
+    target = project.targets.find { |t| t.name == target_name }
+    return if target.nil?
+
+    # Drop any pre-existing reference to this product (e.g. an earlier local-path wiring), so
+    # switching from a local to a remote package leaves a single, clean reference.
+    target.package_product_dependencies.dup.each do |p|
+        next unless p.product_name == product_name
+        target.frameworks_build_phase.files.dup.each do |bf|
+            target.frameworks_build_phase.files.delete(bf) if bf.product_ref == p
+        end
+        target.package_product_dependencies.delete(p)
+    end
+    project.root_object.package_references.dup.each do |r|
+        is_local  = r.is_a?(Xcodeproj::Project::Object::XCLocalSwiftPackageReference) && r.relative_path.to_s.end_with?(product_name)
+        is_remote = r.is_a?(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference) && r.repositoryURL == repository_url
+        project.root_object.package_references.delete(r) if is_local || is_remote
+    end
+
+    pkg_ref = project.new(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference)
+    pkg_ref.repositoryURL = repository_url
+    pkg_ref.requirement = { 'kind' => 'upToNextMajorVersion', 'minimumVersion' => minimum_version }
+    project.root_object.package_references << pkg_ref
+
+    prod = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
+    prod.package = pkg_ref
+    prod.product_name = product_name
+    target.package_product_dependencies << prod
+
+    build_file = project.new(Xcodeproj::Project::Object::PBXBuildFile)
+    build_file.product_ref = prod
+    target.frameworks_build_phase.files << build_file
+
+    project.save
+    puts "[Awesome Notifications FCM] Linked #{product_name} (SPM, #{repository_url} #{minimum_version}) into '#{target_name}'"
+end
+add_remote_spm_to_target('AwesomeNotificationService', File.dirname(File.realpath(__FILE__)), 'https://github.com/rafaelsetragni/IosAwnFcmCore.git', '0.12.0', 'IosAwnFcmCore')
 ################  Awesome Notifications FCM pod mod  ###################
 

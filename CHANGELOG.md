@@ -1,3 +1,12 @@
+## [0.12.0] - 2026-06-16
+### Breaking changes
+- **`licenseKeys` parameter removed:** deprecated and ignored since 0.11.0, the `licenseKeys` argument of `initialize(...)` has now been removed — delete it from your call.
+### Added
+- **Swift Package Manager support (iOS):** the plugin ships a `Package.swift` and installs through Swift Package Manager, keeping CocoaPods support during the transition. The Notification Service Extension is Flutter-free — it extends `IosAwnFcmCore`'s `AwesomeServiceExtension` directly and links the core through SwiftPM, with Firebase resolved once via `firebase-ios-sdk`.
+### Changed
+- **Native cores updated to 0.12.0.** The Android cores `me.carda:AndroidAwnCore` and `me.carda:AndroidAwnFcmCore` are now published on **Maven Central** instead of JitPack (resolved through `mavenCentral()`), and the iOS cores `IosAwnCore`/`IosAwnFcmCore` are consumed through Swift Package Manager from their published 0.12.0 tags.
+- **Requires awesome_notifications, IosAwnCore and IosAwnFcmCore 0.12.0.**
+
 ## [0.11.0] - 2025-02-12
 ### Breaking changes
 - **`licenseKeys` parameter deprecated:** License keys are no longer required. The license validation has been completely removed from the native core libraries (AndroidAwnFcmCore and IosAwnFcmCore). The `licenseKeys` parameter in `initialize()` is now ignored and will be removed in a future version.

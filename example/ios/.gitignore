@@ -22,6 +22,8 @@ Flutter/app.flx
 Flutter/app.zip
 Flutter/flutter_assets/
 Flutter/flutter_export_environment.sh
+Flutter/ephemeral/
+**/xcshareddata/swiftpm/
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
 

@@ -37,14 +37,9 @@ class AwesomeNotificationsFcm {
   /// listeners to capture Firebase Messaging events.
   /// You should call this method only once at main_complete.dart.
   /// [debug]: enables the console log prints
-  /// [licenseKeys]: Deprecated since 0.11.0. License keys are no longer
-  /// required. This parameter is ignored and will be removed in a future version.
   Future<bool> initialize(
       {required PushTokenHandler onFcmTokenHandle,
       required FcmSilentDataHandler onFcmSilentDataHandle,
-      @Deprecated('License keys are no longer required since 0.11.0. '
-          'This parameter is ignored and will be removed in a future version.')
-      List<String>? licenseKeys,
       PushTokenHandler? onNativeTokenHandle,
       bool debug = false}) async {
     WidgetsFlutterBinding.ensureInitialized();
