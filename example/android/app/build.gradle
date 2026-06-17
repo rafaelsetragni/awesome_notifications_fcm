@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "me.carda.example"
-    compileSdk = 34 // flutter.compileSdkVersion
+    compileSdk = 36 // awesome_notifications core compiles against SDK 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

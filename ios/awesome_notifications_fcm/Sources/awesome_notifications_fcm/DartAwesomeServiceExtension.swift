@@ -8,6 +8,7 @@
 import Foundation
 import IosAwnFcmCore
 import awesome_notifications
+import UserNotifications
 
 open class DartAwesomeServiceExtension: AwesomeServiceExtension {
     

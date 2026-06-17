@@ -12,9 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^3.12.0
-  awesome_notifications: ^0.10.1
-#   path: ../../awesome_notifications
+  firebase_core: ^4.0.0
+  awesome_notifications: ^0.12.0
 #    git:
 #      ref: "a9fbe3e"
 #      url: https://github.com/rafaelsetragni/awesome_notifications
@@ -35,6 +34,12 @@ dependencies:
   giff_dialog: ^1.0.1
 
   flutter_launcher_icons: ^0.14.3
+
+# Local override during the migration: resolves awesome_notifications 0.12.0 from the
+# sibling checkout until it is published. Remove once 0.12.0 is on pub.dev.
+dependency_overrides:
+  awesome_notifications:
+    path: ../../awesome_notifications
 
 dev_dependencies:
   flutter_test:
