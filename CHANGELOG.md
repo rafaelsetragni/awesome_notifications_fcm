@@ -1,3 +1,10 @@
+## [0.12.1] - 2026-08-27
+### Fixed
+- **Android: debug Toast removed from the boot receiver.** Every device boot showed a leftover `"Service restarted"` toast (and a debug log) to every end user. Fixed in `AndroidAwnFcmCore` 0.12.1 — thanks to @igordanilovski.
+
+### Changed
+- **Android cores updated to 0.12.1** (`me.carda:AndroidAwnCore` and `me.carda:AndroidAwnFcmCore`), which also ships the compileSdk/targetSdk 36 build that 0.12.0's published artifact was missing. No iOS changes: `IosAwnCore`/`IosAwnFcmCore` stay compatible through the existing `~> 0.12.0` constraints.
+
 ## [0.12.0] - 2026-06-16
 ### Breaking changes
 - **`licenseKeys` parameter removed:** deprecated and ignored since 0.11.0, the `licenseKeys` argument of `initialize(...)` has now been removed — delete it from your call.
