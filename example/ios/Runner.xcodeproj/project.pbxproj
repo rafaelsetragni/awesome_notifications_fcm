@@ -18,7 +18,7 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		AD47AABD2489B39A4360C117 /* IosAwnFcmCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4DDACA579D41E0AF58E3AA5D /* IosAwnFcmCore */; };
+		ACA4D0009D190C3FEA74D282 /* IosAwnFcmCore in Frameworks */ = {isa = PBXBuildFile; productRef = AE65A639A9CF09F0AEC80650 /* IosAwnFcmCore */; };
 		C20D0E2CC4F535F981F5686A /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025E85481D6B59EA321C4635 /* Pods_Runner.framework */; };
 		C767DD7B2822432E0011C179 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C767DD7A2822432E0011C179 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -83,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD47AABD2489B39A4360C117 /* IosAwnFcmCore in Frameworks */,
+				ACA4D0009D190C3FEA74D282 /* IosAwnFcmCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +206,7 @@
 			);
 			name = AwesomeNotificationService;
 			packageProductDependencies = (
-				4DDACA579D41E0AF58E3AA5D /* IosAwnFcmCore */,
+				AE65A639A9CF09F0AEC80650 /* IosAwnFcmCore */,
 			);
 			productName = AwesomeNotificationService;
 			productReference = 050D91432AC4B95E0062F50B /* AwesomeNotificationService.appex */;
@@ -276,7 +276,7 @@
 			mainGroup = 97C146E51CF9000F007C117D;
 			packageReferences = (
 				781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "FlutterGeneratedPluginSwiftPackage" */,
-				E55E520D533E1BB617BB7BE9 /* XCRemoteSwiftPackageReference "IosAwnFcmCore" */,
+				469A8D23FF581AFC2A5394A5 /* XCRemoteSwiftPackageReference "IosAwnFcmCore" */,
 			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
@@ -847,7 +847,7 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		936A05625A4FD6F61A33CD4A /* XCRemoteSwiftPackageReference "IosAwnFcmCore" */ = {
+		469A8D23FF581AFC2A5394A5 /* XCRemoteSwiftPackageReference "IosAwnFcmCore" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rafaelsetragni/IosAwnFcmCore.git";
 			requirement = {
@@ -875,9 +875,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = FlutterGeneratedPluginSwiftPackage;
 		};
-		A835CB2230FCBE85533B7E24 /* IosAwnFcmCore */ = {
+		AE65A639A9CF09F0AEC80650 /* IosAwnFcmCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 936A05625A4FD6F61A33CD4A /* XCRemoteSwiftPackageReference "IosAwnFcmCore" */;
+			package = 469A8D23FF581AFC2A5394A5 /* XCRemoteSwiftPackageReference "IosAwnFcmCore" */;
 			productName = IosAwnFcmCore;
 		};
 /* End XCSwiftPackageProductDependency section */
