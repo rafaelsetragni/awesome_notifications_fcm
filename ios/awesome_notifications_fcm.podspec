@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'awesome_notifications_fcm'
-  s.version          = '0.12.1'
+  s.version          = '0.13.0'
   s.summary          = 'Complement of Awesome Notifications to allow firebase with all awesome resources in Flutter.'
   s.description      = <<-DESC
 Complement of Awesome Notifications to allow firebase with all awesome resources in Flutter.
@@ -14,11 +14,15 @@ Complement of Awesome Notifications to allow firebase with all awesome resources
   s.author           = { 'Rafael Setragni' => 'rafaelsetra@gmail.com' }
   s.source           = { :path => '.' }
   # Shared with Package.swift so CocoaPods and Swift Package Manager build the same sources.
-  s.source_files = 'awesome_notifications_fcm/Sources/awesome_notifications_fcm/**/*'
+  s.source_files = 'awesome_notifications_fcm/Sources/awesome_notifications_fcm/**/*.{swift}'
+  s.resource_bundles = {
+    'awesome_notifications_fcm_privacy' => ['awesome_notifications_fcm/Sources/awesome_notifications_fcm/PrivacyInfo.xcprivacy']
+  }
   s.dependency 'Flutter'
   s.dependency 'awesome_notifications'
-  s.dependency 'IosAwnCore', '~> 0.12.0'
-  s.dependency 'IosAwnFcmCore', '~> 0.12.0'
+  s.dependency 'IosAwnCore', '~> 0.12.1'
+  s.dependency 'IosAwnFcmCore', '~> 0.12.1'
+  # CocoaPods still publishes Firebase 12.x only; Firebase 13 is SPM-only via Package.swift.
   s.dependency 'FirebaseCore', '~> 12.0'
   s.dependency 'Firebase/Messaging', '~> 12.0'
 

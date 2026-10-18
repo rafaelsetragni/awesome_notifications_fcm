@@ -1,3 +1,13 @@
+## [0.13.0] - 2026-10-18
+### Breaking changes
+- **`firebase_core` minimum version raised to 5.0.0:** Required for FlutterFire's Firebase iOS SDK 13.x (Swift Package Manager). Update your app's `firebase_core` (and other FlutterFire plugins) to the 5.x / matching major line.
+- **Dart SDK `>=3.6.0` and Flutter `>=3.27.0`:** Matches `firebase_core` 5.0.0's environment constraints.
+
+### Changed
+- **iOS SwiftPM:** `firebase-ios-sdk` constraint widened to `12.0.0..<14.0.0` so the plugin resolves with both Firebase 12.x and 13.x. Requires **IosAwnFcmCore 0.12.1** (same widened range) and **IosAwnCore 0.12.1**.
+- **CocoaPods:** still pins Firebase `~> 12.0` (Firebase 13 is not published to CocoaPods); privacy manifest is bundled from the shared SPM Sources path.
+- **`awesome_notifications` minimum raised to `^0.12.1`.**
+
 ## [0.12.1] - 2026-08-27
 ### Fixed
 - **Android: debug Toast removed from the boot receiver.** Every device boot showed a leftover `"Service restarted"` toast (and a debug log) to every end user. Fixed in `AndroidAwnFcmCore` 0.12.1 — thanks to @igordanilovski.
